@@ -112,10 +112,7 @@ window.Quarto = {
   <li><a href="#probability" id="toc-probability" class="nav-link" data-scroll-target="#probability">Probability</a>
   <ul class="collapse">
   <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link" data-scroll-target="#bayes-theorem">Bayes’ theorem</a></li>
-  <li><a href="#bayes-theorem---expaned-version" id="toc-bayes-theorem---expaned-version" class="nav-link" data-scroll-target="#bayes-theorem---expaned-version">Bayes’ theorem - expaned version</a>
-  <ul class="collapse">
-  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">testing</a></li>
-  </ul></li>
+  <li><a href="#bayes-theorem---expaned-version" id="toc-bayes-theorem---expaned-version" class="nav-link" data-scroll-target="#bayes-theorem---expaned-version">Bayes’ theorem - expaned version</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -157,9 +154,14 @@ window.Quarto = {
 <p>Now we are trying to get the probaility of A given event B. <br> This means the probability of rain, given it’s cloudy.</p>
 <p>This is also called posterior probability.</p>
 <p><span class="math display">\[P(Rain \mid Cloud) = \frac{ P(Cloud \mid Rain) * P(Rain) }{ P(Cloudy) }\]</span></p>
-<p>Let’s say below are the probability of each event: - Overall chance of rain = 10% - All days start off cloudy = 40% - Rainy days start of cloudy (P(Cloud|Rain)) = 50%</p>
+<p>Let’s say below are the probability of each event:</p>
+<ul>
+<li>Overall chance of rain = 10%</li>
+<li>All days start off cloudy = 40%</li>
+<li>Rainy days start of cloudy (P(Cloud|Rain)) = 50%</li>
+</ul>
 <p><span class="math display">\[P(Rain \mid Cloud) = \frac{ 50\% * 10\% }{ 40\% }\]</span></p>
-<div id="e2b8061a" class="cell" data-execution_count="1">
+<div id="75f67035" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p_a_b <span class="op">=</span> <span class="fl">0.5</span><span class="op">*</span><span class="fl">0.1</span><span class="op">/</span><span class="fl">0.4</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p_a_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -171,36 +173,66 @@ window.Quarto = {
 </section>
 <section id="bayes-theorem---expaned-version" class="level2">
 <h2 class="anchored" data-anchor-id="bayes-theorem---expaned-version">Bayes’ theorem - expaned version</h2>
-<p>So</p>
 <p>Sometimes you don’t know the probability of event B, which is in the denominator of the equation for the basic Bayes’ theorem. In that case, you can use the expanded version of Bayes’ theorem, because you don’t need to know the probability of event B to use the expanded version.</p>
 <p><span class="math display">\[P(A \mid B) = \frac{P(B \mid A) * P(A)} {P(B \mid A) * P(A) + P(B \mid not A) * P(not A)}\]</span></p>
-<div id="5a2d6e1c" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a = actually having medical condition</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span><span class="fl">0.01</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># b = testing positive</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ba = P(B|A) - cnoditioanl probability where the person actualy has the medical condition when tested positive</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ba <span class="op">=</span> <span class="fl">0.95</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># bna = P(B|not A) - probability where the person doesn't have the condition when tested positive (false positive)</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>bna <span class="op">=</span> <span class="fl">0.02</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># a_n = P(A') - prob of A does not occur</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>a_n <span class="op">=</span> <span class="dv">1</span><span class="op">-</span>a</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># P(A|B) = P(B|A) * P(A) / (P(B|A) * P(A) + P(B|not A) * P(not A))</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>P_A_B <span class="op">=</span> <span class="fl">0.95</span> <span class="op">*</span> <span class="fl">0.01</span> <span class="op">/</span> (<span class="fl">0.95</span><span class="op">*</span><span class="fl">0.01</span> <span class="op">+</span> <span class="fl">0.02</span> <span class="op">*</span> <span class="fl">0.99</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(P_A_B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s say we are conducting test for a medical condition. Below are the related probability:</p>
+<table class="caption-top table">
+<caption>Example: medical condition and test result</caption>
+<colgroup>
+<col style="width: 58%">
+<col style="width: 22%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Condition</th>
+<th>Probability</th>
+<th>Variable</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Having the medical condition</td>
+<td>1%</td>
+<td>P(A)</td>
+</tr>
+<tr class="even">
+<td>Test positive</td>
+<td>unknown</td>
+<td>P(B)</td>
+</tr>
+<tr class="odd">
+<td>Given test is positive, has the medical condition</td>
+<td>95%</td>
+<td>P(B | A)</td>
+</tr>
+<tr class="even">
+<td>Given test is positive, doesn’t have the medical condition</td>
+<td>2%</td>
+<td>P(B | not A)</td>
+</tr>
+<tr class="odd">
+<td>Does not have the medical condition</td>
+<td>99%</td>
+<td>1-P(A)</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Now we are trying to find the probability of the person actually having the medical condition, given the test is positive.</p>
+<p>This would be P(A | B).</p>
+<p>We cannot use the basic Bayes’ theorem as the P(B) is unknown. This is when we need the expaned version.</p>
+<p>Putting all available variables into the formula will look like this: <span class="math display">\[
+P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
+\]</span></p>
+<div id="eef7be58" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>P_A_B <span class="op">=</span> <span class="fl">0.95</span> <span class="op">*</span> <span class="fl">0.01</span> <span class="op">/</span> (<span class="fl">0.95</span><span class="op">*</span><span class="fl">0.01</span> <span class="op">+</span> <span class="fl">0.02</span> <span class="op">*</span> <span class="fl">0.99</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(P_A_B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.3242320819112628</code></pre>
 </div>
 </div>
 <p><span class="math display">\[P(A \mid B) = 32.4%\]</span></p>
-<section id="testing" class="level3">
-<h3 class="anchored" data-anchor-id="testing">testing</h3>
-</section>
 </section>
 </section>
 

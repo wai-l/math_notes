@@ -33,6 +33,7 @@ This is also called posterior probability.
 $$P(Rain \mid Cloud) = \frac{ P(Cloud \mid Rain) * P(Rain) }{ P(Cloudy) }$$
 
 Let's say below are the probability of each event: 
+
 - Overall chance of rain = 10%
 - All days start off cloudy = 40%
 - Rainy days start of cloudy (P(Cloud|Rain)) = 50%
@@ -53,27 +54,34 @@ Sometimes you don't know the probability of event B, which is in the denominator
 
 $$P(A \mid B) = \frac{P(B \mid A) * P(A)} {P(B \mid A) * P(A) + P(B \mid not A) * P(not A)}$$
 
-Let's 
+Let's say we are conducting test for a medical condition. Below are the related probability: 
+
+|Condition                   |Probability|Variable |
+|----------------------------|-----------|---------|
+|Having the medical condition|1%         |P(A)     |
+|Test positive|unknown|P(B)|
+|Given test is positive, has the medical condition|95%|P(B \| A)|
+|Given test is positive, doesn't have the medical condition|2%|P(B \| not A)|
+|Does not have the medical condition|99%|1-P(A)|
+
+: Example: medical condition and test result
+
+<br>
+
+Now we are trying to find the probability of the person actually having the medical condition, given the test is positive. 
+
+This would be P(A \| B). 
+
+We cannot use the basic Bayes' theorem as the P(B) is unknown. This is when we need the expaned version. 
+
+Putting all available variables into the formula will look like this: 
+$$
+P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
+$$
+
 
 ```{python}
-
-# a = actually having medical condition
-a=0.01
-# b = testing positive
-
-# ba = P(B|A) - cnoditioanl probability where the person actualy has the medical condition when tested positive
-ba = 0.95
-
-# bna = P(B|not A) - probability where the person doesn't have the condition when tested positive (false positive)
-bna = 0.02
-
-# a_n = P(A') - prob of A does not occur
-a_n = 1-a
-
-# P(A|B) = P(B|A) * P(A) / (P(B|A) * P(A) + P(B|not A) * P(not A))
-
 P_A_B = 0.95 * 0.01 / (0.95*0.01 + 0.02 * 0.99)
-
 print(P_A_B)
 ```
 
