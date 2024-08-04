@@ -1,0 +1,80 @@
+---
+title: Notebook for Statistics
+jupyter: python3
+format: 
+    html: 
+        code-fold: False
+        toc: True
+        toc-location: left
+---
+
+
+# About
+This notebook is for me to record my notes in learning statistics. It includes specific math formulas, examples and how to calculate them in Python. Some notes are directly copied from various different sources. 
+
+# Probability
+
+## Bayes' theorem
+
+Posterior probability is the updated probability of an event based on new data. Posterior means occurring after. Posterior probability is calculated by updating the prior probability using Bayes' theorem. 
+
+$$P(A \mid B) = \frac{ P(B \mid A) * P(A) }{ P(B) }$$
+
+Event A = Rain
+<br>
+Event B = Cloudy
+
+Now we are trying to get the probaility of A given event B. 
+<br>
+This means the probability of rain, given it's cloudy. 
+
+This is also called posterior probability. 
+
+$$P(Rain \mid Cloud) = \frac{ P(Cloud \mid Rain) * P(Rain) }{ P(Cloudy) }$$
+
+Let's say below are the probability of each event: 
+- Overall chance of rain = 10%
+- All days start off cloudy = 40%
+- Rainy days start of cloudy (P(Cloud|Rain)) = 50%
+
+$$P(Rain \mid Cloud) = \frac{ 50\% * 10\% }{ 40\% }$$
+
+```{python}
+p_a_b = 0.5*0.1/0.4
+
+print(p_a_b)
+```
+
+$$P(Rain \mid Cloud) = 12.5%$$
+
+## Bayes' theorem - expaned version
+
+Sometimes you don't know the probability of event B, which is in the denominator of the equation for the basic Bayes' theorem. In that case, you can use the expanded version of Bayes' theorem, because you don't need to know the probability of event B to use the expanded version. 
+
+$$P(A \mid B) = \frac{P(B \mid A) * P(A)} {P(B \mid A) * P(A) + P(B \mid not A) * P(not A)}$$
+
+Let's 
+
+```{python}
+
+# a = actually having medical condition
+a=0.01
+# b = testing positive
+
+# ba = P(B|A) - cnoditioanl probability where the person actualy has the medical condition when tested positive
+ba = 0.95
+
+# bna = P(B|not A) - probability where the person doesn't have the condition when tested positive (false positive)
+bna = 0.02
+
+# a_n = P(A') - prob of A does not occur
+a_n = 1-a
+
+# P(A|B) = P(B|A) * P(A) / (P(B|A) * P(A) + P(B|not A) * P(not A))
+
+P_A_B = 0.95 * 0.01 / (0.95*0.01 + 0.02 * 0.99)
+
+print(P_A_B)
+```
+
+$$P(A \mid B) = 32.4%$$
