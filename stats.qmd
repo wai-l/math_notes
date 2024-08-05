@@ -12,11 +12,13 @@ format:
 # About
 This notebook is for me to record my notes in learning statistics. It includes specific math formulas, examples and how to calculate them in Python. Some notes are directly copied from various different sources. 
 
-# Probability
+# Conditional Probability
 
 ## Bayes' theorem
 
-Posterior probability is the updated probability of an event based on new data. Posterior means occurring after. Posterior probability is calculated by updating the prior probability using Bayes' theorem. 
+Bayes's theorem provides a way to update the probability of an event based on new information about the event. 
+
+In Bayesian statistics, prior probability refers to the probability of an event before new data is collected. Posterior probability is the updated probability of an event based on new data. Posterior means occurring after. 
 
 $$P(A \mid B) = \frac{ P(B \mid A) * P(A) }{ P(B) }$$
 
@@ -86,3 +88,53 @@ print(P_A_B)
 ```
 
 $$P(A \mid B) = 32.4%$$
+
+## Case study - calculate churn rate for a customer type
+
+Suppose you want to calculate the churn rate of a specific type of customer, e.g. UK customer. 
+
+Given you know the number of customer that are in UK, and the number of churned customer in UK, you can easily calculate their churn rate. 
+
+Below is a simple data set: 
+
+|Type|Number of customer|
+|------------------------------|-----------|
+|Total number of customer      |100        |
+|Number of churned customer    |60         |
+|Number of UK customer         |50         |
+|Number of churned UK customer |30         |
+
+:Sample data: total number of customer and churned customer
+
+$$\text{Churn rate of UK customer} = \frac{\text{Number of churned UK customer}} {\text{Number of UK customer}}$$
+
+$$\text{Churn rate of UK customer}  = \frac{30} {50}$$
+
+```{python}
+churn_rate = 30/50
+print(f'Churn rate of UK customer: {churn_rate}')
+```
+
+Now look at the Bayes' theorem
+$$P(A \mid B) = \frac{ P(B \mid A) * P(A) }{ P(B) }$$
+
+Put the numbers into the equation
+$$ \text{Event A} = \text{Churn rate by all customer}$$
+$$ \text{Event B} = \text{Percentage of UK customer}$$
+
+$$
+P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
+$$
+
+$$P(A \mid B) = \frac{30}{60} * \frac{60}{100} * \frac{100}{50}$$
+$$P(A \mid B) = \frac{30}{50}$$
+
+
+```{python}
+print(f'P(B|A) = {30/50}')
+```
+
+They both return the same result. 
+
+When we know enough variables, it is sufficient for us to directly calculate the churn rate. However when we don't have enough data, or when the scenario is new, we may need to apply the Bayes' theorem to get the value we need. 
+

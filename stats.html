@@ -109,10 +109,11 @@ window.Quarto = {
    
   <ul>
   <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about">About</a></li>
-  <li><a href="#probability" id="toc-probability" class="nav-link" data-scroll-target="#probability">Probability</a>
+  <li><a href="#conditional-probability" id="toc-conditional-probability" class="nav-link" data-scroll-target="#conditional-probability">Conditional Probability</a>
   <ul class="collapse">
   <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link" data-scroll-target="#bayes-theorem">Bayes’ theorem</a></li>
   <li><a href="#bayes-theorem---expaned-version" id="toc-bayes-theorem---expaned-version" class="nav-link" data-scroll-target="#bayes-theorem---expaned-version">Bayes’ theorem - expaned version</a></li>
+  <li><a href="#case-study---calculate-churn-rate-for-a-customer-type" id="toc-case-study---calculate-churn-rate-for-a-customer-type" class="nav-link" data-scroll-target="#case-study---calculate-churn-rate-for-a-customer-type">Case study - calculate churn rate for a customer type</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -144,11 +145,12 @@ window.Quarto = {
 <h1>About</h1>
 <p>This notebook is for me to record my notes in learning statistics. It includes specific math formulas, examples and how to calculate them in Python. Some notes are directly copied from various different sources.</p>
 </section>
-<section id="probability" class="level1">
-<h1>Probability</h1>
+<section id="conditional-probability" class="level1">
+<h1>Conditional Probability</h1>
 <section id="bayes-theorem" class="level2">
 <h2 class="anchored" data-anchor-id="bayes-theorem">Bayes’ theorem</h2>
-<p>Posterior probability is the updated probability of an event based on new data. Posterior means occurring after. Posterior probability is calculated by updating the prior probability using Bayes’ theorem.</p>
+<p>Bayes’s theorem provides a way to update the probability of an event based on new information about the event.</p>
+<p>In Bayesian statistics, prior probability refers to the probability of an event before new data is collected. Posterior probability is the updated probability of an event based on new data. Posterior means occurring after.</p>
 <p><span class="math display">\[P(A \mid B) = \frac{ P(B \mid A) * P(A) }{ P(B) }\]</span></p>
 <p>Event A = Rain <br> Event B = Cloudy</p>
 <p>Now we are trying to get the probaility of A given event B. <br> This means the probability of rain, given it’s cloudy.</p>
@@ -161,7 +163,7 @@ window.Quarto = {
 <li>Rainy days start of cloudy (P(Cloud|Rain)) = 50%</li>
 </ul>
 <p><span class="math display">\[P(Rain \mid Cloud) = \frac{ 50\% * 10\% }{ 40\% }\]</span></p>
-<div id="75f67035" class="cell" data-execution_count="1">
+<div id="d8380424" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p_a_b <span class="op">=</span> <span class="fl">0.5</span><span class="op">*</span><span class="fl">0.1</span><span class="op">/</span><span class="fl">0.4</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p_a_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -225,7 +227,7 @@ window.Quarto = {
 <p>Putting all available variables into the formula will look like this: <span class="math display">\[
 P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 \]</span></p>
-<div id="eef7be58" class="cell" data-execution_count="2">
+<div id="549afaf6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>P_A_B <span class="op">=</span> <span class="fl">0.95</span> <span class="op">*</span> <span class="fl">0.01</span> <span class="op">/</span> (<span class="fl">0.95</span><span class="op">*</span><span class="fl">0.01</span> <span class="op">+</span> <span class="fl">0.02</span> <span class="op">*</span> <span class="fl">0.99</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(P_A_B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -233,6 +235,62 @@ P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 </div>
 </div>
 <p><span class="math display">\[P(A \mid B) = 32.4%\]</span></p>
+</section>
+<section id="case-study---calculate-churn-rate-for-a-customer-type" class="level2">
+<h2 class="anchored" data-anchor-id="case-study---calculate-churn-rate-for-a-customer-type">Case study - calculate churn rate for a customer type</h2>
+<p>Suppose you want to calculate the churn rate of a specific type of customer, e.g.&nbsp;UK customer.</p>
+<p>Given you know the number of customer that are in UK, and the number of churned customer in UK, you can easily calculate their churn rate.</p>
+<p>Below is a simple data set:</p>
+<table class="caption-top table">
+<caption>Sample data: total number of customer and churned customer</caption>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Number of customer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Total number of customer</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td>Number of churned customer</td>
+<td>60</td>
+</tr>
+<tr class="odd">
+<td>Number of UK customer</td>
+<td>50</td>
+</tr>
+<tr class="even">
+<td>Number of churned UK customer</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[\text{Churn rate of UK customer} = \frac{\text{Number of churned UK customer}} {\text{Number of UK customer}}\]</span></p>
+<p><span class="math display">\[\text{Churn rate of UK customer}  = \frac{30} {50}\]</span></p>
+<div id="57b59de2" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>churn_rate <span class="op">=</span> <span class="dv">30</span><span class="op">/</span><span class="dv">50</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Churn rate of UK customer: </span><span class="sc">{</span>churn_rate<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Churn rate of UK customer: 0.6</code></pre>
+</div>
+</div>
+<p>Now look at the Bayes’ theorem <span class="math display">\[P(A \mid B) = \frac{ P(B \mid A) * P(A) }{ P(B) }\]</span></p>
+<p>Put the numbers into the equation <span class="math display">\[ \text{Event A} = \text{Churn rate by all customer}\]</span> <span class="math display">\[ \text{Event B} = \text{Percentage of UK customer}\]</span></p>
+<p><span class="math display">\[
+P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
+\]</span></p>
+<p><span class="math display">\[P(A \mid B) = \frac{30}{60} * \frac{60}{100} * \frac{100}{50}\]</span> <span class="math display">\[P(A \mid B) = \frac{30}{50}\]</span></p>
+<div id="0b72b8ca" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'P(B|A) = </span><span class="sc">{</span><span class="dv">30</span><span class="op">/</span><span class="dv">50</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>P(B|A) = 0.6</code></pre>
+</div>
+</div>
+<p>They both return the same result.</p>
+<p>When we know enough variables, it is sufficient for us to directly calculate the churn rate. However when we don’t have enough data, or when the scenario is new, we may need to apply the Bayes’ theorem to get the value we need.</p>
 </section>
 </section>
 
