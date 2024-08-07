@@ -89,7 +89,7 @@ print(P_A_B)
 
 $$P(A \mid B) = 32.4%$$
 
-## Case study - calculate churn rate for a customer type
+## Case study - calculate churn rate for a customer type with Bayes' theorem (or something simplier)
 
 Suppose you want to calculate the churn rate of a specific type of customer, e.g. UK customer. 
 
@@ -138,3 +138,92 @@ They both return the same result.
 
 When we know enough variables, it is sufficient for us to directly calculate the churn rate. However when we don't have enough data, or when the scenario is new, we may need to apply the Bayes' theorem to get the value we need. 
 
+# Discrete Probability Distribution
+## Binomial distribtuion
+
+Binomial distribution referes to the calculation of the probability of k out of n ways. 
+
+Let's say we know in a coin toss, there is a 50% chance for it to be a head or a tail. If we toss it for 10 times, what is the probability that we get 5 heads? We can use binomial distribution to calculate the value. 
+
+Note that to use binomial distribution, the two results must be mutually exclusive. Like in a coin toss, there can only be a head or toss. 
+
+Or in a roll of die, you either get a 3 or not get a 3. 
+
+This is how we calculate the binomial distribution: 
+
+$$P(x=k) = \frac{n!} {k!(n-k)!} * p^k (1-p)^{n-k}$$
+
+The meaning of each variables: 
+$$k = \text{number of success}$$
+
+$$n = \text{number of trials}$$
+
+$$p = \text{probability of success on a given trial}$$
+
+We can break this down into 2 parts. 
+
+### n-choose-k
+
+$$\frac{n!} {k!(n-k)!}$$
+
+This is known as n-choose-k, which refers to the number of outcome we want, or the number of success we can get at the given number of trials. 
+
+Say you want to know out of 3 coin toss, the number of outcomes where you can get 2 heads. 
+
+The formula would be: 
+
+$$\text{n-choose-k}=\frac{3!} {2!(3-2)!}$$
+$$\text{n-choose-k}=\frac{3*2*1} {2*1*1}$$
+
+
+
+```{python}
+n_choose_k = 3*2*1/2*1*1
+
+print(f'n-choose-k = {n_choose_k}')
+```
+
+### Probability of each outcome
+Now that we know what is the number of outcomes we can get 2 heads, we need to know the probability of each outcome as well, which will allow us to calculate the probability of x=k. 
+
+$$p^k(1-p)^{n-k}$$
+
+Now we know the chances of getting a head in each toss is 50%
+
+Put it into work, it would be: 
+$$0.5^2(1-0.5)^{3-2}$$
+
+$$=0.5*0.5*0.5$$
+
+```{python}
+prob_of_each_outcome = 0.5* 0.5 * (1-0.5)
+
+print(f'Probability of each outcome = {prob_of_each_outcome}')
+```
+
+In cases like a coin toss, where you know the chance is 50%, there is also an easier way to get the probability of each outcome. 
+
+Say for each coin toss, you can get 2 possible outcomes. For 2 coin toss, you get 2^2, which is 4 outcome. 
+
+Now for 3 coin toss, you will get the total possible outcome of 2^3, which is 8. 
+
+The probability of getting each outcome is 1/8, which is also 0.125. 
+
+```{python}
+print(f'total number of possible outcome = {2**3}')
+print(f'proabbility of each outcome = {1/2**3}')
+```
+
+### Final outcome
+Now that we can put the two together. 
+
+$$p(x=k) = n-choose-k * \text{probability of each outcome}$$
+$$p(x=k) = 3*0.125$$
+
+
+```{python}
+binomial_dist = 3*0.125
+print(f'p(x=k) = {binomial_dist}')
+```
+
+### Case study: chances of customer make a return to a store

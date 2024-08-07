@@ -113,7 +113,16 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link" data-scroll-target="#bayes-theorem">Bayes’ theorem</a></li>
   <li><a href="#bayes-theorem---expaned-version" id="toc-bayes-theorem---expaned-version" class="nav-link" data-scroll-target="#bayes-theorem---expaned-version">Bayes’ theorem - expaned version</a></li>
-  <li><a href="#case-study---calculate-churn-rate-for-a-customer-type" id="toc-case-study---calculate-churn-rate-for-a-customer-type" class="nav-link" data-scroll-target="#case-study---calculate-churn-rate-for-a-customer-type">Case study - calculate churn rate for a customer type</a></li>
+  <li><a href="#case-study---calculate-churn-rate-for-a-customer-type-with-bayes-theorem-or-something-simplier" id="toc-case-study---calculate-churn-rate-for-a-customer-type-with-bayes-theorem-or-something-simplier" class="nav-link" data-scroll-target="#case-study---calculate-churn-rate-for-a-customer-type-with-bayes-theorem-or-something-simplier">Case study - calculate churn rate for a customer type with Bayes’ theorem (or something simplier)</a></li>
+  </ul></li>
+  <li><a href="#discrete-probability-distribution" id="toc-discrete-probability-distribution" class="nav-link" data-scroll-target="#discrete-probability-distribution">Discrete Probability Distribution</a>
+  <ul class="collapse">
+  <li><a href="#binomial-distribtuion" id="toc-binomial-distribtuion" class="nav-link" data-scroll-target="#binomial-distribtuion">Binomial distribtuion</a>
+  <ul class="collapse">
+  <li><a href="#n-choose-k" id="toc-n-choose-k" class="nav-link" data-scroll-target="#n-choose-k">n-choose-k</a></li>
+  <li><a href="#probability-of-each-outcome" id="toc-probability-of-each-outcome" class="nav-link" data-scroll-target="#probability-of-each-outcome">Probability of each outcome</a></li>
+  <li><a href="#final-outcome" id="toc-final-outcome" class="nav-link" data-scroll-target="#final-outcome">Final outcome</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -163,7 +172,7 @@ window.Quarto = {
 <li>Rainy days start of cloudy (P(Cloud|Rain)) = 50%</li>
 </ul>
 <p><span class="math display">\[P(Rain \mid Cloud) = \frac{ 50\% * 10\% }{ 40\% }\]</span></p>
-<div id="d8380424" class="cell" data-execution_count="1">
+<div id="32ba6328" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p_a_b <span class="op">=</span> <span class="fl">0.5</span><span class="op">*</span><span class="fl">0.1</span><span class="op">/</span><span class="fl">0.4</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p_a_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -227,7 +236,7 @@ window.Quarto = {
 <p>Putting all available variables into the formula will look like this: <span class="math display">\[
 P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 \]</span></p>
-<div id="549afaf6" class="cell" data-execution_count="2">
+<div id="fa23b1fe" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>P_A_B <span class="op">=</span> <span class="fl">0.95</span> <span class="op">*</span> <span class="fl">0.01</span> <span class="op">/</span> (<span class="fl">0.95</span><span class="op">*</span><span class="fl">0.01</span> <span class="op">+</span> <span class="fl">0.02</span> <span class="op">*</span> <span class="fl">0.99</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(P_A_B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -236,8 +245,8 @@ P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 </div>
 <p><span class="math display">\[P(A \mid B) = 32.4%\]</span></p>
 </section>
-<section id="case-study---calculate-churn-rate-for-a-customer-type" class="level2">
-<h2 class="anchored" data-anchor-id="case-study---calculate-churn-rate-for-a-customer-type">Case study - calculate churn rate for a customer type</h2>
+<section id="case-study---calculate-churn-rate-for-a-customer-type-with-bayes-theorem-or-something-simplier" class="level2">
+<h2 class="anchored" data-anchor-id="case-study---calculate-churn-rate-for-a-customer-type-with-bayes-theorem-or-something-simplier">Case study - calculate churn rate for a customer type with Bayes’ theorem (or something simplier)</h2>
 <p>Suppose you want to calculate the churn rate of a specific type of customer, e.g.&nbsp;UK customer.</p>
 <p>Given you know the number of customer that are in UK, and the number of churned customer in UK, you can easily calculate their churn rate.</p>
 <p>Below is a simple data set:</p>
@@ -270,7 +279,7 @@ P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 </table>
 <p><span class="math display">\[\text{Churn rate of UK customer} = \frac{\text{Number of churned UK customer}} {\text{Number of UK customer}}\]</span></p>
 <p><span class="math display">\[\text{Churn rate of UK customer}  = \frac{30} {50}\]</span></p>
-<div id="57b59de2" class="cell" data-execution_count="3">
+<div id="8280933b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>churn_rate <span class="op">=</span> <span class="dv">30</span><span class="op">/</span><span class="dv">50</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Churn rate of UK customer: </span><span class="sc">{</span>churn_rate<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -283,7 +292,7 @@ P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 \]</span></p>
 <p><span class="math display">\[P(A \mid B) = \frac{30}{60} * \frac{60}{100} * \frac{100}{50}\]</span> <span class="math display">\[P(A \mid B) = \frac{30}{50}\]</span></p>
-<div id="0b72b8ca" class="cell" data-execution_count="4">
+<div id="acb78aa1" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'P(B|A) = </span><span class="sc">{</span><span class="dv">30</span><span class="op">/</span><span class="dv">50</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>P(B|A) = 0.6</code></pre>
@@ -291,6 +300,78 @@ P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 </div>
 <p>They both return the same result.</p>
 <p>When we know enough variables, it is sufficient for us to directly calculate the churn rate. However when we don’t have enough data, or when the scenario is new, we may need to apply the Bayes’ theorem to get the value we need.</p>
+</section>
+</section>
+<section id="discrete-probability-distribution" class="level1">
+<h1>Discrete Probability Distribution</h1>
+<section id="binomial-distribtuion" class="level2">
+<h2 class="anchored" data-anchor-id="binomial-distribtuion">Binomial distribtuion</h2>
+<p>Binomial distribution referes to the calculation of the probability of k out of n ways.</p>
+<p>Let’s say we know in a coin toss, there is a 50% chance for it to be a head or a tail. If we toss it for 10 times, what is the probability that we get 5 heads? We can use binomial distribution to calculate the value.</p>
+<p>Note that to use binomial distribution, the two results must be mutually exclusive. Like in a coin toss, there can only be a head or toss.</p>
+<p>Or in a roll of die, you either get a 3 or not get a 3.</p>
+<p>This is how we calculate the binomial distribution:</p>
+<p><span class="math display">\[P(x=k) = \frac{n!} {k!(n-k)!} * p^k (1-p)^{n-k}\]</span></p>
+<p>The meaning of each variables: <span class="math display">\[k = \text{number of success}\]</span></p>
+<p><span class="math display">\[n = \text{number of trials}\]</span></p>
+<p><span class="math display">\[p = \text{probability of success on a given trial}\]</span></p>
+<p>We can break this down into 2 parts.</p>
+<section id="n-choose-k" class="level3">
+<h3 class="anchored" data-anchor-id="n-choose-k">n-choose-k</h3>
+<p><span class="math display">\[\frac{n!} {k!(n-k)!}\]</span></p>
+<p>This is known as n-choose-k, which refers to the number of outcome we want, or the number of success we can get at the given number of trials.</p>
+<p>Say you want to know out of 3 coin toss, the number of outcomes where you can get 2 heads.</p>
+<p>The formula would be:</p>
+<p><span class="math display">\[\text{n-choose-k}=\frac{3!} {2!(3-2)!}\]</span> <span class="math display">\[\text{n-choose-k}=\frac{3*2*1} {2*1*1}\]</span></p>
+<div id="e27afeca" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>n_choose_k <span class="op">=</span> <span class="dv">3</span><span class="op">*</span><span class="dv">2</span><span class="op">*</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">*</span><span class="dv">1</span><span class="op">*</span><span class="dv">1</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'n-choose-k = </span><span class="sc">{</span>n_choose_k<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>n-choose-k = 3.0</code></pre>
+</div>
+</div>
+</section>
+<section id="probability-of-each-outcome" class="level3">
+<h3 class="anchored" data-anchor-id="probability-of-each-outcome">Probability of each outcome</h3>
+<p>Now that we know what is the number of outcomes we can get 2 heads, we need to know the probability of each outcome as well, which will allow us to calculate the probability of x=k.</p>
+<p><span class="math display">\[p^k(1-p)^{n-k}\]</span></p>
+<p>Now we know the chances of getting a head in each toss is 50%</p>
+<p>Put it into work, it would be: <span class="math display">\[0.5^2(1-0.5)^{3-2}\]</span></p>
+<p><span class="math display">\[=0.5*0.5*0.5\]</span></p>
+<div id="21ee30d3" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>prob_of_each_outcome <span class="op">=</span> <span class="fl">0.5</span><span class="op">*</span> <span class="fl">0.5</span> <span class="op">*</span> (<span class="dv">1</span><span class="op">-</span><span class="fl">0.5</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Probability of each outcome = </span><span class="sc">{</span>prob_of_each_outcome<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Probability of each outcome = 0.125</code></pre>
+</div>
+</div>
+<p>In cases like a coin toss, where you know the chance is 50%, there is also an easier way to get the probability of each outcome.</p>
+<p>Say for each coin toss, you can get 2 possible outcomes. For 2 coin toss, you get 2^2, which is 4 outcome.</p>
+<p>Now for 3 coin toss, you will get the total possible outcome of 2^3, which is 8.</p>
+<p>The probability of getting each outcome is 1/8, which is also 0.125.</p>
+<div id="e9e5ef0f" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'total number of possible outcome = </span><span class="sc">{</span><span class="dv">2</span><span class="op">**</span><span class="dv">3</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'proabbility of each outcome = </span><span class="sc">{</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">**</span><span class="dv">3</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>total number of possible outcome = 8
+proabbility of each outcome = 0.125</code></pre>
+</div>
+</div>
+</section>
+<section id="final-outcome" class="level3">
+<h3 class="anchored" data-anchor-id="final-outcome">Final outcome</h3>
+<p>Now that we can put the two together.</p>
+<p><span class="math display">\[p(x=k) = n-choose-k * \text{probability of each outcome}\]</span> <span class="math display">\[p(x=k) = 3*0.125\]</span></p>
+<div id="2f51d532" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>binomial_dist <span class="op">=</span> <span class="dv">3</span><span class="op">*</span><span class="fl">0.125</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'p(x=k) = </span><span class="sc">{</span>binomial_dist<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>p(x=k) = 0.375</code></pre>
+</div>
+</div>
+</section>
 </section>
 </section>
 
