@@ -122,7 +122,14 @@ window.Quarto = {
   <li><a href="#n-choose-k" id="toc-n-choose-k" class="nav-link" data-scroll-target="#n-choose-k">n-choose-k</a></li>
   <li><a href="#probability-of-each-outcome" id="toc-probability-of-each-outcome" class="nav-link" data-scroll-target="#probability-of-each-outcome">Probability of each outcome</a></li>
   <li><a href="#final-outcome" id="toc-final-outcome" class="nav-link" data-scroll-target="#final-outcome">Final outcome</a></li>
+  <li><a href="#wipcase-study-chances-of-customer-make-a-return-to-a-store" id="toc-wipcase-study-chances-of-customer-make-a-return-to-a-store" class="nav-link" data-scroll-target="#wipcase-study-chances-of-customer-make-a-return-to-a-store">(WIP)Case study: chances of customer make a return to a store</a></li>
   </ul></li>
+  <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution">Poisson distribution</a>
+  <ul class="collapse">
+  <li><a href="#poisson-distribution-formula" id="toc-poisson-distribution-formula" class="nav-link" data-scroll-target="#poisson-distribution-formula">Poisson distribution formula</a></li>
+  <li><a href="#example-possible-number-of-order-in-a-drive-through-restaurant-wip" id="toc-example-possible-number-of-order-in-a-drive-through-restaurant-wip" class="nav-link" data-scroll-target="#example-possible-number-of-order-in-a-drive-through-restaurant-wip">Example: possible number of order in a drive through restaurant (WIP)</a></li>
+  </ul></li>
+  <li><a href="#possion-vs-binomial" id="toc-possion-vs-binomial" class="nav-link" data-scroll-target="#possion-vs-binomial">Possion VS Binomial</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -172,7 +179,7 @@ window.Quarto = {
 <li>Rainy days start of cloudy (P(Cloud|Rain)) = 50%</li>
 </ul>
 <p><span class="math display">\[P(Rain \mid Cloud) = \frac{ 50\% * 10\% }{ 40\% }\]</span></p>
-<div id="32ba6328" class="cell" data-execution_count="1">
+<div id="b4dca8df" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p_a_b <span class="op">=</span> <span class="fl">0.5</span><span class="op">*</span><span class="fl">0.1</span><span class="op">/</span><span class="fl">0.4</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p_a_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -236,7 +243,7 @@ window.Quarto = {
 <p>Putting all available variables into the formula will look like this: <span class="math display">\[
 P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 \]</span></p>
-<div id="fa23b1fe" class="cell" data-execution_count="2">
+<div id="5bf63d63" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>P_A_B <span class="op">=</span> <span class="fl">0.95</span> <span class="op">*</span> <span class="fl">0.01</span> <span class="op">/</span> (<span class="fl">0.95</span><span class="op">*</span><span class="fl">0.01</span> <span class="op">+</span> <span class="fl">0.02</span> <span class="op">*</span> <span class="fl">0.99</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(P_A_B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -279,7 +286,7 @@ P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 </table>
 <p><span class="math display">\[\text{Churn rate of UK customer} = \frac{\text{Number of churned UK customer}} {\text{Number of UK customer}}\]</span></p>
 <p><span class="math display">\[\text{Churn rate of UK customer}  = \frac{30} {50}\]</span></p>
-<div id="8280933b" class="cell" data-execution_count="3">
+<div id="6b4fe86f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>churn_rate <span class="op">=</span> <span class="dv">30</span><span class="op">/</span><span class="dv">50</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Churn rate of UK customer: </span><span class="sc">{</span>churn_rate<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -292,7 +299,7 @@ P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 \]</span></p>
 <p><span class="math display">\[P(A \mid B) = \frac{30}{60} * \frac{60}{100} * \frac{100}{50}\]</span> <span class="math display">\[P(A \mid B) = \frac{30}{50}\]</span></p>
-<div id="acb78aa1" class="cell" data-execution_count="4">
+<div id="6800d2f5" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'P(B|A) = </span><span class="sc">{</span><span class="dv">30</span><span class="op">/</span><span class="dv">50</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>P(B|A) = 0.6</code></pre>
@@ -323,7 +330,7 @@ P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 <p>Say you want to know out of 3 coin toss, the number of outcomes where you can get 2 heads.</p>
 <p>The formula would be:</p>
 <p><span class="math display">\[\text{n-choose-k}=\frac{3!} {2!(3-2)!}\]</span> <span class="math display">\[\text{n-choose-k}=\frac{3*2*1} {2*1*1}\]</span></p>
-<div id="e27afeca" class="cell" data-execution_count="5">
+<div id="0b7cd202" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>n_choose_k <span class="op">=</span> <span class="dv">3</span><span class="op">*</span><span class="dv">2</span><span class="op">*</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">*</span><span class="dv">1</span><span class="op">*</span><span class="dv">1</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'n-choose-k = </span><span class="sc">{</span>n_choose_k<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -339,7 +346,7 @@ P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 <p>Now we know the chances of getting a head in each toss is 50%</p>
 <p>Put it into work, it would be: <span class="math display">\[0.5^2(1-0.5)^{3-2}\]</span></p>
 <p><span class="math display">\[=0.5*0.5*0.5\]</span></p>
-<div id="21ee30d3" class="cell" data-execution_count="6">
+<div id="38c90ba1" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>prob_of_each_outcome <span class="op">=</span> <span class="fl">0.5</span><span class="op">*</span> <span class="fl">0.5</span> <span class="op">*</span> (<span class="dv">1</span><span class="op">-</span><span class="fl">0.5</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Probability of each outcome = </span><span class="sc">{</span>prob_of_each_outcome<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -351,7 +358,7 @@ P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 <p>Say for each coin toss, you can get 2 possible outcomes. For 2 coin toss, you get 2^2, which is 4 outcome.</p>
 <p>Now for 3 coin toss, you will get the total possible outcome of 2^3, which is 8.</p>
 <p>The probability of getting each outcome is 1/8, which is also 0.125.</p>
-<div id="e9e5ef0f" class="cell" data-execution_count="7">
+<div id="576c8982" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'total number of possible outcome = </span><span class="sc">{</span><span class="dv">2</span><span class="op">**</span><span class="dv">3</span><span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'proabbility of each outcome = </span><span class="sc">{</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">**</span><span class="dv">3</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -364,7 +371,7 @@ proabbility of each outcome = 0.125</code></pre>
 <h3 class="anchored" data-anchor-id="final-outcome">Final outcome</h3>
 <p>Now that we can put the two together.</p>
 <p><span class="math display">\[p(x=k) = n-choose-k * \text{probability of each outcome}\]</span> <span class="math display">\[p(x=k) = 3*0.125\]</span></p>
-<div id="2f51d532" class="cell" data-execution_count="8">
+<div id="403bdb51" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>binomial_dist <span class="op">=</span> <span class="dv">3</span><span class="op">*</span><span class="fl">0.125</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'p(x=k) = </span><span class="sc">{</span>binomial_dist<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -372,6 +379,123 @@ proabbility of each outcome = 0.125</code></pre>
 </div>
 </div>
 </section>
+<section id="wipcase-study-chances-of-customer-make-a-return-to-a-store" class="level3">
+<h3 class="anchored" data-anchor-id="wipcase-study-chances-of-customer-make-a-return-to-a-store">(WIP)Case study: chances of customer make a return to a store</h3>
+<p>You are working for a retail store. You know that 10% of all customers visiting the store would make a return.</p>
+<p>Now 3 customers visit the store, what is the probability that they will return?</p>
+<p>Let’s apply the Binomial distribution formula to all possible situations.</p>
+<p>Result should be like below:</p>
+<table class="caption-top table">
+<caption>Value of p(x=k) for different number of success</caption>
+<thead>
+<tr class="header">
+<th>Number of success</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>p(x=0)</td>
+<td>0.729</td>
+</tr>
+<tr class="even">
+<td>p(x=1)</td>
+<td>0.243</td>
+</tr>
+<tr class="odd">
+<td>p(x=2)</td>
+<td>0.027</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="poisson-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="poisson-distribution">Poisson distribution</h2>
+<p>Possion distribution models the probability that a certain number of events will occur during a specific time period.</p>
+<p>Below are some practical use cases</p>
+<ul>
+<li>Calls per hour for a customer service call centre</li>
+<li>Visitors per hour for a website</li>
+<li>Customers per day at a restaurant</li>
+</ul>
+<p>Below are necessary for a Poisson experiment</p>
+<ul>
+<li>The number of events in the experiment can be counted</li>
+<li>The mean number of events that occur during a specific time period is known</li>
+<li>Each event is independent</li>
+</ul>
+<section id="poisson-distribution-formula" class="level3">
+<h3 class="anchored" data-anchor-id="poisson-distribution-formula">Poisson distribution formula</h3>
+<p><span class="math display">\[p(x=k) = \frac{λ^k e^{-λ}}{k!}\]</span></p>
+<ul>
+<li>λ (lambda) is the mean number of events that occur during a specific time period</li>
+<li>k refers to the number of events</li>
+<li>e: a constant equal to approximately 2.71828</li>
+</ul>
+</section>
+<section id="example-possible-number-of-order-in-a-drive-through-restaurant-wip" class="level3">
+<h3 class="anchored" data-anchor-id="example-possible-number-of-order-in-a-drive-through-restaurant-wip">Example: possible number of order in a drive through restaurant (WIP)</h3>
+<p>Let’s say we know that the average number of order per minute is 2.</p>
+<p>We can use the Poisson formula to determine the probability of the restaurant receiving 0, 1, 2 or 3 orders per minute.</p>
+<table class="caption-top table">
+<caption>probability of the restaurant receiving number of orders</caption>
+<thead>
+<tr class="header">
+<th>Number of orders</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>p(x=0)</td>
+<td>0.1353</td>
+</tr>
+<tr class="even">
+<td>p(x=1)</td>
+<td>0.2707</td>
+</tr>
+<tr class="odd">
+<td>p(x=2)</td>
+<td>0.2707</td>
+</tr>
+<tr class="even">
+<td>p(x=3)</td>
+<td>0.1805</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="possion-vs-binomial" class="level2">
+<h2 class="anchored" data-anchor-id="possion-vs-binomial">Possion VS Binomial</h2>
+<table class="caption-top table">
+<caption>Possion VS Binomial</caption>
+<colgroup>
+<col style="width: 14%">
+<col style="width: 42%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Given</th>
+<th>Want to Find</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Poisson</td>
+<td>The average probability of an event happening for a specific time period</td>
+<td>The probability of a certain number of events happening in that time period</td>
+</tr>
+<tr class="even">
+<td>Binomial</td>
+<td>An exact probability of an event happening</td>
+<td>The probability of the event happening a certain number of times in a repeated trial</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 

@@ -226,4 +226,65 @@ binomial_dist = 3*0.125
 print(f'p(x=k) = {binomial_dist}')
 ```
 
-### Case study: chances of customer make a return to a store
+### (WIP)Case study: chances of customer make a return to a store
+
+You are working for a retail store. You know that 10% of all customers visiting the store would make a return. 
+
+Now 3 customers visit the store, what is the probability that they will return? 
+
+Let's apply the Binomial distribution formula to all possible situations. 
+
+Result should be like below: 
+
+|Number of success|P     |
+|-----------------|------|
+|p(x=0)           |0.729 |
+|p(x=1)           |0.243 |
+|p(x=2)           |0.027 |
+
+:Value of p(x=k) for different number of success
+
+## Poisson distribution
+Possion distribution models the probability that a certain number of events will occur during a specific time period. 
+
+Below are some practical use cases
+
+- Calls per hour for a customer service call centre
+- Visitors per hour for a website
+- Customers per day at a restaurant
+
+Below are necessary for a Poisson experiment
+
+- The number of events in the experiment can be counted
+- The mean number of events that occur during a specific time period is known
+- Each event is independent
+
+### Poisson distribution formula
+$$p(x=k) = \frac{λ^k e^{-λ}}{k!}$$
+
+- λ (lambda) is the mean number of events that occur during a specific time period
+- k refers to the number of events
+- e: a constant equal to approximately 2.71828
+
+### Example: possible number of order in a drive through restaurant (WIP)
+Let's say we know that the average number of order per minute is 2. 
+
+We can use the Poisson formula to determine the probability of the restaurant receiving 0, 1, 2 or 3 orders per minute. 
+
+|Number of orders |P     |
+|-----------------|-------|
+|p(x=0)           |0.1353 |
+|p(x=1)           |0.2707 |
+|p(x=2)           |0.2707 |
+|p(x=3)           |0.1805 |
+
+: probability of the restaurant receiving number of orders
+
+## Possion VS Binomial
+
+|   |Given|Want to Find|
+|--------|-----------------------|-----------------------|
+|Poisson |The average probability of an event happening for a specific time period|The probability of a certain number of events happening in that time period|
+|Binomial|An exact probability of an event happening|The probability of the event happening a certain number of times in a repeated trial|
+
+:Possion VS Binomial
