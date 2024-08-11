@@ -265,6 +265,7 @@ $$p(x=k) = \frac{λ^k e^{-λ}}{k!}$$
 - λ (lambda) is the mean number of events that occur during a specific time period
 - k refers to the number of events
 - e: a constant equal to approximately 2.71828
+- e^-λ: 1/e^λ
 
 ### Example: possible number of order in a drive through restaurant (WIP)
 Let's say we know that the average number of order per minute is 2. 
@@ -288,3 +289,18 @@ We can use the Poisson formula to determine the probability of the restaurant re
 |Binomial|An exact probability of an event happening|The probability of the event happening a certain number of times in a repeated trial|
 
 :Possion VS Binomial
+
+# Continuous Probability
+## The normal distribution
+This is also know as the bell curve. It has the following features: 
+
+- The shape is a bell curve
+- The mean is located at the centre of the curve
+- The curve is symmetrical on both sides of the center
+- The total area under the curve equals 1
+
+The bell curve follows the emprical rule
+
+- 68% of values fall within 1 standard deviation of the mean
+- 95% of values fall within 2 standard deviation of the mean
+- 99.7% of values fall within 3 standard deviation of the mean
