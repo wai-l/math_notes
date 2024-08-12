@@ -304,3 +304,29 @@ The bell curve follows the emprical rule
 - 68% of values fall within 1 standard deviation of the mean
 - 95% of values fall within 2 standard deviation of the mean
 - 99.7% of values fall within 3 standard deviation of the mean
+
+## Z-score
+Z-score allows us to compare the normal distribution of different dataset by standardise the normal distribution. It looks at the normal distribution in terms of standard deviation. This is also known as standarised normal distribution
+
+![Standarised normal distribution](images/z-score_1.png)
+
+![Z-score allows us to compare the normla distribution in different datasets](images/z-score_2.png)
+
+### Formula
+This is how we calculate the Z-score: 
+$$Z = \frac{x-μ}{σ}$$
+$$x = \text{a single data value/raw score}$$
+$$μ/mu = \text{the population mean}$$
+$$σ/sigma = \text{the poplation standard deviation}$$
+
+Now let's say you have a test score of 133. The test has a mean score of 100 and a standard deviation of 15. The equation would look like this: 
+$$Z = \frac{133-100}{15}$$
+
+
+```{python}
+z_score = (133-100)/15
+print(f'Z-score: {z_score}')
+```
+
+### Python
+You can use the z-score function in the scipy package to calculate the z-score of each datapoint in your dataframe. 
