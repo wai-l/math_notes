@@ -12,6 +12,12 @@ format:
 # About
 This notebook is for me to record my notes in learning statistics. It includes specific math formulas, examples and how to calculate them in Python. Some notes are directly copied from various different sources. 
 
+# Packages used
+
+```{python}
+import math
+```
+
 # Conditional Probability
 
 ## Bayes' theorem
@@ -330,3 +336,32 @@ print(f'Z-score: {z_score}')
 
 ### Python
 You can use the z-score function in the scipy package to calculate the z-score of each datapoint in your dataframe. 
+
+# Sampling
+## Sampling distribution
+### Standard Error of the Mean
+The standard error formula is base on the math assumption of repeated sampling, and it calculates the possible range of the actual mean based on one sample. 
+
+$$\text{Standard error of the mean} = \frac{s}{\sqrt{n}}$$
+$$s = \text{The sample standard deviation}$$
+$$n = \text{The sample size}$$
+
+The larger the sample size is,the smaller the error would be. 
+
+Now let's say we have a sample of 100 penguine, which has a mean weight of 3 pounds and a standard deviation of 1 pound. 
+
+$$\text{Stand error of the mean} = \frac{1}{\sqrt{100}}$$
+
+```{python}
+sample_std = 1
+n_sqr = math.sqrt(100)
+
+standard_error = sample_std/n_sqr
+
+print(standard_error)
+```
+
+Now while the best estimated mean of the population will still be 3 pounds, you know that the mean will vary with a standard deviation of 0.1 pound. 
+
+## The Central Limit Theorem
+The sample distribution of the mean approaches a normal distribution when the sample size increases. 
