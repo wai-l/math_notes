@@ -337,9 +337,8 @@ print(f'Z-score: {z_score}')
 ### Python
 You can use the z-score function in the scipy package to calculate the z-score of each datapoint in your dataframe. 
 
-# Sampling
-## Sampling distribution
-### Standard Error of the Mean
+# Sampling distribution
+## Standard Error of the Mean
 The standard error formula is base on the math assumption of repeated sampling, and it calculates the possible range of the actual mean based on one sample. 
 
 $$\text{Standard error of the mean} = \frac{s}{\sqrt{n}}$$
@@ -365,3 +364,59 @@ Now while the best estimated mean of the population will still be 3 pounds, you 
 
 ## The Central Limit Theorem
 The sample distribution of the mean approaches a normal distribution when the sample size increases. 
+
+## Standard Error of the Proportion
+### Theory and formula
+The standard error of proportion measures the standard error of a sampling proportion. 
+
+$$SE(\hat{p}) = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
+
+$$\hat{p} (\text{p hat}) = \text{population proportion}$$
+
+$$n = \text{sample size}$$
+
+Say you are researching a population of 100,000, in a sample with 100 people, 10% of them prefer slipon sneaker. 
+
+$$SE(\hat{p}) = \sqrt{\frac{0.1(1-0.1)}{100}}$$
+
+
+```{python}
+import math
+
+phat = 0.1
+sample = 100
+sample_error = math.sqrt(0.1*(1-0.1)/100)
+
+print(sample_error)
+
+```
+
+The sample error is 0.03, which means that the estimate population proportion who prefer slipon sneaker is 10%, which would deviate for +/-3%. 
+
+### Case study: apply the standard error of the proportion to churn rate
+Say you know that you have 100 customers (current and churned) in Scotland, and their churn rate is 60%. You can use the standard error formula to understand how much the sample proportion (in your case, the sample churn rate) is expected to vary from the true population proportion (the true churn rate for all current and future customers). 
+
+
+```{python}
+import math
+
+# Given data
+p_hat = 0.60  # Sample churn rate
+n = 100       # Sample size
+
+# Standard error calculation
+standard_error = math.sqrt((p_hat * (1 - p_hat)) / n)
+
+print(standard_error)
+```
+
+The standard error is around 0.05, which means that the standard deviation of the churn rate for current and future Scotland customer will be at 60%, vary for +-5%. 
+
+You can further calculate the confidence level base on the standard error and sample size, to understand how reliable this is. 
+
+# Confidence level
+Usual confidence level choosen are as follow: 
+
+- 90%
+- 95%
+- 99%
