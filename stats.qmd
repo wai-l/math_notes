@@ -10,7 +10,7 @@ format:
 
 
 # About
-This notebook is for me to record my notes in learning statistics. It includes specific math formulas, examples and how to calculate them in Python. Some notes are directly copied from various different sources. 
+This notebook is for me to record my notes in learning statistics. It includes specific math formulas, examples and how to calculate them in Python. Some notes are directly quoted from various online sources. 
 
 # Packages used
 
@@ -415,8 +415,85 @@ The standard error is around 0.05, which means that the standard deviation of th
 You can further calculate the confidence level base on the standard error and sample size, to understand how reliable this is. 
 
 # Confidence level
+Imagine you want to estimate the mean weight of a population of 10,000 penguins. Instead of weighing every single penguin, you select a sample of 100 penguins. The mean weight of your sample is 30 pounds. Based on your sample data, you construct a 95% confidence interval between 28 pounds and 32 pounds. 
+
+95 CI [28, 32]
+
 Usual confidence level choosen are as follow: 
 
 - 90%
 - 95%
 - 99%
+
+## Interpret the confidence interval
+Technically, 95% confidence means that if you take repeated random samples from a population, and construct a confidence interval for each sample using the same method, you can expect that 95% of these intervals will capture the population mean. You can also expect that 5% of the total will not capture the population mean. 
+
+The confidence level refers to the long-term success rate of the method, or the estimation process based on random sampling. 
+
+Imagine you take 20 random samples of 100 penguins each from the penguin population, and calculate a 95% confidence interval for each sample. You can expect that approximately 19 of the 20 intervals, or 95% of the total, will contain the actual population mean weight of 31 pounds. One such interval will be the range of values between 28 pounds and 32 pounds. 
+
+![Interpret the confidence interval](images/confidence_intervals.png)
+
+## Incorrect interpretations
+
+- There is a 95% probability that the population mean falls within the constructed interval. (It's not true!)
+
+What you can say is that if you take repeated random samples from the population, and construct a confidence interval for each sample using the same method, you can expect 95% of your intervals to capture the population mean. 
+
+Pro tip: Remember that a 95% confidence level refers to the success rate of the estimation process. 
+
+- 95% of all of the data values in the population fall within the interval (Also not true. )
+
+## Construct confidence interval for porportion
+
+1. Identify a sample statistic
+2. Choose a confidence level
+3. Find the margin of error
+4. Calculate the interval
+
+Let's say you work for election polling. Below would be the associate data point. 
+
+
+|Component        |Metric           |Data|
+|-----------------|-----------------|------|
+|Sample statistic |Percentage of sample that prefer candidate A|55%|
+|Confidence level |95%|1.96|
+|Standard error   |Standard error of poportion from the sample (assume sample size is 100)|5%|
+|Margin of error  |Assume a large sample size and normal distribution, it would be z-score * standard error|1.96*0.05=0.098|
+|Upper limit of the interval|Sample stat + margin of error|55%+9.8%=64.8%|
+|Lower limit of the interval|Sample stat - margin of error|55%-9.8%=45.2%|
+|Confidence Interval|Upper limit - lower limit|64.8%-45.2%=19.6%|
+
+: Construct confidence interval for election polling
+
+|Confidence Level |Z-score |
+|------------|------------|
+|90% |1.645 |
+|95% |1.96 |
+|99% |2.58 |
+
+: Common confidence level and associated z-score
+
+The formula for calculate margin of error in a large sample size would be: 
+
+$$\text{Margin of error} = \text{z-score}*\text{standard error}$$
+
+Note that in a smaller sample size, we will need to use **t-score** to calculate the margin of error. 
+
+In the situation of polling, we will use the standard error of poportion for the standard error calculation: 
+
+$$SE(\hat{p}) = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
+
+$$\text{Sample proportion}=0.55$$
+$$\text{Sample size}=100$$
+
+
+```{python}
+import math
+p=0.55
+n=100
+
+se = math.sqrt(p*(1-p)/n)
+
+print(f'Standard error of porportion: {se}')
+```
