@@ -341,6 +341,11 @@ You can use the z-score function in the scipy package to calculate the z-score o
 ## Standard Error of the Mean
 The standard error formula is base on the math assumption of repeated sampling, and it calculates the possible range of the actual mean based on one sample. 
 
+$$\text{Standard error of the mean} = \frac{σ*}{\sqrt{n}}$$
+$$σ = \text{Standard deviation of the population}$$
+
+*The standard deviation of the population is usually unknown, so in practice we often use the standard deviation o the sample instead. 
+
 $$\text{Standard error of the mean} = \frac{s}{\sqrt{n}}$$
 $$s = \text{The sample standard deviation}$$
 $$n = \text{The sample size}$$
@@ -496,4 +501,42 @@ n=100
 se = math.sqrt(p*(1-p)/n)
 
 print(f'Standard error of porportion: {se}')
+```
+
+## Construct confidence interval for mean
+1. Identify a sample statistic
+2. Choose a confidence level
+3. Find the margin of error
+4. Calculate the interval
+
+Let's say this time you work for a a cellphone manufactory company, and you are trying to get the average battery life of a new cellphone battery. 
+
+
+|Component        |Metric           |Data|
+|-----------------|-----------------|------|
+|Sample statistic |Mean|20.5|
+|Confidence level |95%|1.96|
+|Standard error   |Standard error of poportion from the sample (assume sample size is 100)|0.15|
+|Margin of error  |Assume a large sample size and normal distribution, it would be z-score * standard error|1.96*0.15=0.294|
+|Upper limit of the interval|Sample stat + margin of error|20.5+0.294=20.794|
+|Lower limit of the interval|Sample stat - margin of error|20.5-0.294=20.206|
+|Confidence Interval|Upper limit - lower limit|20.794-20.206|
+
+: Construct confidence interval for cellphone battery
+
+We want to use the standard error of the mean to calculate the margin of error. 
+
+As we know the standard deviation of the population, we can use that for the formula. 
+$$\text{Standard error of the mean} = \frac{σ}{\sqrt{n}}$$
+
+
+```{python}
+import math
+
+sigma=1.5
+n=100
+
+se = 1.5/math.sqrt(100)
+
+print(f'Standard error: {se}')
 ```
