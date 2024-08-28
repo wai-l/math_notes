@@ -337,6 +337,25 @@ print(f'Z-score: {z_score}')
 ### Python
 You can use the z-score function in the scipy package to calculate the z-score of each datapoint in your dataframe. 
 
+## Smaller sample size - T-score and T-distribution
+The Student's t-distribution, often just called the t-distribution, is a probability distribution that is used when estimating the mean of a normally distributed population in situations where the sample size is small, and the population standard deviation is unknown. This distribution was developed by William Sealy Gosset under the pseudonym "Student." 
+
+It is similar to the normal distribution but more compressed with heavier tails. 
+
+![Z-distrbution vs T-distribution](images/t-distrbution.png)
+
+Below are the differences between T-score and Z-score: 
+
+|Feature      |Z-Score                   |T-Score                   |
+|-------------|--------------------------|--------------------------|
+|Sample Size  |Large samples (n>30n>30)|Small samples (n≤30n≤30)|
+|Population Standard Deviation|Known|Unknown|
+|Distribution |Normal distribution|T-distribution (heavier tails)|
+|Applications |Standardized tests, quality control, large-scale surveys|Small-sample studies, medical trials, social science experiments|
+|Type of Data |Population data or large samples|Sample data when population parameters are unknown|
+
+:T-score VS Z-score
+
 # Sampling distribution
 ## Standard Error of the Mean
 The standard error formula is base on the math assumption of repeated sampling, and it calculates the possible range of the actual mean based on one sample. 
