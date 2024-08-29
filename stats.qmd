@@ -16,6 +16,9 @@ This notebook is for me to record my notes in learning statistics. It includes s
 
 ```{python}
 import math
+import pandas as pd
+import numpy as np
+from scipy import stats
 ```
 
 # Conditional Probability
@@ -559,3 +562,79 @@ se = 1.5/math.sqrt(100)
 
 print(f'Standard error: {se}')
 ```
+
+## Calculate confidence interval with SciPy
+First let's generate a random sample of a survey result of government support rate by town. 
+
+
+```{python}
+import pandas as pd
+import numpy as np
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Number of rows
+n_rows = 500
+
+# Generate town names (using 'Town' with an index for uniqueness)
+towns = [f'Town_{i+1}' for i in range(n_rows)]
+
+# Generate random support rates (between 0 and 100)
+support_rates = np.random.uniform(0, 1, n_rows).round(2)
+
+# Create the DataFrame
+data = pd.DataFrame({
+    'town': towns,
+    'support_rate': support_rates
+})
+
+data.head()  # Display the first few rows of the dataset
+
+data.describe()
+
+data['support_rate'].mean()
+
+```
+
+The average support rate by town for the whole data set is 0.4987. 
+
+Now take a random sample size of 50. 
+
+```{python}
+data_sample = data.sample(n=50, replace=True, random_state=30624300)
+```
+
+To get the confidence interval of the sample, we will need to know the below: 
+
+- Confidence level
+- Sample mean
+- Sample standard error
+
+Assume we want the confidence level of 95 or 99. 
+
+```{python}
+confi_level = 0.95
+
+sample_mean = data_sample['support_rate'].mean()
+
+print(f'Sample mean: {sample_mean}')
+print()
+
+standard_error = data_sample['support_rate'].std()/np.sqrt(data_sample.shape[0])
+
+print(f'Standard error: {standard_error}')
+print()
+
+conf_interval = stats.norm.interval(confi_level, loc=sample_mean, scale=standard_error)
+
+print(f'Confidence interval of the sample with confidence level of {confi_level}: ')
+print(conf_interval)
+
+print()
+confi_level = 0.99
+print(f'Confidence interval of the sample with confidence level of {confi_level}: ')
+print(conf_interval)
+
+```
+
