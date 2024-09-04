@@ -638,3 +638,36 @@ print(conf_interval)
 
 ```
 
+# Hypotheses testing 
+## Steps for conducting a hypothesis test
+
+1. State the null hypothesis and the alternative hypothesis.
+
+2. Choose a significance level.
+
+3. Find the p-value.
+
+4. Reject or fail to reject the null hypothesis.
+
+
+## Null VS Alternative hypothesis 
+
++--------------+--------------------------------------+--------------------------------------+
+|              |**Null hypothesis (H0)**              |**Alternative hypothesis (Ha)**       |
++==============+======================================+======================================+
+|**Claims**    |There is no effect in the population. |There is an effect in the population. |
++--------------+--------------------------------------+--------------------------------------+
+|**Assumption**|Assumed to be true unless there is    |Accepted as true only if there is     |
+|              |convincing evidence to the contrary.  |convincing evidence for it.           |
++--------------+--------------------------------------+--------------------------------------+
+|**Language**  |- No Effect                           |- An effect                           |
+|              |- No difference                       |- A difference                        |
+|              |- No relationship                     |- A relationship                      |
+|              |- No change                           |- A change                            |
++--------------+--------------------------------------+--------------------------------------+
+|**Symbols**   |Equality (=, ≤, ≥)                    |Inequality (≠, <, >)                  |
++--------------+--------------------------------------+--------------------------------------+
+
+: Null VS Alternative hypothesis
+
+## Examples of Null and Alternative hypothesis
