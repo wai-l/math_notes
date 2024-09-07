@@ -643,11 +643,11 @@ print(conf_interval)
 
 1. State the null hypothesis and the alternative hypothesis.
 
-2. Choose a significance level.
+2. Choose a significant level.
 
 3. Find the p-value.
 
-4. Reject or fail to reject the null hypothesis.
+4. Reject or fail to reject the null hypothesis. (by comparing p-value and significant level)
 
 
 ## Null VS Alternative hypothesis 
@@ -670,4 +670,169 @@ print(conf_interval)
 
 : Null VS Alternative hypothesis
 
+## Significant level
+This is the threshold at which we will consider our result statiscally significant. It is also the probability of rejecting the null hypothesis when it is true. 
+
+5% is the most common standard for significant level. 
+
+For more strict result, 1% is used. 
+
+## P-value
+The probability of observing a difference in your result as or more extreme than the difference observed when the null hypothesis is true. 
+
+It is used to compared against the significant level. 
+
+The p-value is calculated by test statistic, a value that shows how closely your observed data matches the distribution expected under the null hypothesis. 
+
 ## Examples of Null and Alternative hypothesis
+### Example#1: Mean weight 
+
+An organic food company is famous for their granola. The company claims each bag they produce contains 300 grams of granola—no more and no less. To test this claim, a quality control expert measures the weight of a random sample of 40 bags.
+
+- H0: μ = 300 (the mean weight of all produced granola bags is equal to 300 grams)
+- Ha: μ ≠ 300 (the mean weight of all produced granola bags is not equal to 300 grams)
+
+### Example#2: Mean height 
+
+Suppose it’s assumed that the mean height of a certain species of tree is 30 feet tall. However, one ecologist claims the actual mean height is greater than 30 feet. To test this claim, the ecologist measures the height of a random sample of 50 trees.
+
+- H0: μ ≤ 30 (the mean height of this species of tree is equal to or less than 30 feet)
+- Ha: μ > 30 (the mean height of this species of tree is greater than 30 feet)
+
+### Example#3: Proportion of employees
+
+A corporation claims that at least 80% of all employees are satisfied with their job. However, an independent researcher believes that less than 80% of all employees are satisfied with their job. To test this claim, the researcher surveys a random sample of 100 employees.
+
+- H0: p ≥ 0.80 (the proportion of all employees who are satisfied with their job is equal to or greater than 80%)
+- Ha: p < 0.80 (the proportion of all employees who are satisfied with their job is less than 80%)
+
+## Type I and Type II errors
+When you decide to reject or fail to reject the null hypothesis, there are four possible outcomes–two represent correct choices, and two represent errors. You can: 
+
+- Reject the null hypothesis when it’s actually true (Type I error)
+- Reject the null hypothesis when it’s actually false (Correct)
+- Fail to reject the null hypothesis when it’s actually true (Correct) 
+- Fail to reject the null hypothesis when it’s actually false (Type II error)
+
+## One tail T-test vs z-test
+The primary difference between the one-tail t-test and the one-tail z-test lies in the distribution they use, which depends on whether the population standard deviation is known and the sample size. Both tests are used to determine if there is a significant difference between the sample mean and the population mean, but they differ slightly in their formula.
+
+### One tail t-test
+The t-test is typically used when:
+
+- The sample size is small (generally n<30).
+- The population standard deviation σ is unknown, so we estimate it using the sample standard deviation s.
+
+The formula for the t-test statistic is: 
+$$t = \frac{\bar{x}-μ}{\frac{s}{\sqrt{n}}}$$
+
+ 
+Where:
+x̄ = sample mean
+μ = population mean (hypothesized)
+s = sample standard deviation
+n = sample size
+s/sqrt(n) = standard error of the sample mean
+
+The result is compared with a t-distribution with n−1 degrees of freedom to get the critical value for a one-tail test. 
+
+### One tail z-test
+The z-test is typically used when:
+
+- The sample size is small (generally n<30).
+- The population standard deviation σ is unknown, so we estimate it using the sample standard deviation s.
+
+- The sample size is large (typically n≥30).
+- The population standard deviation σ is known.
+
+The formula for the z-test statistic is: 
+$$z = \frac{\bar{x}-μ}{\frac{σ}{\sqrt{n}}}$$
+
+ 
+Where:
+x̄ = sample mean
+μ = population mean (hypothesized)
+σ = population standard deviation
+n = sample size
+σ/sqrt(n) = standard error of the population mean
+
+The result is compared with the standard normal distribution (Z-distribution) to get the critical value for a one-tail test.
+
+## One sample tests - Z-test
+### Assumption: 
+
+- The data is a random sample of a normally distributed population
+- The standard deviation of the population is known
+
+### Case Study: Online Delivery
+Let's say you work for an online delivery company. Currently the average delivery time is 40 minutes, with a standard deviation of 5 minutes. 
+
+Recently, the company launched a new training program to make the delivery more efficient. After the drivers completed the training program, the company tracked a random sample of 50 deliveries to understand how long a delivery take. The sample has an average delivery time of 38 minutes, and a standard deviation of 5 minutes. 
+
+Now the company wants to know if the decrease in delivery time is due to chance, or is statistically significant. 
+
+We can determine this with a one hypothesis z-test. 
+
+**Population**
+
+- Mean = 40 min
+- Standard deviation = 5 min
+
+**Sample**
+
+- Mean = 38 min
+- Standard deviation = 5 min
+
+Let's build the hypothesis step by step: 
+
+**Null hypothesis**
+
+The average delivery time equals 40 minutes. 
+
+**Alternative hypothesis**
+
+The average delivery time is less than 40 minutes. 
+
+**Significant level**
+
+5%
+
+This is the threshold at which we will consider our result statiscally significant. It is also the probability of rejecting the null hypothesis when it is true. 
+
+**P-value**
+
+The probability of observing a difference in your result as or more extreme than the difference observed when the null hypothesis is true. 
+
+The probability of observing a difference that is two minutes or greater if the null hypothesis is true. If the probability of this outcome is very unlikely, in particular, if your p-value is less than your significance level of five percent, then you'll reject the null hypothesis. 
+
+If p-value < 5%, then reject the null hypothesis. 
+
+In this case, as we are using z-test, we will calculate the z-score to find the p-value. 
+
+$$z = \frac{\bar{x}-μ}{\frac{σ}{\sqrt{n}}}$$
+
+Where:
+x̄ = sample mean
+μ = population mean (hypothesized)
+σ = population standard deviation
+n = sample size
+σ/sqrt(n) = standard error of the population mean
+
+$$z = \frac{38-40}{\frac{5}{\sqrt{50}}}$$
+
+
+```{python}
+import math
+
+sample_mean = 38
+pop_mean = 40
+pop_std = 5
+sample_size = 50
+
+z_score = (sample_mean-pop_mean)/(pop_std/math.sqrt(sample_size))
+
+print(f'Z-score: {z_score}')
+
+```
+
+In this case, the z-score is -2.8284. 

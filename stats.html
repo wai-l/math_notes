@@ -164,7 +164,25 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#steps-for-conducting-a-hypothesis-test" id="toc-steps-for-conducting-a-hypothesis-test" class="nav-link" data-scroll-target="#steps-for-conducting-a-hypothesis-test">Steps for conducting a hypothesis test</a></li>
   <li><a href="#null-vs-alternative-hypothesis" id="toc-null-vs-alternative-hypothesis" class="nav-link" data-scroll-target="#null-vs-alternative-hypothesis">Null VS Alternative hypothesis</a></li>
-  <li><a href="#examples-of-null-and-alternative-hypothesis" id="toc-examples-of-null-and-alternative-hypothesis" class="nav-link" data-scroll-target="#examples-of-null-and-alternative-hypothesis">Examples of Null and Alternative hypothesis</a></li>
+  <li><a href="#significant-level" id="toc-significant-level" class="nav-link" data-scroll-target="#significant-level">Significant level</a></li>
+  <li><a href="#p-value" id="toc-p-value" class="nav-link" data-scroll-target="#p-value">P-value</a></li>
+  <li><a href="#examples-of-null-and-alternative-hypothesis" id="toc-examples-of-null-and-alternative-hypothesis" class="nav-link" data-scroll-target="#examples-of-null-and-alternative-hypothesis">Examples of Null and Alternative hypothesis</a>
+  <ul class="collapse">
+  <li><a href="#example1-mean-weight" id="toc-example1-mean-weight" class="nav-link" data-scroll-target="#example1-mean-weight">Example#1: Mean weight</a></li>
+  <li><a href="#example2-mean-height" id="toc-example2-mean-height" class="nav-link" data-scroll-target="#example2-mean-height">Example#2: Mean height</a></li>
+  <li><a href="#example3-proportion-of-employees" id="toc-example3-proportion-of-employees" class="nav-link" data-scroll-target="#example3-proportion-of-employees">Example#3: Proportion of employees</a></li>
+  </ul></li>
+  <li><a href="#type-i-and-type-ii-errors" id="toc-type-i-and-type-ii-errors" class="nav-link" data-scroll-target="#type-i-and-type-ii-errors">Type I and Type II errors</a></li>
+  <li><a href="#one-tail-t-test-vs-z-test" id="toc-one-tail-t-test-vs-z-test" class="nav-link" data-scroll-target="#one-tail-t-test-vs-z-test">One tail T-test vs z-test</a>
+  <ul class="collapse">
+  <li><a href="#one-tail-t-test" id="toc-one-tail-t-test" class="nav-link" data-scroll-target="#one-tail-t-test">One tail t-test</a></li>
+  <li><a href="#one-tail-z-test" id="toc-one-tail-z-test" class="nav-link" data-scroll-target="#one-tail-z-test">One tail z-test</a></li>
+  </ul></li>
+  <li><a href="#one-sample-tests---z-test" id="toc-one-sample-tests---z-test" class="nav-link" data-scroll-target="#one-sample-tests---z-test">One sample tests - Z-test</a>
+  <ul class="collapse">
+  <li><a href="#assumption" id="toc-assumption" class="nav-link" data-scroll-target="#assumption">Assumption:</a></li>
+  <li><a href="#case-study-online-delivery" id="toc-case-study-online-delivery" class="nav-link" data-scroll-target="#case-study-online-delivery">Case Study: Online Delivery</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -198,7 +216,7 @@ window.Quarto = {
 </section>
 <section id="packages-used" class="level1">
 <h1>Packages used</h1>
-<div id="c13f890e" class="cell" data-execution_count="1">
+<div id="ac8191d1" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -223,7 +241,7 @@ window.Quarto = {
 <li>Rainy days start of cloudy (P(Cloud|Rain)) = 50%</li>
 </ul>
 <p><span class="math display">\[P(Rain \mid Cloud) = \frac{ 50\% * 10\% }{ 40\% }\]</span></p>
-<div id="0ad1cb9a" class="cell" data-execution_count="2">
+<div id="6e6f0d21" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p_a_b <span class="op">=</span> <span class="fl">0.5</span><span class="op">*</span><span class="fl">0.1</span><span class="op">/</span><span class="fl">0.4</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p_a_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -287,7 +305,7 @@ window.Quarto = {
 <p>Putting all available variables into the formula will look like this: <span class="math display">\[
 P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 \]</span></p>
-<div id="cbaf69ef" class="cell" data-execution_count="3">
+<div id="ab7cf767" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>P_A_B <span class="op">=</span> <span class="fl">0.95</span> <span class="op">*</span> <span class="fl">0.01</span> <span class="op">/</span> (<span class="fl">0.95</span><span class="op">*</span><span class="fl">0.01</span> <span class="op">+</span> <span class="fl">0.02</span> <span class="op">*</span> <span class="fl">0.99</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(P_A_B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -330,7 +348,7 @@ P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 </table>
 <p><span class="math display">\[\text{Churn rate of UK customer} = \frac{\text{Number of churned UK customer}} {\text{Number of UK customer}}\]</span></p>
 <p><span class="math display">\[\text{Churn rate of UK customer}  = \frac{30} {50}\]</span></p>
-<div id="1e80873e" class="cell" data-execution_count="4">
+<div id="30c49313" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>churn_rate <span class="op">=</span> <span class="dv">30</span><span class="op">/</span><span class="dv">50</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Churn rate of UK customer: </span><span class="sc">{</span>churn_rate<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -343,7 +361,7 @@ P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 \]</span></p>
 <p><span class="math display">\[P(A \mid B) = \frac{30}{60} * \frac{60}{100} * \frac{100}{50}\]</span> <span class="math display">\[P(A \mid B) = \frac{30}{50}\]</span></p>
-<div id="8f454a85" class="cell" data-execution_count="5">
+<div id="9026ddfa" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'P(B|A) = </span><span class="sc">{</span><span class="dv">30</span><span class="op">/</span><span class="dv">50</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>P(B|A) = 0.6</code></pre>
@@ -374,7 +392,7 @@ P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 <p>Say you want to know out of 3 coin toss, the number of outcomes where you can get 2 heads.</p>
 <p>The formula would be:</p>
 <p><span class="math display">\[\text{n-choose-k}=\frac{3!} {2!(3-2)!}\]</span> <span class="math display">\[\text{n-choose-k}=\frac{3*2*1} {2*1*1}\]</span></p>
-<div id="0e97e18c" class="cell" data-execution_count="6">
+<div id="3c486846" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>n_choose_k <span class="op">=</span> <span class="dv">3</span><span class="op">*</span><span class="dv">2</span><span class="op">*</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">*</span><span class="dv">1</span><span class="op">*</span><span class="dv">1</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'n-choose-k = </span><span class="sc">{</span>n_choose_k<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -390,7 +408,7 @@ P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 <p>Now we know the chances of getting a head in each toss is 50%</p>
 <p>Put it into work, it would be: <span class="math display">\[0.5^2(1-0.5)^{3-2}\]</span></p>
 <p><span class="math display">\[=0.5*0.5*0.5\]</span></p>
-<div id="a32e38e2" class="cell" data-execution_count="7">
+<div id="c472d55b" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>prob_of_each_outcome <span class="op">=</span> <span class="fl">0.5</span><span class="op">*</span> <span class="fl">0.5</span> <span class="op">*</span> (<span class="dv">1</span><span class="op">-</span><span class="fl">0.5</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Probability of each outcome = </span><span class="sc">{</span>prob_of_each_outcome<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -402,7 +420,7 @@ P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 <p>Say for each coin toss, you can get 2 possible outcomes. For 2 coin toss, you get 2^2, which is 4 outcome.</p>
 <p>Now for 3 coin toss, you will get the total possible outcome of 2^3, which is 8.</p>
 <p>The probability of getting each outcome is 1/8, which is also 0.125.</p>
-<div id="70bee952" class="cell" data-execution_count="8">
+<div id="21429223" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'total number of possible outcome = </span><span class="sc">{</span><span class="dv">2</span><span class="op">**</span><span class="dv">3</span><span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'proabbility of each outcome = </span><span class="sc">{</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">**</span><span class="dv">3</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -415,7 +433,7 @@ proabbility of each outcome = 0.125</code></pre>
 <h3 class="anchored" data-anchor-id="final-outcome">Final outcome</h3>
 <p>Now that we can put the two together.</p>
 <p><span class="math display">\[p(x=k) = n-choose-k * \text{probability of each outcome}\]</span> <span class="math display">\[p(x=k) = 3*0.125\]</span></p>
-<div id="f1abb25e" class="cell" data-execution_count="9">
+<div id="ef7851d1" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>binomial_dist <span class="op">=</span> <span class="dv">3</span><span class="op">*</span><span class="fl">0.125</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'p(x=k) = </span><span class="sc">{</span>binomial_dist<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -580,7 +598,7 @@ proabbility of each outcome = 0.125</code></pre>
 <h3 class="anchored" data-anchor-id="formula">Formula</h3>
 <p>This is how we calculate the Z-score: <span class="math display">\[Z = \frac{x-μ}{σ}\]</span> <span class="math display">\[x = \text{a single data value/raw score}\]</span> <span class="math display">\[μ/mu = \text{the population mean}\]</span> <span class="math display">\[σ/sigma = \text{the poplation standard deviation}\]</span></p>
 <p>Now let’s say you have a test score of 133. The test has a mean score of 100 and a standard deviation of 15. The equation would look like this: <span class="math display">\[Z = \frac{133-100}{15}\]</span></p>
-<div id="fba7202d" class="cell" data-execution_count="10">
+<div id="09303372" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>z_score <span class="op">=</span> (<span class="dv">133</span><span class="op">-</span><span class="dv">100</span>)<span class="op">/</span><span class="dv">15</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Z-score: </span><span class="sc">{</span>z_score<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -659,7 +677,7 @@ proabbility of each outcome = 0.125</code></pre>
 <p>The larger the sample size is,the smaller the error would be.</p>
 <p>Now let’s say we have a sample of 100 penguine, which has a mean weight of 3 pounds and a standard deviation of 1 pound.</p>
 <p><span class="math display">\[\text{Stand error of the mean} = \frac{1}{\sqrt{100}}\]</span></p>
-<div id="51022309" class="cell" data-execution_count="11">
+<div id="186f4f4a" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sample_std <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>n_sqr <span class="op">=</span> math.sqrt(<span class="dv">100</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -686,7 +704,7 @@ proabbility of each outcome = 0.125</code></pre>
 <p><span class="math display">\[n = \text{sample size}\]</span></p>
 <p>Say you are researching a population of 100,000, in a sample with 100 people, 10% of them prefer slipon sneaker.</p>
 <p><span class="math display">\[SE(\hat{p}) = \sqrt{\frac{0.1(1-0.1)}{100}}\]</span></p>
-<div id="4147db7d" class="cell" data-execution_count="12">
+<div id="906d4504" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>phat <span class="op">=</span> <span class="fl">0.1</span></span>
@@ -703,7 +721,7 @@ proabbility of each outcome = 0.125</code></pre>
 <section id="case-study-apply-the-standard-error-of-the-proportion-to-churn-rate" class="level3">
 <h3 class="anchored" data-anchor-id="case-study-apply-the-standard-error-of-the-proportion-to-churn-rate">Case study: apply the standard error of the proportion to churn rate</h3>
 <p>Say you know that you have 100 customers (current and churned) in Scotland, and their churn rate is 60%. You can use the standard error formula to understand how much the sample proportion (in your case, the sample churn rate) is expected to vary from the true population proportion (the true churn rate for all current and future customers).</p>
-<div id="c795f94c" class="cell" data-execution_count="13">
+<div id="6bf826f8" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given data</span></span>
@@ -846,7 +864,7 @@ proabbility of each outcome = 0.125</code></pre>
 <p>In the situation of polling, we will use the standard error of poportion for the standard error calculation:</p>
 <p><span class="math display">\[SE(\hat{p}) = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\]</span></p>
 <p><span class="math display">\[\text{Sample proportion}=0.55\]</span> <span class="math display">\[\text{Sample size}=100\]</span></p>
-<div id="256eeae1" class="cell" data-execution_count="14">
+<div id="1064d237" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>p<span class="op">=</span><span class="fl">0.55</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>n<span class="op">=</span><span class="dv">100</span></span>
@@ -922,7 +940,7 @@ proabbility of each outcome = 0.125</code></pre>
 </table>
 <p>We want to use the standard error of the mean to calculate the margin of error.</p>
 <p>As we know the standard deviation of the population, we can use that for the formula. <span class="math display">\[\text{Standard error of the mean} = \frac{σ}{\sqrt{n}}\]</span></p>
-<div id="983e0c58" class="cell" data-execution_count="15">
+<div id="2d096ab4" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>sigma<span class="op">=</span><span class="fl">1.5</span></span>
@@ -939,7 +957,7 @@ proabbility of each outcome = 0.125</code></pre>
 <section id="calculate-confidence-interval-with-scipy" class="level2">
 <h2 class="anchored" data-anchor-id="calculate-confidence-interval-with-scipy">Calculate confidence interval with SciPy</h2>
 <p>First let’s generate a random sample of a survey result of government support rate by town.</p>
-<div id="1ccf5f67" class="cell" data-execution_count="16">
+<div id="265af024" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -972,7 +990,7 @@ proabbility of each outcome = 0.125</code></pre>
 </div>
 <p>The average support rate by town for the whole data set is 0.4987.</p>
 <p>Now take a random sample size of 50.</p>
-<div id="9ccac22e" class="cell" data-execution_count="17">
+<div id="77e61573" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>data_sample <span class="op">=</span> data.sample(n<span class="op">=</span><span class="dv">50</span>, replace<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">30624300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To get the confidence interval of the sample, we will need to know the below:</p>
@@ -982,7 +1000,7 @@ proabbility of each outcome = 0.125</code></pre>
 <li>Sample standard error</li>
 </ul>
 <p>Assume we want the confidence level of 95 or 99.</p>
-<div id="804f2a75" class="cell" data-execution_count="18">
+<div id="c4fe5671" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>confi_level <span class="op">=</span> <span class="fl">0.95</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>sample_mean <span class="op">=</span> data_sample[<span class="st">'support_rate'</span>].mean()</span>
@@ -1024,9 +1042,9 @@ Confidence interval of the sample with confidence level of 0.99:
 <h2 class="anchored" data-anchor-id="steps-for-conducting-a-hypothesis-test">Steps for conducting a hypothesis test</h2>
 <ol type="1">
 <li><p>State the null hypothesis and the alternative hypothesis.</p></li>
-<li><p>Choose a significance level.</p></li>
+<li><p>Choose a significant level.</p></li>
 <li><p>Find the p-value.</p></li>
-<li><p>Reject or fail to reject the null hypothesis.</p></li>
+<li><p>Reject or fail to reject the null hypothesis. (by comparing p-value and significant level)</p></li>
 </ol>
 </section>
 <section id="null-vs-alternative-hypothesis" class="level2">
@@ -1079,8 +1097,141 @@ Confidence interval of the sample with confidence level of 0.99:
 </tbody>
 </table>
 </section>
+<section id="significant-level" class="level2">
+<h2 class="anchored" data-anchor-id="significant-level">Significant level</h2>
+<p>This is the threshold at which we will consider our result statiscally significant. It is also the probability of rejecting the null hypothesis when it is true.</p>
+<p>5% is the most common standard for significant level.</p>
+<p>For more strict result, 1% is used.</p>
+</section>
+<section id="p-value" class="level2">
+<h2 class="anchored" data-anchor-id="p-value">P-value</h2>
+<p>The probability of observing a difference in your result as or more extreme than the difference observed when the null hypothesis is true.</p>
+<p>It is used to compared against the significant level.</p>
+<p>The p-value is calculated by test statistic, a value that shows how closely your observed data matches the distribution expected under the null hypothesis.</p>
+</section>
 <section id="examples-of-null-and-alternative-hypothesis" class="level2">
 <h2 class="anchored" data-anchor-id="examples-of-null-and-alternative-hypothesis">Examples of Null and Alternative hypothesis</h2>
+<section id="example1-mean-weight" class="level3">
+<h3 class="anchored" data-anchor-id="example1-mean-weight">Example#1: Mean weight</h3>
+<p>An organic food company is famous for their granola. The company claims each bag they produce contains 300 grams of granola—no more and no less. To test this claim, a quality control expert measures the weight of a random sample of 40 bags.</p>
+<ul>
+<li>H0: μ = 300 (the mean weight of all produced granola bags is equal to 300 grams)</li>
+<li>Ha: μ ≠ 300 (the mean weight of all produced granola bags is not equal to 300 grams)</li>
+</ul>
+</section>
+<section id="example2-mean-height" class="level3">
+<h3 class="anchored" data-anchor-id="example2-mean-height">Example#2: Mean height</h3>
+<p>Suppose it’s assumed that the mean height of a certain species of tree is 30 feet tall. However, one ecologist claims the actual mean height is greater than 30 feet. To test this claim, the ecologist measures the height of a random sample of 50 trees.</p>
+<ul>
+<li>H0: μ ≤ 30 (the mean height of this species of tree is equal to or less than 30 feet)</li>
+<li>Ha: μ &gt; 30 (the mean height of this species of tree is greater than 30 feet)</li>
+</ul>
+</section>
+<section id="example3-proportion-of-employees" class="level3">
+<h3 class="anchored" data-anchor-id="example3-proportion-of-employees">Example#3: Proportion of employees</h3>
+<p>A corporation claims that at least 80% of all employees are satisfied with their job. However, an independent researcher believes that less than 80% of all employees are satisfied with their job. To test this claim, the researcher surveys a random sample of 100 employees.</p>
+<ul>
+<li>H0: p ≥ 0.80 (the proportion of all employees who are satisfied with their job is equal to or greater than 80%)</li>
+<li>Ha: p &lt; 0.80 (the proportion of all employees who are satisfied with their job is less than 80%)</li>
+</ul>
+</section>
+</section>
+<section id="type-i-and-type-ii-errors" class="level2">
+<h2 class="anchored" data-anchor-id="type-i-and-type-ii-errors">Type I and Type II errors</h2>
+<p>When you decide to reject or fail to reject the null hypothesis, there are four possible outcomes–two represent correct choices, and two represent errors. You can:</p>
+<ul>
+<li>Reject the null hypothesis when it’s actually true (Type I error)</li>
+<li>Reject the null hypothesis when it’s actually false (Correct)</li>
+<li>Fail to reject the null hypothesis when it’s actually true (Correct)</li>
+<li>Fail to reject the null hypothesis when it’s actually false (Type II error)</li>
+</ul>
+</section>
+<section id="one-tail-t-test-vs-z-test" class="level2">
+<h2 class="anchored" data-anchor-id="one-tail-t-test-vs-z-test">One tail T-test vs z-test</h2>
+<p>The primary difference between the one-tail t-test and the one-tail z-test lies in the distribution they use, which depends on whether the population standard deviation is known and the sample size. Both tests are used to determine if there is a significant difference between the sample mean and the population mean, but they differ slightly in their formula.</p>
+<section id="one-tail-t-test" class="level3">
+<h3 class="anchored" data-anchor-id="one-tail-t-test">One tail t-test</h3>
+<p>The t-test is typically used when:</p>
+<ul>
+<li>The sample size is small (generally n&lt;30).</li>
+<li>The population standard deviation σ is unknown, so we estimate it using the sample standard deviation s.</li>
+</ul>
+<p>The formula for the t-test statistic is: <span class="math display">\[t = \frac{\bar{x}-μ}{\frac{s}{\sqrt{n}}}\]</span></p>
+<p>Where: x̄ = sample mean μ = population mean (hypothesized) s = sample standard deviation n = sample size s/sqrt(n) = standard error of the sample mean</p>
+<p>The result is compared with a t-distribution with n−1 degrees of freedom to get the critical value for a one-tail test.</p>
+</section>
+<section id="one-tail-z-test" class="level3">
+<h3 class="anchored" data-anchor-id="one-tail-z-test">One tail z-test</h3>
+<p>The z-test is typically used when:</p>
+<ul>
+<li><p>The sample size is small (generally n&lt;30).</p></li>
+<li><p>The population standard deviation σ is unknown, so we estimate it using the sample standard deviation s.</p></li>
+<li><p>The sample size is large (typically n≥30).</p></li>
+<li><p>The population standard deviation σ is known.</p></li>
+</ul>
+<p>The formula for the z-test statistic is: <span class="math display">\[z = \frac{\bar{x}-μ}{\frac{σ}{\sqrt{n}}}\]</span></p>
+<p>Where: x̄ = sample mean μ = population mean (hypothesized) σ = population standard deviation n = sample size σ/sqrt(n) = standard error of the population mean</p>
+<p>The result is compared with the standard normal distribution (Z-distribution) to get the critical value for a one-tail test.</p>
+</section>
+</section>
+<section id="one-sample-tests---z-test" class="level2">
+<h2 class="anchored" data-anchor-id="one-sample-tests---z-test">One sample tests - Z-test</h2>
+<section id="assumption" class="level3">
+<h3 class="anchored" data-anchor-id="assumption">Assumption:</h3>
+<ul>
+<li>The data is a random sample of a normally distributed population</li>
+<li>The standard deviation of the population is known</li>
+</ul>
+</section>
+<section id="case-study-online-delivery" class="level3">
+<h3 class="anchored" data-anchor-id="case-study-online-delivery">Case Study: Online Delivery</h3>
+<p>Let’s say you work for an online delivery company. Currently the average delivery time is 40 minutes, with a standard deviation of 5 minutes.</p>
+<p>Recently, the company launched a new training program to make the delivery more efficient. After the drivers completed the training program, the company tracked a random sample of 50 deliveries to understand how long a delivery take. The sample has an average delivery time of 38 minutes, and a standard deviation of 5 minutes.</p>
+<p>Now the company wants to know if the decrease in delivery time is due to chance, or is statistically significant.</p>
+<p>We can determine this with a one hypothesis z-test.</p>
+<p><strong>Population</strong></p>
+<ul>
+<li>Mean = 40 min</li>
+<li>Standard deviation = 5 min</li>
+</ul>
+<p><strong>Sample</strong></p>
+<ul>
+<li>Mean = 38 min</li>
+<li>Standard deviation = 5 min</li>
+</ul>
+<p>Let’s build the hypothesis step by step:</p>
+<p><strong>Null hypothesis</strong></p>
+<p>The average delivery time equals 40 minutes.</p>
+<p><strong>Alternative hypothesis</strong></p>
+<p>The average delivery time is less than 40 minutes.</p>
+<p><strong>Significant level</strong></p>
+<p>5%</p>
+<p>This is the threshold at which we will consider our result statiscally significant. It is also the probability of rejecting the null hypothesis when it is true.</p>
+<p><strong>P-value</strong></p>
+<p>The probability of observing a difference in your result as or more extreme than the difference observed when the null hypothesis is true.</p>
+<p>The probability of observing a difference that is two minutes or greater if the null hypothesis is true. If the probability of this outcome is very unlikely, in particular, if your p-value is less than your significance level of five percent, then you’ll reject the null hypothesis.</p>
+<p>If p-value &lt; 5%, then reject the null hypothesis.</p>
+<p>In this case, as we are using z-test, we will calculate the z-score to find the p-value.</p>
+<p><span class="math display">\[z = \frac{\bar{x}-μ}{\frac{σ}{\sqrt{n}}}\]</span></p>
+<p>Where: x̄ = sample mean μ = population mean (hypothesized) σ = population standard deviation n = sample size σ/sqrt(n) = standard error of the population mean</p>
+<p><span class="math display">\[z = \frac{38-40}{\frac{5}{\sqrt{50}}}\]</span></p>
+<div id="86c6f810" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>sample_mean <span class="op">=</span> <span class="dv">38</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>pop_mean <span class="op">=</span> <span class="dv">40</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>pop_std <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>sample_size <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>z_score <span class="op">=</span> (sample_mean<span class="op">-</span>pop_mean)<span class="op">/</span>(pop_std<span class="op">/</span>math.sqrt(sample_size))</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Z-score: </span><span class="sc">{</span>z_score<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Z-score: -2.8284271247461903</code></pre>
+</div>
+</div>
+<p>In this case, the z-score is -2.8284.</p>
+</section>
 </section>
 </section>
 
