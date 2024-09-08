@@ -19,6 +19,8 @@ import math
 import pandas as pd
 import numpy as np
 from scipy import stats
+from scipy.stats import norm
+from scipy.stats import t
 ```
 
 # Conditional Probability
@@ -682,7 +684,7 @@ The probability of observing a difference in your result as or more extreme than
 
 It is used to compared against the significant level. 
 
-The p-value is calculated by test statistic, a value that shows how closely your observed data matches the distribution expected under the null hypothesis. 
+The p-value is calculated by test statistic, a value that shows how closely your observed data matches the distribution expected under the null hypothesis. After getting a t-score or a z-score from a t-test or z-test, you can calculate the p-value by 
 
 ## Examples of Null and Alternative hypothesis
 ### Example#1: Mean weight 
@@ -727,12 +729,13 @@ The formula for the t-test statistic is:
 $$t = \frac{\bar{x}-μ}{\frac{s}{\sqrt{n}}}$$
 
  
-Where:
-x̄ = sample mean
-μ = population mean (hypothesized)
-s = sample standard deviation
-n = sample size
-s/sqrt(n) = standard error of the sample mean
+Where: 
+
+- x̄ = sample mean
+- μ = population mean (hypothesized)
+- s = sample standard deviation
+- n = sample size
+- s/sqrt(n) = standard error of the sample mean
 
 The result is compared with a t-distribution with n−1 degrees of freedom to get the critical value for a one-tail test. 
 
@@ -750,13 +753,113 @@ $$z = \frac{\bar{x}-μ}{\frac{σ}{\sqrt{n}}}$$
 
  
 Where:
-x̄ = sample mean
-μ = population mean (hypothesized)
-σ = population standard deviation
-n = sample size
-σ/sqrt(n) = standard error of the population mean
+
+- x̄ = sample mean
+- μ = population mean (hypothesized)
+- σ = population standard deviation
+- n = sample size
+- σ/sqrt(n) = standard error of the population mean
 
 The result is compared with the standard normal distribution (Z-distribution) to get the critical value for a one-tail test.
+
+## Calculate the p-value from a one-tail/two-tail z-score and t-score
+### Z-score
+**Two-tail z-test**
+$$\text{p-value} = 2 \times P(Z \geq |z|)$$
+
+**Right-tail z-test**
+$$\text{p-value} = P(Z \geq z)$$
+
+**Left-tail z-test**
+$$\text{p-value} = P(Z \leq z)$$
+
+**Example**
+Suppose z = 1.96 in a two-tail test. 
+
+$$P(Z \geq 1.96) = 0.025$$
+$$\text{p-value} = 2*0.025 = 0.05$$
+
+```{python}
+from scipy.stats import norm
+print((1-norm.cdf(abs(1.96)))*2)
+```
+
+**Calulation in python**
+
+```{python}
+from scipy.stats import norm
+
+# Given z-score
+z = 1.96
+
+# Two-tailed test p-value
+p_value_two_tailed = 2 * (1 - norm.cdf(abs(z)))
+
+# Right-tailed test p-value
+p_value_right_tailed = 1 - norm.cdf(z)
+
+# Left-tailed test p-value
+p_value_left_tailed = norm.cdf(z)
+
+print("Two-tailed p-value:", p_value_two_tailed)
+print("Right-tailed p-value:", p_value_right_tailed)
+print("Left-tailed p-value:", p_value_left_tailed)
+
+```
+
+### T-score
+In a t-test, you also want to determine the degree of freedom (df). In a one sample t-test, it would usually be n-1. 
+$$df = n-1$$
+
+Below are some different cases of degree of freedom baseon the test we conduct: 
+
+|Test                                  |Degrees of Freedom (df)                               |
+|--------------------------------------|------------------------------------------------------|
+|One-Sample t-Test                     |n−1n−1                                                |
+|Paired t-Test                         |n−1n−1                                                |
+|Two-Sample t-Test (Equal Variances)   |n1+n2−2n1​+n2​−2                                        |
+|Two-Sample t-Test (Unequal Variances) |Approximate dfdf based on Welch-Satterthwaite equation|
+|ANOVA (Between Groups)                |k−1k−1                                                |
+|ANOVA (Within Groups)                 |N−kN−k                                                |
+|Chi-Square (Goodness-of-Fit)          |k−1k−1                                                |
+|Chi-Square (Independence)             |(r−1)(c−1)(r−1)(c−1)                                  |
+|Linear Regression (Residual)          |n−p−1n−p−1                                            |
+|F-Test                                |df1,df2df1​,df2​                                        |
+
+: Degree of freedom in different stat tests
+
+**Two-tail t-test**
+$$\text{p-value} = 2 \times P(T \geq |t|;df)$$
+
+**Right-tail t-test**
+$$\text{p-value} = P(T \geq t;df)$$
+
+**Left-tail t-test**
+$$\text{p-value} = P(T \leq t;df)$$
+
+**Calculation in python**
+
+```{python}
+from scipy.stats import t
+
+# Given t-score and degrees of freedom
+t_score = 2.0
+df = 10  # degrees of freedom
+
+# Two-tailed test p-value
+p_value_two_tailed_t = 2 * (1 - t.cdf(abs(t_score), df))
+
+# Right-tailed test p-value
+p_value_right_tailed_t = 1 - t.cdf(t_score, df)
+
+# Left-tailed test p-value
+p_value_left_tailed_t = t.cdf(t_score, df)
+
+print("Two-tailed p-value (t-test):", p_value_two_tailed_t)
+print("Right-tailed p-value (t-test):", p_value_right_tailed_t)
+print("Left-tailed p-value (t-test):", p_value_left_tailed_t)
+
+```
 
 ## One sample tests - Z-test
 ### Assumption: 
@@ -823,6 +926,7 @@ $$z = \frac{38-40}{\frac{5}{\sqrt{50}}}$$
 
 ```{python}
 import math
+from scipy.stats import norm
 
 sample_mean = 38
 pop_mean = 40
@@ -831,8 +935,18 @@ sample_size = 50
 
 z_score = (sample_mean-pop_mean)/(pop_std/math.sqrt(sample_size))
 
+p_value = norm.cdf(z_score)
+
 print(f'Z-score: {z_score}')
+print(f'P-value: {p_value}')
 
 ```
 
 In this case, the z-score is -2.8284. 
+P-value is 0.0023 or 0.23%. 
+
+In this case, it is very unlikely that the mean delivery time is 38 minutes when the null hypothesis is true. In other words, it's highly unlikely that the sample mean of 38 is due to chance. 
+
+The p-value we calculated here is the probability for when the z-score <= -2.8284 in a normal distribution, which is the red area in the image below. 
+
+![P value according to the z-score](images/z_test_p_value.png)
