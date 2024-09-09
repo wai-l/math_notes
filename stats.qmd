@@ -716,7 +716,9 @@ When you decide to reject or fail to reject the null hypothesis, there are four 
 - Fail to reject the null hypothesis when it’s actually true (Correct) 
 - Fail to reject the null hypothesis when it’s actually false (Type II error)
 
-## One tail T-test vs z-test
+## One sample tests - T-test vs z-test
+One-sample tests are usually used to determine whether a population mean is equal to a specific value. 
+
 The primary difference between the one-tail t-test and the one-tail z-test lies in the distribution they use, which depends on whether the population standard deviation is known and the sample size. Both tests are used to determine if there is a significant difference between the sample mean and the population mean, but they differ slightly in their formula.
 
 ### One tail t-test
@@ -950,3 +952,29 @@ In this case, it is very unlikely that the mean delivery time is 38 minutes when
 The p-value we calculated here is the probability for when the z-score <= -2.8284 in a normal distribution, which is the red area in the image below. 
 
 ![P value according to the z-score](images/z_test_p_value.png)
+
+## Two-sample test
+A two-sample test determines whether two population means are equal to each other. It is frequently used in A/B testing. 
+
+## Two-sample t-test for means
+### Assumption
+
+- The two samples are independent of each other
+- For each sample, the data is drawn randomly from a normally distributed population
+- The population standard deviation is unknown
+
+### Case study - Landing page A/B test
+You are working for a cosmetics company. The company is researching the amount of time the customers spent on its website. Your team leader ask you to conduct a A/B test to determine if changing the background color of the landing page from grey to green has any effect on the average time spent on the page. 
+
+You randomly select two groups of users. The first group visits the gray landing page named version A. The second group visits the green landing page named version B. 
+
+Below are the data you collected: 
+
+|                  |Version A   |Version B   |
+|------------------|------------|------------|
+|Landing page color|Grey        |Green       |
+|Sample size       |40          |38          |
+|Average time spent|300 seconds |305 seconds |
+|Standard deviation|18.5 seconds|16.7 seconds|
+
+: Version A VS Version B
