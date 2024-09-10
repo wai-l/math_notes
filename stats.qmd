@@ -963,6 +963,23 @@ A two-sample test determines whether two population means are equal to each othe
 - For each sample, the data is drawn randomly from a normally distributed population
 - The population standard deviation is unknown
 
+### Hypothesis
+
+- Null: There is no difference in the mean on version A and version B
+- Alternative: There is a difference in the mean on version A and version B
+- Significant level: Usually 5%, can also be 1% or 10%
+- P-value: The probability of observing a difference in your sample means as or more extreme than the difference observed when the null hypothesis is true 
+
+### T-score for two-sample t-test
+
+$$t = \frac{(\bar{x}_1 - \bar{x}_2)}{\sqrt{({\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}})}}$$
+
+
+- x̄ = sample mean
+- s = sample standard deviation
+- n = sample size
+- s^2/n = variance of the sample mean
+
 ### Case study - Landing page A/B test
 You are working for a cosmetics company. The company is researching the amount of time the customers spent on its website. Your team leader ask you to conduct a A/B test to determine if changing the background color of the landing page from grey to green has any effect on the average time spent on the page. 
 
@@ -978,3 +995,39 @@ Below are the data you collected:
 |Standard deviation|18.5 seconds|16.7 seconds|
 
 : Version A VS Version B
+
+**Hypothesis**
+
+- Null: There is no difference in the mean time spent on version A and version B
+- Alternative: There is a difference in the mean time spent on version A and version B
+- Significant level: 5%
+- P value: The probability of observing a difference in your sample means as or more extreme (5 seconds) than the difference observed when the null hypothesis is true 
+
+**Calculation**
+
+$$t = \frac{(\bar{x}_1 - \bar{x}_2)}{\sqrt{({\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}})}}$$
+
+
+- x̄ = sample mean
+- s = sample standard deviation
+- n = sample size
+- s^2/n = variance of the sample mean
+
+$$t = \frac{(300 - 305)}{\sqrt{({\frac{18.5^2}{40} + \frac{16.7^2}{38}})}}$$
+
+```{python}
+import math
+
+x1 = 300
+x2 = 305
+s1 = 18.5
+s2 = 16.7
+n1 = 40
+n2 = 38
+
+t = (x1-x2)/math.sqrt(s1**2/n1 + s2**2/n2)
+
+print(f'T-score: {t}')
+```
+
+T-score: -1.254103693454824
