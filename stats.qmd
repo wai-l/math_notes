@@ -323,7 +323,7 @@ Z-score allows us to compare the normal distribution of different dataset by sta
 
 ![Z-score allows us to compare the normla distribution in different datasets](images/z-score_2.png)
 
-### Formula
+### Formula - mean
 This is how we calculate the Z-score: 
 $$Z = \frac{x-μ}{σ}$$
 $$x = \text{a single data value/raw score}$$
@@ -338,6 +338,17 @@ $$Z = \frac{133-100}{15}$$
 z_score = (133-100)/15
 print(f'Z-score: {z_score}')
 ```
+
+### Formula - proportion
+$$Z = \frac{\hat{P}-P}{\sqrt{\frac{\hat{P}(1-\hat{P})}{n}}}$$
+
+$$\hat{P} = \text{Obverved sample proportion}$$
+$$P = \text{Population proportion}$$
+$$n = \text{Sample size}$$
+
+This measures the standard error of the proportion. Note that if we are calculating the Z-score for a hypothesis test, you may replace the sample proportion (p hat) with the population proportion (p). In hypothesis testing, we are testing whether the true population proportion P is equal to the hypothesized value. Therefore, we calculate the standard error assuming the null hypothesis is true and use P to determine how much variability we expect in the sample proportions.
+$$\sqrt{\frac{\hat{P}(1-\hat{P})}{n}} = \text{Sample error of the proportion}$$
+
 
 ### Python
 You can use the z-score function in the scipy package to calculate the z-score of each datapoint in your dataframe. 
@@ -817,16 +828,16 @@ Below are some different cases of degree of freedom baseon the test we conduct:
 
 |Test                                  |Degrees of Freedom (df)                               |
 |--------------------------------------|------------------------------------------------------|
-|One-Sample t-Test                     |n−1n−1                                                |
-|Paired t-Test                         |n−1n−1                                                |
-|Two-Sample t-Test (Equal Variances)   |n1+n2−2n1​+n2​−2                                        |
-|Two-Sample t-Test (Unequal Variances) |Approximate dfdf based on Welch-Satterthwaite equation|
-|ANOVA (Between Groups)                |k−1k−1                                                |
-|ANOVA (Within Groups)                 |N−kN−k                                                |
-|Chi-Square (Goodness-of-Fit)          |k−1k−1                                                |
-|Chi-Square (Independence)             |(r−1)(c−1)(r−1)(c−1)                                  |
-|Linear Regression (Residual)          |n−p−1n−p−1                                            |
-|F-Test                                |df1,df2df1​,df2​                                        |
+|One-Sample t-Test                     |n−1                                                   |
+|Paired t-Test                         |n−1                                                   |
+|Two-Sample t-Test (Equal Variances)   |n1+n2−2                                               |
+|Two-Sample t-Test (Unequal Variances) |Approximate df based on Welch-Satterthwaite equation  |
+|ANOVA (Between Groups)                |k−1                                                   |
+|ANOVA (Within Groups)                 |N−k                                                   |
+|Chi-Square (Goodness-of-Fit)          |k−1                                                   |
+|Chi-Square (Independence)             |(r−1)(c−1)                                            |
+|Linear Regression (Residual)          |n−p−1                                                 |
+|F-Test                                |df1,df2       ​                                        |
 
 : Degree of freedom in different stat tests
 
@@ -916,12 +927,13 @@ In this case, as we are using z-test, we will calculate the z-score to find the 
 
 $$z = \frac{\bar{x}-μ}{\frac{σ}{\sqrt{n}}}$$
 
-Where:
-x̄ = sample mean
-μ = population mean (hypothesized)
-σ = population standard deviation
-n = sample size
-σ/sqrt(n) = standard error of the population mean
+Where: 
+
+- x̄ = sample mean
+- μ = population mean (hypothesized)
+- σ = population standard deviation
+- n = sample size
+- σ/sqrt(n) = standard error of the population mean
 
 $$z = \frac{38-40}{\frac{5}{\sqrt{50}}}$$
 
@@ -947,7 +959,7 @@ print(f'P-value: {p_value}')
 In this case, the z-score is -2.8284. 
 P-value is 0.0023 or 0.23%. 
 
-In this case, it is very unlikely that the mean delivery time is 38 minutes when the null hypothesis is true. In other words, it's highly unlikely that the sample mean of 38 is due to chance. 
+In this case, it is very unlikely that the mean delivery time is 38 minutes when the null hypothesis is true. In other words, it's highly unlikely that the sample mean of 38 is due to chance. Therefore we reject the null hypothesis. 
 
 The p-value we calculated here is the probability for when the z-score <= -2.8284 in a normal distribution, which is the red area in the image below. 
 
@@ -979,6 +991,23 @@ $$t = \frac{(\bar{x}_1 - \bar{x}_2)}{\sqrt{({\frac{s^2_1}{n_1} + \frac{s^2_2}{n_
 - s = sample standard deviation
 - n = sample size
 - s^2/n = variance of the sample mean
+
+### Get p-value from two-sample t-test
+In a two-sample t-test, you would want the below: 
+```{python}
+from scipy.stats import t
+
+# Given t-score and degrees of freedom
+t_score = -1.2541
+df = 40+38-2  # degrees of freedom
+
+# Two-tailed test p-value
+p_value_two_tailed_t = 2 * (1 - t.cdf(abs(t_score), df))
+
+print("Two-tailed p-value (t-test):", p_value_two_tailed_t)
+
+```
+
 
 ### Case study - Landing page A/B test
 You are working for a cosmetics company. The company is researching the amount of time the customers spent on its website. Your team leader ask you to conduct a A/B test to determine if changing the background color of the landing page from grey to green has any effect on the average time spent on the page. 
@@ -1031,3 +1060,68 @@ print(f'T-score: {t}')
 ```
 
 T-score: -1.254103693454824
+
+Now you want to get the probability of the red area from the image below, which is lower than -1.2541 and greater than 1.2541
+
+![Two-tail test p-value](images/two_tails_test_p_value.png)
+
+
+
+```{python}
+from scipy.stats import t
+
+# Given t-score and degrees of freedom
+t_score = -1.2541
+df = 40+38-2  # degrees of freedom
+
+# Two-tailed test p-value
+p_value_two_tailed_t = 2 * (1 - t.cdf(abs(t_score), df))
+
+print("Two-tailed p-value (t-test):", p_value_two_tailed_t)
+
+```
+
+P-value = 0.2136 or 21.36%
+
+While p-value (21.36%) > significant level (5%), we fail to reject the null hypothesis, and conclude there is no statistically significant differece between the two mean. 
+
+## Two-tail z-test for proportion
+### Case study - Customer satisfaction
+Suppose the company claims that 80% of its customers are satisfied with their shopping experience. To test this claim, you survey a random sample of 100 customers. According to the survey, 73% of customers say they are satisfied. Based on the survey data, you conduct a z-test to evaluate the claim that 80% of customers are satisfied. 
+
+**Hypothesis**
+
+- Null: P = 0.80 (the proportion of satisfied customers equals 80%)
+- Alternative: P ≠ 0.80 (the proportion of satisfied customers does not equal 80%)
+- Significant level: 5%
+
+**Z-score for proportion in hypothesis teseting**
+$$Z = \frac{\hat{P}-P}{\sqrt{\frac{{P}(1-{P})}{n}}}$$
+
+```{python}
+from scipy.stats import norm
+import math
+from scipy.stats import norm
+
+sample_mean = 0.73
+pop_mean = 0.80
+sample_size = 100
+
+z_score = (sample_mean-pop_mean)/math.sqrt(pop_mean*(1-pop_mean)/sample_size)
+
+print(f'Z-score: {z_score}')
+
+# Two-tailed test p-value
+p_value_two_tailed = 2 * (1 - norm.cdf(abs(z_score)))
+
+print("Two-tailed p-value:", p_value_two_tailed)
+
+```
+
+P-value = 0.08
+
+As P-value > significant level, you failed to reject the null hypothesis. 
+
+Note that the p-value of 0.08 does not mean there is an 8% probability that the sample proportion is 0.80. Instead, it means there is an 8% probability of observing a sample proportion as extreme as 0.73 or more extreme, given that the true population proportion is 0.80.
+
+To put it in simple term, the p-value answers the question: "If the true population proportion is 0.80, what is the probability of observing a sample proportion as different from 0.80 as 0.73 is?"
