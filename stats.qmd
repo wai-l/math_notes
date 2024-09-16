@@ -1085,8 +1085,16 @@ P-value = 0.2136 or 21.36%
 
 While p-value (21.36%) > significant level (5%), we fail to reject the null hypothesis, and conclude there is no statistically significant differece between the two mean. 
 
-## Two-tail z-test for proportion
-### Case study - Customer satisfaction
+## Z-test for proportion
+We use z-test for proportion as t-test does not apply to proportion for technical reasons. 
+
+Z-test for proportion can be used to compare: 
+
+- Defects among manufacturing products on two assembly lines
+- Side effects to a new medicine for two trial groups
+- Support for new law among voters in two disctricts
+
+### Two tail z-test for proportion case study - Customer satisfaction
 Suppose the company claims that 80% of its customers are satisfied with their shopping experience. To test this claim, you survey a random sample of 100 customers. According to the survey, 73% of customers say they are satisfied. Based on the survey data, you conduct a z-test to evaluate the claim that 80% of customers are satisfied. 
 
 **Hypothesis**
@@ -1125,3 +1133,28 @@ As P-value > significant level, you failed to reject the null hypothesis.
 Note that the p-value of 0.08 does not mean there is an 8% probability that the sample proportion is 0.80. Instead, it means there is an 8% probability of observing a sample proportion as extreme as 0.73 or more extreme, given that the true population proportion is 0.80.
 
 To put it in simple term, the p-value answers the question: "If the true population proportion is 0.80, what is the probability of observing a sample proportion as different from 0.80 as 0.73 is?"
+
+### Two-sample z-test for proportion case study - Employee satisfaction
+Let's say the HR team of an international company conducted an employee satisfaction survey for their London and Beijing office. Both has a sample size of 50. The satisfaction rate of the London office is 67%, Beijing is 57%. We want to find out if the 10% difference is due to chance. 
+
+**Hypothesis**
+
+- Null (H0): There is no difference in the proportion of the satisfied employees in London and Beijing
+- Alternative (Ha): There is a difference in the proportion of the satisfied employees in London and Beijing
+- Significant level: 5%
+- P-value: The probability of observing a difference in your sample proportion as or more extreme than the difference observed when the null hypothesis is true
+
+In this case, we will reject the null hypothesis when p-value < 5%. 
+
+**Z-score for two sample proportion**
+$$Z=\frac{\hat{p_1}-\hat{p_2}}{\sqrt{\hat{p_0}(1-\hat{p_0})(\frac{1}{n_1}+\frac{1}{n_2})}}$$
+
+$$\hat{p_1} = \text{Sample proportion of the 1st group}$$
+$$\hat{p_2} = \text{Sample proportion of the 2nd group}$$
+
+$$n_1 = \text{Sample size of the 1st group}$$
+$$n_2 = \text{Sample size of the 2nd group}$$
+$$\hat{p_0} = \text{Pooled proportion (weighted average of the two samples)}$$
+$$\text{Pooled proportion} = \frac{x_1+x_2}{n_1+n_2}$$
+$$x_1 = \text{Number of success in sample 1}$$
+$$x_2 = \text{Number of success in sample 2}$$
