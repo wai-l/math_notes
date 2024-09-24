@@ -982,6 +982,16 @@ A two-sample test determines whether two population means are equal to each othe
 - Significant level: Usually 5%, can also be 1% or 10%
 - P-value: The probability of observing a difference in your sample means as or more extreme than the difference observed when the null hypothesis is true 
 
+### Code
+If you have the full sample data, you can leverage Scipy's t-test functions to calculate the t-score and p-value as below: 
+
+```{{python}}
+stats.ttest_ind(a=sampled_state21['OVERALL_LI'], b=sampled_state28['OVERALL_LI'], equal_var=False, alternative='two-sided')
+```
+
+It should return the t-score and p-value like below: 
+Ttest_indResult(statistic=2.8980444277268735, pvalue=0.006421719142765231)
+
 ### T-score for two-sample t-test
 
 $$t = \frac{(\bar{x}_1 - \bar{x}_2)}{\sqrt{({\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}})}}$$
@@ -1109,7 +1119,6 @@ $$Z = \frac{\hat{P}-P}{\sqrt{\frac{{P}(1-{P})}{n}}}$$
 ```{python}
 from scipy.stats import norm
 import math
-from scipy.stats import norm
 
 sample_mean = 0.73
 pop_mean = 0.80
@@ -1158,3 +1167,29 @@ $$\hat{p_0} = \text{Pooled proportion (weighted average of the two samples)}$$
 $$\text{Pooled proportion} = \frac{x_1+x_2}{n_1+n_2}$$
 $$x_1 = \text{Number of success in sample 1}$$
 $$x_2 = \text{Number of success in sample 2}$$
+
+
+```{python}
+import math
+from scipy.stats import norm
+
+p_1 = 0.67
+p_2 = 0.57
+p_0 = (0.67+0.57)/2
+x_1 = 50
+x_2 = 50
+
+z = (p_1 - p_2)/math.sqrt(p_0*(1-p_0)*(1/x_1+1/x_2))
+
+print(f'Z score: {z}')
+
+# Two-tailed test p-value
+p_value = 2 * (1 - norm.cdf(abs(z)))
+
+print("Two-tailed p-value:", p_value)
+```
+
+Z score: 1.0301070542879125
+Two-tailed p-value: 0.30295975411763143
+
+The probability that thereis a 10% difference between two offices in London and Beijing is 30.3% under the null hypothesis. This is greater than the significant level, therefore we failed to reject the null hypothesis, and concluded that there is no statistical significant in the percentage difference between Beijing and London. 
