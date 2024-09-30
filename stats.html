@@ -205,6 +205,13 @@ window.Quarto = {
   <li><a href="#two-sample-z-test-for-proportion-case-study---employee-satisfaction" id="toc-two-sample-z-test-for-proportion-case-study---employee-satisfaction" class="nav-link" data-scroll-target="#two-sample-z-test-for-proportion-case-study---employee-satisfaction">Two-sample z-test for proportion case study - Employee satisfaction</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression">Linear regression</a>
+  <ul class="collapse">
+  <li><a href="#simple-linear-regression" id="toc-simple-linear-regression" class="nav-link" data-scroll-target="#simple-linear-regression">Simple linear regression</a></li>
+  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression">Multiple linear regression</a></li>
+  <li><a href="#advanced-hypothesis-testing" id="toc-advanced-hypothesis-testing" class="nav-link" data-scroll-target="#advanced-hypothesis-testing">Advanced hypothesis testing</a></li>
+  </ul></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic regression</a></li>
   </ul>
 </nav>
 </div>
@@ -237,7 +244,7 @@ window.Quarto = {
 </section>
 <section id="packages-used" class="level1">
 <h1>Packages used</h1>
-<div id="78683607" class="cell" data-execution_count="1">
+<div id="73bcf691" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -264,7 +271,7 @@ window.Quarto = {
 <li>Rainy days start of cloudy (P(Cloud|Rain)) = 50%</li>
 </ul>
 <p><span class="math display">\[P(Rain \mid Cloud) = \frac{ 50\% * 10\% }{ 40\% }\]</span></p>
-<div id="c4a9da1f" class="cell" data-execution_count="2">
+<div id="6d974284" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p_a_b <span class="op">=</span> <span class="fl">0.5</span><span class="op">*</span><span class="fl">0.1</span><span class="op">/</span><span class="fl">0.4</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p_a_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -328,7 +335,7 @@ window.Quarto = {
 <p>Putting all available variables into the formula will look like this: <span class="math display">\[
 P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 \]</span></p>
-<div id="5e52685b" class="cell" data-execution_count="3">
+<div id="a9ae3b3e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>P_A_B <span class="op">=</span> <span class="fl">0.95</span> <span class="op">*</span> <span class="fl">0.01</span> <span class="op">/</span> (<span class="fl">0.95</span><span class="op">*</span><span class="fl">0.01</span> <span class="op">+</span> <span class="fl">0.02</span> <span class="op">*</span> <span class="fl">0.99</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(P_A_B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -371,7 +378,7 @@ P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 </table>
 <p><span class="math display">\[\text{Churn rate of UK customer} = \frac{\text{Number of churned UK customer}} {\text{Number of UK customer}}\]</span></p>
 <p><span class="math display">\[\text{Churn rate of UK customer}  = \frac{30} {50}\]</span></p>
-<div id="0af8263c" class="cell" data-execution_count="4">
+<div id="1bc93ee8" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>churn_rate <span class="op">=</span> <span class="dv">30</span><span class="op">/</span><span class="dv">50</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Churn rate of UK customer: </span><span class="sc">{</span>churn_rate<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -384,7 +391,7 @@ P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 \]</span></p>
 <p><span class="math display">\[P(A \mid B) = \frac{30}{60} * \frac{60}{100} * \frac{100}{50}\]</span> <span class="math display">\[P(A \mid B) = \frac{30}{50}\]</span></p>
-<div id="dbad084b" class="cell" data-execution_count="5">
+<div id="9bd83741" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'P(B|A) = </span><span class="sc">{</span><span class="dv">30</span><span class="op">/</span><span class="dv">50</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>P(B|A) = 0.6</code></pre>
@@ -415,7 +422,7 @@ P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 <p>Say you want to know out of 3 coin toss, the number of outcomes where you can get 2 heads.</p>
 <p>The formula would be:</p>
 <p><span class="math display">\[\text{n-choose-k}=\frac{3!} {2!(3-2)!}\]</span> <span class="math display">\[\text{n-choose-k}=\frac{3*2*1} {2*1*1}\]</span></p>
-<div id="694db34f" class="cell" data-execution_count="6">
+<div id="af276877" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>n_choose_k <span class="op">=</span> <span class="dv">3</span><span class="op">*</span><span class="dv">2</span><span class="op">*</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">*</span><span class="dv">1</span><span class="op">*</span><span class="dv">1</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'n-choose-k = </span><span class="sc">{</span>n_choose_k<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -431,7 +438,7 @@ P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 <p>Now we know the chances of getting a head in each toss is 50%</p>
 <p>Put it into work, it would be: <span class="math display">\[0.5^2(1-0.5)^{3-2}\]</span></p>
 <p><span class="math display">\[=0.5*0.5*0.5\]</span></p>
-<div id="66fc1410" class="cell" data-execution_count="7">
+<div id="6ce586e8" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>prob_of_each_outcome <span class="op">=</span> <span class="fl">0.5</span><span class="op">*</span> <span class="fl">0.5</span> <span class="op">*</span> (<span class="dv">1</span><span class="op">-</span><span class="fl">0.5</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Probability of each outcome = </span><span class="sc">{</span>prob_of_each_outcome<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -443,7 +450,7 @@ P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 <p>Say for each coin toss, you can get 2 possible outcomes. For 2 coin toss, you get 2^2, which is 4 outcome.</p>
 <p>Now for 3 coin toss, you will get the total possible outcome of 2^3, which is 8.</p>
 <p>The probability of getting each outcome is 1/8, which is also 0.125.</p>
-<div id="5c713cba" class="cell" data-execution_count="8">
+<div id="f2ecdf4d" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'total number of possible outcome = </span><span class="sc">{</span><span class="dv">2</span><span class="op">**</span><span class="dv">3</span><span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'proabbility of each outcome = </span><span class="sc">{</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">**</span><span class="dv">3</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -456,7 +463,7 @@ proabbility of each outcome = 0.125</code></pre>
 <h3 class="anchored" data-anchor-id="final-outcome">Final outcome</h3>
 <p>Now that we can put the two together.</p>
 <p><span class="math display">\[p(x=k) = n-choose-k * \text{probability of each outcome}\]</span> <span class="math display">\[p(x=k) = 3*0.125\]</span></p>
-<div id="b9d55423" class="cell" data-execution_count="9">
+<div id="7b5eb20a" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>binomial_dist <span class="op">=</span> <span class="dv">3</span><span class="op">*</span><span class="fl">0.125</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'p(x=k) = </span><span class="sc">{</span>binomial_dist<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -621,7 +628,7 @@ proabbility of each outcome = 0.125</code></pre>
 <h3 class="anchored" data-anchor-id="formula---mean">Formula - mean</h3>
 <p>This is how we calculate the Z-score: <span class="math display">\[Z = \frac{x-μ}{σ}\]</span> <span class="math display">\[x = \text{a single data value/raw score}\]</span> <span class="math display">\[μ/mu = \text{the population mean}\]</span> <span class="math display">\[σ/sigma = \text{the poplation standard deviation}\]</span></p>
 <p>Now let’s say you have a test score of 133. The test has a mean score of 100 and a standard deviation of 15. The equation would look like this: <span class="math display">\[Z = \frac{133-100}{15}\]</span></p>
-<div id="de3a0a78" class="cell" data-execution_count="10">
+<div id="97db75b7" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>z_score <span class="op">=</span> (<span class="dv">133</span><span class="op">-</span><span class="dv">100</span>)<span class="op">/</span><span class="dv">15</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Z-score: </span><span class="sc">{</span>z_score<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -706,7 +713,7 @@ proabbility of each outcome = 0.125</code></pre>
 <p>The larger the sample size is,the smaller the error would be.</p>
 <p>Now let’s say we have a sample of 100 penguine, which has a mean weight of 3 pounds and a standard deviation of 1 pound.</p>
 <p><span class="math display">\[\text{Stand error of the mean} = \frac{1}{\sqrt{100}}\]</span></p>
-<div id="1b06cb4e" class="cell" data-execution_count="11">
+<div id="20729fde" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sample_std <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>n_sqr <span class="op">=</span> math.sqrt(<span class="dv">100</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -733,7 +740,7 @@ proabbility of each outcome = 0.125</code></pre>
 <p><span class="math display">\[n = \text{sample size}\]</span></p>
 <p>Say you are researching a population of 100,000, in a sample with 100 people, 10% of them prefer slipon sneaker.</p>
 <p><span class="math display">\[SE(\hat{p}) = \sqrt{\frac{0.1(1-0.1)}{100}}\]</span></p>
-<div id="25107730" class="cell" data-execution_count="12">
+<div id="d15d3120" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>phat <span class="op">=</span> <span class="fl">0.1</span></span>
@@ -750,7 +757,7 @@ proabbility of each outcome = 0.125</code></pre>
 <section id="case-study-apply-the-standard-error-of-the-proportion-to-churn-rate" class="level3">
 <h3 class="anchored" data-anchor-id="case-study-apply-the-standard-error-of-the-proportion-to-churn-rate">Case study: apply the standard error of the proportion to churn rate</h3>
 <p>Say you know that you have 100 customers (current and churned) in Scotland, and their churn rate is 60%. You can use the standard error formula to understand how much the sample proportion (in your case, the sample churn rate) is expected to vary from the true population proportion (the true churn rate for all current and future customers).</p>
-<div id="83341d90" class="cell" data-execution_count="13">
+<div id="58a437db" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given data</span></span>
@@ -893,7 +900,7 @@ proabbility of each outcome = 0.125</code></pre>
 <p>In the situation of polling, we will use the standard error of poportion for the standard error calculation:</p>
 <p><span class="math display">\[SE(\hat{p}) = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\]</span></p>
 <p><span class="math display">\[\text{Sample proportion}=0.55\]</span> <span class="math display">\[\text{Sample size}=100\]</span></p>
-<div id="78fbdc0b" class="cell" data-execution_count="14">
+<div id="abe301d1" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>p<span class="op">=</span><span class="fl">0.55</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>n<span class="op">=</span><span class="dv">100</span></span>
@@ -969,7 +976,7 @@ proabbility of each outcome = 0.125</code></pre>
 </table>
 <p>We want to use the standard error of the mean to calculate the margin of error.</p>
 <p>As we know the standard deviation of the population, we can use that for the formula. <span class="math display">\[\text{Standard error of the mean} = \frac{σ}{\sqrt{n}}\]</span></p>
-<div id="f85432f8" class="cell" data-execution_count="15">
+<div id="227975a2" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>sigma<span class="op">=</span><span class="fl">1.5</span></span>
@@ -986,7 +993,7 @@ proabbility of each outcome = 0.125</code></pre>
 <section id="calculate-confidence-interval-with-scipy" class="level2">
 <h2 class="anchored" data-anchor-id="calculate-confidence-interval-with-scipy">Calculate confidence interval with SciPy</h2>
 <p>First let’s generate a random sample of a survey result of government support rate by town.</p>
-<div id="3aeeef19" class="cell" data-execution_count="16">
+<div id="0ca504bd" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1019,7 +1026,7 @@ proabbility of each outcome = 0.125</code></pre>
 </div>
 <p>The average support rate by town for the whole data set is 0.4987.</p>
 <p>Now take a random sample size of 50.</p>
-<div id="7cd08bd6" class="cell" data-execution_count="17">
+<div id="39f4135d" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>data_sample <span class="op">=</span> data.sample(n<span class="op">=</span><span class="dv">50</span>, replace<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">30624300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To get the confidence interval of the sample, we will need to know the below:</p>
@@ -1029,7 +1036,7 @@ proabbility of each outcome = 0.125</code></pre>
 <li>Sample standard error</li>
 </ul>
 <p>Assume we want the confidence level of 95 or 99.</p>
-<div id="f926034f" class="cell" data-execution_count="18">
+<div id="71f98591" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>confi_level <span class="op">=</span> <span class="fl">0.95</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>sample_mean <span class="op">=</span> data_sample[<span class="st">'support_rate'</span>].mean()</span>
@@ -1227,7 +1234,7 @@ Confidence interval of the sample with confidence level of 0.99:
 <p><strong>Left-tail z-test</strong> <span class="math display">\[\text{p-value} = P(Z \leq z)\]</span></p>
 <p><strong>Example</strong> Suppose z = 1.96 in a two-tail test.</p>
 <p><span class="math display">\[P(Z \geq 1.96) = 0.025\]</span> <span class="math display">\[\text{p-value} = 2*0.025 = 0.05\]</span></p>
-<div id="6b14be95" class="cell" data-execution_count="19">
+<div id="e6f02603" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((<span class="dv">1</span><span class="op">-</span>norm.cdf(<span class="bu">abs</span>(<span class="fl">1.96</span>)))<span class="op">*</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1235,7 +1242,7 @@ Confidence interval of the sample with confidence level of 0.99:
 </div>
 </div>
 <p><strong>Calulation in python</strong></p>
-<div id="8392652e" class="cell" data-execution_count="20">
+<div id="1ee02716" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given z-score</span></span>
@@ -1323,7 +1330,7 @@ Left-tailed p-value: 0.9750021048517795</code></pre>
 <p><strong>Right-tail t-test</strong> <span class="math display">\[\text{p-value} = P(T \geq t;df)\]</span></p>
 <p><strong>Left-tail t-test</strong> <span class="math display">\[\text{p-value} = P(T \leq t;df)\]</span></p>
 <p><strong>Calculation in python</strong></p>
-<div id="0a4d9b72" class="cell" data-execution_count="21">
+<div id="366967ae" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> t</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given t-score and degrees of freedom</span></span>
@@ -1348,6 +1355,9 @@ Right-tailed p-value (t-test): 0.03669401738537026
 Left-tailed p-value (t-test): 0.9633059826146297</code></pre>
 </div>
 </div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="in">stats.ttest_1samp(a = aqi_michigan['aqi'], popmean=10, alternative='greater')</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="one-sample-tests---z-test" class="level2">
@@ -1398,21 +1408,21 @@ Left-tailed p-value (t-test): 0.9633059826146297</code></pre>
 <li>σ/sqrt(n) = standard error of the population mean</li>
 </ul>
 <p><span class="math display">\[z = \frac{38-40}{\frac{5}{\sqrt{50}}}\]</span></p>
-<div id="b952df7e" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>sample_mean <span class="op">=</span> <span class="dv">38</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>pop_mean <span class="op">=</span> <span class="dv">40</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>pop_std <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>sample_size <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>z_score <span class="op">=</span> (sample_mean<span class="op">-</span>pop_mean)<span class="op">/</span>(pop_std<span class="op">/</span>math.sqrt(sample_size))</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>p_value <span class="op">=</span> norm.cdf(z_score)</span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Z-score: </span><span class="sc">{</span>z_score<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'P-value: </span><span class="sc">{</span>p_value<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="9037d8ac" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>sample_mean <span class="op">=</span> <span class="dv">38</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>pop_mean <span class="op">=</span> <span class="dv">40</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>pop_std <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>sample_size <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>z_score <span class="op">=</span> (sample_mean<span class="op">-</span>pop_mean)<span class="op">/</span>(pop_std<span class="op">/</span>math.sqrt(sample_size))</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>p_value <span class="op">=</span> norm.cdf(z_score)</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Z-score: </span><span class="sc">{</span>z_score<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'P-value: </span><span class="sc">{</span>p_value<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Z-score: -2.8284271247461903
 P-value: 0.0023388674905236283</code></pre>
@@ -1455,9 +1465,9 @@ P-value: 0.0023388674905236283</code></pre>
 <section id="code" class="level3">
 <h3 class="anchored" data-anchor-id="code">Code</h3>
 <p>If you have the full sample data, you can leverage Scipy’s t-test functions to calculate the t-score and p-value as below:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="in">stats.ttest_ind(a=sampled_state21['OVERALL_LI'], b=sampled_state28['OVERALL_LI'], equal_var=False, alternative='two-sided')</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="in">stats.ttest_ind(a=sampled_state21['OVERALL_LI'], b=sampled_state28['OVERALL_LI'], equal_var=False, alternative='two-sided')</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It should return the t-score and p-value like below: Ttest_indResult(statistic=2.8980444277268735, pvalue=0.006421719142765231)</p>
 </section>
 <section id="t-score-for-two-sample-t-test" class="level3">
@@ -1473,17 +1483,17 @@ P-value: 0.0023388674905236283</code></pre>
 <section id="get-p-value-from-two-sample-t-test" class="level3">
 <h3 class="anchored" data-anchor-id="get-p-value-from-two-sample-t-test">Get p-value from two-sample t-test</h3>
 <p>In a two-sample t-test, you would want the below:</p>
-<div id="d0b07778" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> t</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given t-score and degrees of freedom</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>t_score <span class="op">=</span> <span class="op">-</span><span class="fl">1.2541</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> <span class="dv">40</span><span class="op">+</span><span class="dv">38</span><span class="op">-</span><span class="dv">2</span>  <span class="co"># degrees of freedom</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Two-tailed test p-value</span></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>p_value_two_tailed_t <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> t.cdf(<span class="bu">abs</span>(t_score), df))</span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Two-tailed p-value (t-test):"</span>, p_value_two_tailed_t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4b2ab375" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> t</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given t-score and degrees of freedom</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>t_score <span class="op">=</span> <span class="op">-</span><span class="fl">1.2541</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> <span class="dv">40</span><span class="op">+</span><span class="dv">38</span><span class="op">-</span><span class="dv">2</span>  <span class="co"># degrees of freedom</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Two-tailed test p-value</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>p_value_two_tailed_t <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> t.cdf(<span class="bu">abs</span>(t_score), df))</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Two-tailed p-value (t-test):"</span>, p_value_two_tailed_t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Two-tailed p-value (t-test): 0.21364931373347917</code></pre>
 </div>
@@ -1542,19 +1552,19 @@ P-value: 0.0023388674905236283</code></pre>
 <li>s^2/n = variance of the sample mean</li>
 </ul>
 <p><span class="math display">\[t = \frac{(300 - 305)}{\sqrt{({\frac{18.5^2}{40} + \frac{16.7^2}{38}})}}\]</span></p>
-<div id="09e76347" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> <span class="dv">300</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> <span class="dv">305</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>s1 <span class="op">=</span> <span class="fl">18.5</span></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>s2 <span class="op">=</span> <span class="fl">16.7</span></span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>n1 <span class="op">=</span> <span class="dv">40</span></span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>n2 <span class="op">=</span> <span class="dv">38</span></span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> (x1<span class="op">-</span>x2)<span class="op">/</span>math.sqrt(s1<span class="op">**</span><span class="dv">2</span><span class="op">/</span>n1 <span class="op">+</span> s2<span class="op">**</span><span class="dv">2</span><span class="op">/</span>n2)</span>
-<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'T-score: </span><span class="sc">{</span>t<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fbe333f1" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> <span class="dv">300</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> <span class="dv">305</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>s1 <span class="op">=</span> <span class="fl">18.5</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>s2 <span class="op">=</span> <span class="fl">16.7</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>n1 <span class="op">=</span> <span class="dv">40</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>n2 <span class="op">=</span> <span class="dv">38</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> (x1<span class="op">-</span>x2)<span class="op">/</span>math.sqrt(s1<span class="op">**</span><span class="dv">2</span><span class="op">/</span>n1 <span class="op">+</span> s2<span class="op">**</span><span class="dv">2</span><span class="op">/</span>n2)</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'T-score: </span><span class="sc">{</span>t<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>T-score: -1.254103693454824</code></pre>
 </div>
@@ -1567,17 +1577,17 @@ P-value: 0.0023388674905236283</code></pre>
 <figcaption>Two-tail test p-value</figcaption>
 </figure>
 </div>
-<div id="04c036f1" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> t</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given t-score and degrees of freedom</span></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>t_score <span class="op">=</span> <span class="op">-</span><span class="fl">1.2541</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> <span class="dv">40</span><span class="op">+</span><span class="dv">38</span><span class="op">-</span><span class="dv">2</span>  <span class="co"># degrees of freedom</span></span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Two-tailed test p-value</span></span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>p_value_two_tailed_t <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> t.cdf(<span class="bu">abs</span>(t_score), df))</span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Two-tailed p-value (t-test):"</span>, p_value_two_tailed_t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="facae468" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> t</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given t-score and degrees of freedom</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>t_score <span class="op">=</span> <span class="op">-</span><span class="fl">1.2541</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> <span class="dv">40</span><span class="op">+</span><span class="dv">38</span><span class="op">-</span><span class="dv">2</span>  <span class="co"># degrees of freedom</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Two-tailed test p-value</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>p_value_two_tailed_t <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> t.cdf(<span class="bu">abs</span>(t_score), df))</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Two-tailed p-value (t-test):"</span>, p_value_two_tailed_t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Two-tailed p-value (t-test): 0.21364931373347917</code></pre>
 </div>
@@ -1605,22 +1615,22 @@ P-value: 0.0023388674905236283</code></pre>
 <li>Significant level: 5%</li>
 </ul>
 <p><strong>Z-score for proportion in hypothesis teseting</strong> <span class="math display">\[Z = \frac{\hat{P}-P}{\sqrt{\frac{{P}(1-{P})}{n}}}\]</span></p>
-<div id="e871bd97" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>sample_mean <span class="op">=</span> <span class="fl">0.73</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>pop_mean <span class="op">=</span> <span class="fl">0.80</span></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>sample_size <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>z_score <span class="op">=</span> (sample_mean<span class="op">-</span>pop_mean)<span class="op">/</span>math.sqrt(pop_mean<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>pop_mean)<span class="op">/</span>sample_size)</span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Z-score: </span><span class="sc">{</span>z_score<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Two-tailed test p-value</span></span>
-<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>p_value_two_tailed <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> norm.cdf(<span class="bu">abs</span>(z_score)))</span>
-<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Two-tailed p-value:"</span>, p_value_two_tailed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e63519a3" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>sample_mean <span class="op">=</span> <span class="fl">0.73</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>pop_mean <span class="op">=</span> <span class="fl">0.80</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>sample_size <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>z_score <span class="op">=</span> (sample_mean<span class="op">-</span>pop_mean)<span class="op">/</span>math.sqrt(pop_mean<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>pop_mean)<span class="op">/</span>sample_size)</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Z-score: </span><span class="sc">{</span>z_score<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Two-tailed test p-value</span></span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>p_value_two_tailed <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> norm.cdf(<span class="bu">abs</span>(z_score)))</span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Two-tailed p-value:"</span>, p_value_two_tailed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Z-score: -1.7500000000000016
 Two-tailed p-value: 0.080118313727634</code></pre>
@@ -1645,24 +1655,24 @@ Two-tailed p-value: 0.080118313727634</code></pre>
 <p><strong>Z-score for two sample proportion</strong> <span class="math display">\[Z=\frac{\hat{p_1}-\hat{p_2}}{\sqrt{\hat{p_0}(1-\hat{p_0})(\frac{1}{n_1}+\frac{1}{n_2})}}\]</span></p>
 <p><span class="math display">\[\hat{p_1} = \text{Sample proportion of the 1st group}\]</span> <span class="math display">\[\hat{p_2} = \text{Sample proportion of the 2nd group}\]</span></p>
 <p><span class="math display">\[n_1 = \text{Sample size of the 1st group}\]</span> <span class="math display">\[n_2 = \text{Sample size of the 2nd group}\]</span> <span class="math display">\[\hat{p_0} = \text{Pooled proportion (weighted average of the two samples)}\]</span> <span class="math display">\[\text{Pooled proportion} = \frac{x_1+x_2}{n_1+n_2}\]</span> <span class="math display">\[x_1 = \text{Number of success in sample 1}\]</span> <span class="math display">\[x_2 = \text{Number of success in sample 2}\]</span></p>
-<div id="2dc993eb" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>p_1 <span class="op">=</span> <span class="fl">0.67</span></span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>p_2 <span class="op">=</span> <span class="fl">0.57</span></span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>p_0 <span class="op">=</span> (<span class="fl">0.67</span><span class="op">+</span><span class="fl">0.57</span>)<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>x_1 <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>x_2 <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> (p_1 <span class="op">-</span> p_2)<span class="op">/</span>math.sqrt(p_0<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p_0)<span class="op">*</span>(<span class="dv">1</span><span class="op">/</span>x_1<span class="op">+</span><span class="dv">1</span><span class="op">/</span>x_2))</span>
-<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Z score: </span><span class="sc">{</span>z<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Two-tailed test p-value</span></span>
-<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>p_value <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> norm.cdf(<span class="bu">abs</span>(z)))</span>
-<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Two-tailed p-value:"</span>, p_value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b32e8b91" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>p_1 <span class="op">=</span> <span class="fl">0.67</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>p_2 <span class="op">=</span> <span class="fl">0.57</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>p_0 <span class="op">=</span> (<span class="fl">0.67</span><span class="op">+</span><span class="fl">0.57</span>)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>x_1 <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>x_2 <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> (p_1 <span class="op">-</span> p_2)<span class="op">/</span>math.sqrt(p_0<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p_0)<span class="op">*</span>(<span class="dv">1</span><span class="op">/</span>x_1<span class="op">+</span><span class="dv">1</span><span class="op">/</span>x_2))</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Z score: </span><span class="sc">{</span>z<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Two-tailed test p-value</span></span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>p_value <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> norm.cdf(<span class="bu">abs</span>(z)))</span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Two-tailed p-value:"</span>, p_value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Z score: 1.0301070542879125
 Two-tailed p-value: 0.30295975411763143</code></pre>
@@ -1672,6 +1682,28 @@ Two-tailed p-value: 0.30295975411763143</code></pre>
 <p>The probability that thereis a 10% difference between two offices in London and Beijing is 30.3% under the null hypothesis. This is greater than the significant level, therefore we failed to reject the null hypothesis, and concluded that there is no statistical significant in the percentage difference between Beijing and London.</p>
 </section>
 </section>
+</section>
+<section id="linear-regression" class="level1">
+<h1>Linear regression</h1>
+<section id="simple-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="simple-linear-regression">Simple linear regression</h2>
+<p>Linear regression model explore how one or multiple independent variable impact the dependent variable.</p>
+<p><strong>Equation</strong> <span class="math display">\[Y = \text{slope}*X+\text{intercept}\]</span></p>
+<p><strong>Independent variable (x)</strong> A variable that explains trends in the dependent variable, also referred to as an explanatory or predictor variable.</p>
+<p><strong>Dependent variable (y)</strong> The variable a given model estimates, also referred to as a response or outcome variable.</p>
+<p><strong>Slope</strong> The amount that y increases or decreases per one-unit increase of x.</p>
+<p><strong>Intercept</strong> The value of y when x equals 0.</p>
+<p><strong>Correlation</strong> Describes linear relationships between variables (positive/negative).</p>
+</section>
+<section id="multiple-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-linear-regression">Multiple linear regression</h2>
+</section>
+<section id="advanced-hypothesis-testing" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-hypothesis-testing">Advanced hypothesis testing</h2>
+</section>
+</section>
+<section id="logistic-regression" class="level1">
+<h1>Logistic regression</h1>
 </section>
 
 </main>

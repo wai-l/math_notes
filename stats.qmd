@@ -874,6 +874,10 @@ print("Left-tailed p-value (t-test):", p_value_left_tailed_t)
 
 ```
 
+```{{python}}
+stats.ttest_1samp(a = aqi_michigan['aqi'], popmean=10, alternative='greater')
+```
+
 ## One sample tests - Z-test
 ### Assumption: 
 
@@ -1193,3 +1197,31 @@ Z score: 1.0301070542879125
 Two-tailed p-value: 0.30295975411763143
 
 The probability that thereis a 10% difference between two offices in London and Beijing is 30.3% under the null hypothesis. This is greater than the significant level, therefore we failed to reject the null hypothesis, and concluded that there is no statistical significant in the percentage difference between Beijing and London. 
+
+# Linear regression
+## Simple linear regression
+Linear regression model explore how one or multiple independent variable impact the dependent variable. 
+
+
+**Equation**
+$$Y = \text{slope}*X+\text{intercept}$$
+
+**Independent variable (x)**
+A variable that explains trends in the dependent variable, also referred to as an explanatory or predictor variable. 
+
+**Dependent variable (y)**
+The variable a given model estimates, also referred to as a response or outcome variable. 
+
+**Slope**
+The amount that y increases or decreases per one-unit increase of x. 
+
+**Intercept**
+The value of y when x equals 0. 
+
+**Correlation**
+Describes linear relationships between variables (positive/negative). 
+
+## Multiple linear regression
+## Advanced hypothesis testing
+
+# Logistic regression
