@@ -1204,7 +1204,17 @@ Linear regression model explore how one or multiple independent variable impact 
 
 
 **Equation**
-$$Y = \text{slope}*X+\text{intercept}$$
+$$Y = \text{intercept} + \text{slope}*X$$
+
+Or it can be written as
+
+$$\mu_{y|x}=\beta_0 + \beta_1 * X$$
+
+It's not always possible to get all the x and y variables in a population. For example if you want to evaluate the impact of number of social media followers against book sales, you can't get all author in the world for your linear regression model. This is when we use a sample of the population to build the regression model. (estimate of the paramaters). To distinguish the differences, the equation has a hat on the estimate parameters. 
+
+$$
+\hat{y} = \hat{\beta_0} + \hat{\beta_1} x
+$$
 
 **Independent variable (x)**
 A variable that explains trends in the dependent variable, also referred to as an explanatory or predictor variable. 
@@ -1221,7 +1231,21 @@ The value of y when x equals 0.
 **Correlation**
 Describes linear relationships between variables (positive/negative). 
 
+**Linear regression coefficients**
+The B-hat shown in the estimated formula are known as regression coefficients. A common way to caculate it is Ordinary Least Squares Estimation (OLS). 
+
 ## Multiple linear regression
 ## Advanced hypothesis testing
 
 # Logistic regression
+A technique that models a categorical dependent variable based on one or more independent variables. For example, if leads become subscriber or not, customer renew or not renew. The dependent variable can have two or more possible discrete values. 
+
+In the case of logistic regression, the relationship between x and y doesn't forma straight line. 
+
+![Logistic regression doesn't form a line. ](images/logistic_regression.png)
+
+Therefore we need a different way to model the logistic regression. The key is to get the probability of y equals to 1 given x. 
+
+$$\mu_{y|x} = \text{Prob}(Y=1|X)$$
+
+An easy way to do it would be sum all binary y (0 or 1) and devide by the total count. 
