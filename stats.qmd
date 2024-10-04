@@ -1265,6 +1265,19 @@ $$SSR = \sum_{i=1}^{n} ( y_i - \hat{y}_i )^2$$
 ### Oridnary Least Squares (OLS) 
 In linear regression, we use OLS to get the best fitted line. OLS is a method that minimizes the error, or the sum of squared residuals to estimate parameters in a linear regression model. 
 
+### Correlation coefficient (r, Pearson’s correlation coefficient)
+The correlation coefficient quantifies the strength of the linear relationship between two variables. It always falls in the range of [-1, 1]. When r is negative, there is a negative correlation between the variables: as one increases, the other decreases. When r is positive, there is a positive correlation between the variables: as one increases, so too does the other. When r = 0, there is no linear correlation between the variables. 
+
+![Correlation coefficient plots](images/correlation_coefficient_1.png)
+
+Note that there are cases where one variable might be precisely determined by another—like y=x2 or y=sin(x)—but the value of the linear correlation between X and Y would nonetheless be low or zero because their relationship is non-linear.
+
+However, r only tells you the strength of the linear correlation between the variables; it does not tell you anything about the magnitude of the slope of the relationship between the variables aside from its sign.
+
+![Correlation coefficient plots](images/correlation_coefficient_2.png)
+
+### Equations
+
 ## Multiple linear regression
 ## Advanced hypothesis testing
 
