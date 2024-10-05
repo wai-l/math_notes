@@ -1276,7 +1276,53 @@ However, r only tells you the strength of the linear correlation between the var
 
 ![Correlation coefficient plots](images/correlation_coefficient_2.png)
 
-### Equations
+**Equations**
+
+$$r = \frac{covariance(X, Y)}{(SD_X)(SD_Y)}$$
+
+Where
+
+$$covariance(X, Y) = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{n}$$
+
+$$\bar{x} = \text{mean of x}$$
+
+$$\bar{y} = \text{mean of y}$$
+
+**The regression equation**
+
+Now that you know about r and you better understand the concept of regression, you’re ready to put everything together to find the line of best fit through the data. The formula for this line is known as the regression equation. There are two keys to this step.
+
+The first is:
+
+The mean value of X and the mean value of Y (i.e., point (x̄, ȳ)) will always fall on the regression line. 
+
+The second is to understand what r means:
+
+For each increase of one standard deviation in X, there is an expected increase of r standard deviations in Y, on average over X. 
+
+In other words, the slope of the regression line is:
+
+$$m=\frac{r(SD y)}{(SD x)}$$
+
+This is m in the formula for a line: y = mx + b. The intercept, represented by b, is therefore: b = y - mx. Because you know that point (x̄, ȳ) is always on the regression line, you can plug in the x and y values from this point to calculate the intercept. Here’s an example using the original sample of five students.
+
+|      |Hours studying (X) |Exam grade (Y)|
+|------|-------------------|--------------|
+|mean: |5                  |80            |
+|SD:   |2                  |10            |
+|r:    |0.6                |              |
+
+: Elements in the regression equation
+
+Now we know the r score, we can use it to calculate the slope(m) and the intercept (b): 
+
+**Slope (m)**
+$$m=\frac{r(SD y)}{(SD x)}=\frac{0.6(10)}{2}=3$$
+
+**Intercept (b)**
+$$y=mx+b$$
+$$80=3(5)+b$$
+$$b=65$$
 
 ## Multiple linear regression
 ## Advanced hypothesis testing
