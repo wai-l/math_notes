@@ -1324,6 +1324,39 @@ $$y=mx+b$$
 $$80=3(5)+b$$
 $$b=65$$
 
+### Model assumption
+
+**Linearity**
+
+Each predictor variable (Xi) is linearly related to the outcome variable (Y). If you plot the X and Y variables into a scatter plot, they should approximately form a striaght line. 
+
+```{{python}}
+# Create pairwise scatterplots of Chinstrap penguins data
+sns.pairplot(chinstrap_penguins)
+```
+
+**Normality**
+
+The residuals or errors are normally distributed. You can only check this after the model is built. 
+
+The normality assumption focuses on the errors, which can be estimated by the residuals, or the difference between the observed values in the data and the values predicted by the regression model. Once the model has been built, you can either create a QQ-plot to check that the residuals are normally distributed, or create a histogram of the residuals. Whether the assumption is met is up to some level of interpretation. 
+
+**Independent observations**
+
+Each observation in the dataset is independent. 
+
+**Homoscedasticity**
+
+The variation of the residuals (errors) is constant or similar across the model. 
+
+**Note on errors and residuals**
+
+The terms "errors" and "residuals" sometimes used interchangeably in connection with regression. In actuality, there is a difference:
+
+**Residuals** are the difference between the predicted and observed values. You can calculate residuals after you build a regression model by subtracting the predicted values from the observed values.
+**Errors** are the natural noise assumed to be in the model.
+**Residuals** are used to estimate errors when checking the normality and homoscedasticity assumptions of linear regression.
+
 ## Multiple linear regression
 ## Advanced hypothesis testing
 
