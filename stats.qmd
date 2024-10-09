@@ -1341,13 +1341,75 @@ The residuals or errors are normally distributed. You can only check this after 
 
 The normality assumption focuses on the errors, which can be estimated by the residuals, or the difference between the observed values in the data and the values predicted by the regression model. Once the model has been built, you can either create a QQ-plot to check that the residuals are normally distributed, or create a histogram of the residuals. Whether the assumption is met is up to some level of interpretation. 
 
+The **quantile-quantile plot** (**Q-Q plot**) is a graphical tool used to compare two probability distributions by plotting their quantiles against each other. Here’s how Q-Q plots work when assessing the normality of a model’s residuals: 
+
+**Rank-order the residuals** Sort your n residuals from least to greatest. For each one, calculate what percentage of the data falls at or below this rank. These are the n quantiles of your data.
+
+**Compare to a normal distribution** Divide a standard normal distribution into n+1 equal areas (i.e., slice it n times). If the residuals are normally distributed, the quantile of each residual (i.e., what percentage of the data falls below each ranked residual) will align closely with the corresponding z-scores of each of the n cuts on the standard normal distribution (these can be found in a normal z-score table or, more commonly, using statistical software). 
+
+**Construct a plot** A Q-Q plot has the known quantile values of a standard normal distribution along its x-axis and the rank-ordered residual values on its y-axis. If the residuals are normally distributed, the quantile values of the residuals will correspond with those of the standardized normal distribution, and both will increase linearly. If you first standardize your residuals (convert to z-scores by subtracting the mean and dividing by the standard deviation), the two axes will be on identical scales, and, if the residuals are indeed normally distributed, the line will be at a 45° angle. However, standardizing the residuals is not a requirement of a Q-Q plot. In either case, if the resulting plot is not linear, the residuals are not normally distributed.
+
+Below are Q-Q plots showing different types of distribution: 
+
+![Q-Q plot examples](images/qqplot.png)
+
+After you calculated the residuals from a linear regression model, you can use the statsmodel to directly plot a Q-Q plot. 
+
+```{{python}}
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+
+residuals = model.resid # the residual calculated from a model
+fig = sm.qqplot(
+    residuals, 
+    line = 's' # Standardized Line: this adds a line that passes through the mean of the data and has a slope equal to the standard deviation of the data. It accounts for the specific scale of the sample data. If the data is not standardized (i.e., not converted to z-scores), this line helps compare the data's actual scale to the expected normal distribution's scale. 
+    )
+plt.show()
+```
+
 **Independent observations**
 
 Each observation in the dataset is independent. 
 
+Whether or not observations are independent is dependent on understanding your data. Asking questions like:
+
+How was the data collected?
+What does each data point represent?
+Based on the data collection process, is it likely that the value of one data point impacts the value of another data point?
+
+An objective review of these questions, which would include soliciting insights from others who might notice things you don't, can help you determine whether or not the independent observations assumption is violated. This in turn will allow you to determine your next steps in working with the dataset at hand. 
+
 **Homoscedasticity**
 
 The variation of the residuals (errors) is constant or similar across the model. 
+
+Like the normality assumption, the homoscedasticity assumption concerns the residuals of a model, so it can only be evaluated after a regression model has already been constructed. A scatterplot of the fitted values (i.e., the model’s predicted Y values) versus the residuals can help determine whether the homoscedasticity assumption is violated.
+
+In a homoscedastic model:
+
+The residuals should be randomly scattered around zero with no clear pattern (e.g., no funnel shape or systematic variation).
+
+There should not be a visible trend or increasing spread as the fitted values increase.
+
+To determine if the assumption is satisfied: 
+**Random Scatter**: If the points are randomly distributed around the horizontal line (y = 0), with no discernible patterns or increasing spread, then homoscedasticity is satisfied.
+
+**No Funnel Shape**: If the residuals fan out or create a funnel-shaped pattern (narrow at one end, wider at the other), this indicates heteroscedasticity (non-constant variance), meaning the assumption is violated.
+
+```{{python}}
+import matplotlib.pyplot as plt
+
+fig = sns.scatterplot(fitted_values, residuals)
+fig.axhline(0)
+fig.set_xlabel("Fitted Values")
+fig.set_ylabel("Residuals")
+plt.show()
+```
+
+![Scatter plot to check the homoscedasticity](images/homoscedasticity.png)
+
+In this example plot, the residuals seem to be scattered without a clear pattern, though there is a slight variation in spread toward the middle and ends of the plot. However, it does not seem to exhibit a strong funnel shape or a systematic increase in variance. Based on this, the model likely passes the homoscedasticity assumption.
+
 
 **Note on errors and residuals**
 
@@ -1356,6 +1418,10 @@ The terms "errors" and "residuals" sometimes used interchangeably in connection 
 **Residuals** are the difference between the predicted and observed values. You can calculate residuals after you build a regression model by subtracting the predicted values from the observed values.
 **Errors** are the natural noise assumed to be in the model.
 **Residuals** are used to estimate errors when checking the normality and homoscedasticity assumptions of linear regression.
+
+### Use logarithm to transform unfit assumptions
+
+### Fixing other unfit assumptions
 
 ## Multiple linear regression
 ## Advanced hypothesis testing
