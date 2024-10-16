@@ -1235,7 +1235,7 @@ Describes linear relationships between variables (positive/negative).
 The B-hat shown in the estimated formula are known as regression coefficients. A common way to caculate it is Ordinary Least Squares Estimation (OLS). 
 
 ### Best fitted line
-In a simaple linear regression model, we want to find the best fitted line, which is the line that fits the data best by minimizing some loss function or error. 
+In a simple linear regression model, we want to find the best fitted line, which is the line that fits the data best by minimizing some loss function or error. 
 
 There are a few key components associated with this concept. 
 
@@ -1420,8 +1420,135 @@ The terms "errors" and "residuals" sometimes used interchangeably in connection 
 **Residuals** are used to estimate errors when checking the normality and homoscedasticity assumptions of linear regression.
 
 ### Use logarithm to transform unfit assumptions
+Applying a log transformation (natural logarithm) in linear regression can make the data more suitable for a linear model by addressing:
+- Skewness (right-skewed data) (e.g. income, house price)
+- Non-linear relationships (exponential or multiplicative relationships) (e.g. biological growth, population growth)
+- Reducing the impact of outliers.
+- Stabilizing variance. 
+
+The natural logarithm (often denoted as ln), which is the logarithm with base e, where e ≈ 2.718. It is a mathematical function that transforms data by compressing large values more than small ones, which can help in stabilizing variance and linearizing relationships between variables in certain situations. 
+
+For y > 0
+
+$$y=e^x$$
+
+$$\quad Y_{\text{log}} = \ln(Y)$$
+
+$$ln(y)=ln(e^x)$$
+
+If y = 1000, log(y) = 6.907755278982137
+
+And after you finished the computation using the log variable, you can use expotential function to transform it back. (It may be slighly difference due to rounding)
+
+```{python}
+import numpy as np
+y=1000
+log_y = np.log(y)
+print(log_y)
+
+reverse_log_y = np.exp(log_y)
+print(reverse_log_y)
+```
+
+In the context of a pandas dataframe, you can use the `apply` function to tranform the data in a column: 
+
+```{{python}}
+data['Income_1'] = data['LogIncome'].apply(np.exp)
+data['LogIncome_1'] = data['Income'].apply(np.log)
+```
 
 ### Fixing other unfit assumptions
+**Left-Skewed Distributions**
+For left-skewed distributions (where the tail is on the left), log transformation is generally not used. Instead, transformations like the square or cube may be applied to "stretch" smaller values and reduce the skewness. For left-skewed data, transformations such as square root or inverse are more appropriate. 
+
+**Zero or negative values**
+Logarithms can't be applied to zero or negative values, so data with such values need to be handled differently (for example, adding a small constant to avoid issues). 
+
+**Homoscedasticity**
+Define a different outcome variable. If you are interested in understanding how a city’s population correlates with the number of restaurants in a city, you know that some cities are much more populous than others. You can then redefine the outcome variable as the ratio of population to restaurants. 
+
+**Independent observations**
+Take just a subset of the available data. 
+
+If, for example, you are conducting a survey and get responses from people in the same household, their responses may be correlated. You can correct for this by just keeping the data of one person in each household.
+
+Another example is if you are collecting data over a time period. Let’s say you are researching data on bike rentals. If you collect your data every 15 minutes, the number of bikes rented out at 8:00 a.m. might correlate with the number of bikes rented out at 8:15 a.m. But, perhaps the number of bikes rented out is independent if the data is taken once every 2 hours, instead of once every 15 minutes.
+
+### Run a simple linear regression model in Python with the OLS method
+
+```{python}
+# Import packages
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from statsmodels.formula.api import ols
+import statsmodels.api as sm
+
+# Load dataset
+penguins = sns.load_dataset("penguins")
+
+# Data cleaning
+penguins_sub = penguins[penguins["species"] != "Chinstrap"]
+penguins_final = penguins_sub.dropna()
+penguins_final.reset_index(inplace=True, drop=True)
+
+# Check assumptions
+sns.pairplot(penguins_final)
+
+# Model construction
+## Subset Data
+ols_data = penguins_final[["bill_length_mm", "body_mass_g"]]
+
+## Write out formula ("y ~ x")
+ols_formula = "body_mass_g ~ bill_length_mm"
+
+## Build OLS, fit model to data
+OLS = ols(formula = ols_formula, data = ols_data)
+model = OLS.fit()
+
+print('Model Summary')
+print(model.summary())
+
+sns.regplot(x = "bill_length_mm", y = "body_mass_g", data = ols_data)
+plt.show()
+
+# Check assumptions again
+## Get residuals and precitions from the model
+
+# Subset X variable
+X = ols_data["bill_length_mm"]
+
+# Get predictions from model
+fitted_values = model.predict(X)
+
+# Calculate residuals
+residuals = model.resid
+
+##Normality
+### histogram
+fig = sns.histplot(residuals)
+fig.set_xlabel("Residual Value")
+fig.set_title("Histogram of Residuals")
+plt.show()
+
+## QQ plot
+fig = sm.qqplot(model.resid, line = 's')
+plt.show()
+
+##Homoscedasticity
+fig = sns.scatterplot(x=fitted_values, y=residuals)
+
+# Add reference line at residuals = 0
+fig.axhline(0)
+
+# Set x-axis and y-axis labels
+fig.set_xlabel("Fitted Values")
+fig.set_ylabel("Residuals")
+
+# Show the plot
+plt.show()
+```
+
 
 ## Multiple linear regression
 ## Advanced hypothesis testing
