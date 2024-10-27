@@ -1339,6 +1339,8 @@ sns.pairplot(chinstrap_penguins)
 
 The residuals or errors are normally distributed. You can only check this after the model is built. 
 
+Note: It’s a common misunderstanding that the independent and/or dependent variables must be normally distributed when performing linear regression. This is not the case. Only the model’s residuals are assumed to be normal.
+
 The normality assumption focuses on the errors, which can be estimated by the residuals, or the difference between the observed values in the data and the values predicted by the regression model. Once the model has been built, you can either create a QQ-plot to check that the residuals are normally distributed, or create a histogram of the residuals. Whether the assumption is met is up to some level of interpretation. 
 
 The **quantile-quantile plot** (**Q-Q plot**) is a graphical tool used to compare two probability distributions by plotting their quantiles against each other. Here’s how Q-Q plots work when assessing the normality of a model’s residuals: 
@@ -1583,9 +1585,97 @@ The area surrounding the line that descrines the uncertainty around the predicte
 
 Each beta coefficient also has a confidence interval associated with its estimate. A 95% interval means the interval itself has a 95% chance of containing the true parameter value of the coefficient. So there is 5% chance that our confidence interval [131.788, 150.592] does not contain the true value of β1. More precisely, this means that if you were to repeat this experiment many times, 95% of the confidence intervals would contain the true value of β1.
 
-But, since there is uncertainty in both of the estimated beta coefficients, then the estimated y values also have uncertainty. This is where confidence bands become useful.
+But, since there is uncertainty in both of the estimated beta coefficients, then the estimated y values also have uncertainty. This is where confidence bands become useful. 
+
+### Metrics to evaluate simple linear regression model
+
+**R²: The coefficient of determination**
+
+R² measures the proportion of variation in the dependent variable, Y, explained by the independent variable(s), X.
+
+This is calculated by subtracting the sum of squared residuals divided by the total sum of squares from 1.
+
+$$R^2=1-\frac{\text{Sum of squared residuals}}{\text{Total sum of squares}}$$
+
+R² ranges from 0 to 1. So, if a model has an R² of 0.85, that means that the X variables explain about 85% of the variation in the Y variable. Although R² is a highly interpretable and commonly used metric, you may also encounter mean squared error (MSE) and mean absolute error (MAE) when R² is insufficient in evaluating model performance. 
+
+**MSE: Mean squared error**
+
+MSE (mean squared error) is the average of the squared difference between the predicted and actual values.
+
+Because of how MSE is calculated, MSE is very sensitive to large errors.
+
+**MAE: Mean absolute error**
+
+MAE (mean absolute error) is the average of the absolute difference between the predicted and actual values.
+
+If your data has outliers that you want to ignore, you can use MAE, as it is not sensitive to large errors. 
+
+
+### Hold-out sample
+A random sample of observed data that is not used to fit the model. You can use this sample to evaluate how does this fit with the model, or how does the model fit in with the data. 
 
 ## Multiple linear regression
+
+### Equation for multiple linear regression
+
+$$Y = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + ... + \beta_n*X_n$$
+
+### Categorical variables in multiple linear regression
+In order to use the categorical indepent variables in a multiple linear regression model, we need to transform them to numbers for the computer to understand. Two common methods are **one hot encoding** and **label encoding**. 
+
+**One hot encoding** 
+
+A data tranformation technique that turns one categorical variable into several binary variables. 
+
+Let's say there is a category called action. It will be represented in the equation as X_action in the below equation: 
+$$Y = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_action*X_action$$
+
+Where x with action is X_action = 1; 
+X without action is X_action = 0
+
+### Assumptions
+Multiple linear regression shares the same 4 assumptions of linear regressions: 
+- Linearity
+- Independent observations
+- Normality
+- Homoscedasticity
+
+Different from simple linear regression, multiple linear regression also has a **no multicollinearity assumption**: 
+- No two independent variables (Xi and Xj) can be highly correlated with each other. 
+
+To verify the no multicollinearity assumption, you can use scatter plot to explore the relationship between variables as a first step. As a second step, **Variance Inflation Factors (VIF)** can also verify the relationship. The VIF quantifies how correlated each indepent variable is with all of the other independent variables. 
+
+Note, however, that the assumption of no multicollinearity is most important when you are using your regression model to make inferences about your data, because the inclusion of collinear data increases the standard errors of the model’s beta parameter estimates. But there may be times when the primary purpose of your model is to make predictions and the need for accurate predictions outweighs the need to make inferences about your data. In this case, including the collinear independent variables may be justified because it’s possible that their inclusion would result in better predictions.
+
+### Variance Inflation Factors (VIF)
+Calculating the variance inflation factor, or VIF, for each independent (X) variable is a way to quantify how much the variance of each variable is “inflated” due to correlation with other X variables. The VIF represents the amount that the standard error of coefficient Beta increases relative to a situation in which all of the predictor variables are uncorrelated. 
+
+To calculate the VIF for each predictor variable, you can use the `variance_inflation_factor()` function from the statsmodels package. Here is an example of how you might obtain VIFs for your predictor variables.
+
+```{{python}}
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+X = df[['col_1', 'col_2', 'col_3']]
+vif = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
+vif = zip(X, vif)
+print(list(vif))
+```
+
+The smallest value a VIF can take on is 1, which would indicate 0 correlation between the X variable in question and the other predictor variables in the model. A high VIF, such as 5 and above, according to the statsmodels documentation, can indicate the presence of multicollinearity.
+
+### Handle data with multicollinearity**
+
+**Drop one or more variables that have high multicollinearity** 
+
+There are a few specific statistical techniques you can use to select variables strategically. 
+- Forward selection
+- Backward elimination
+
+**Create new variables using existing data**
+
+
+
+
 ## Advanced hypothesis testing
 
 # Logistic regression
