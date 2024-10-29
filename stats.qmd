@@ -1648,7 +1648,7 @@ To verify the no multicollinearity assumption, you can use scatter plot to explo
 
 Note, however, that the assumption of no multicollinearity is most important when you are using your regression model to make inferences about your data, because the inclusion of collinear data increases the standard errors of the model’s beta parameter estimates. But there may be times when the primary purpose of your model is to make predictions and the need for accurate predictions outweighs the need to make inferences about your data. In this case, including the collinear independent variables may be justified because it’s possible that their inclusion would result in better predictions.
 
-### Variance Inflation Factors (VIF)
+### Variance Inflation Factors (VIF) to measure multicollinearity
 Calculating the variance inflation factor, or VIF, for each independent (X) variable is a way to quantify how much the variance of each variable is “inflated” due to correlation with other X variables. The VIF represents the amount that the standard error of coefficient Beta increases relative to a situation in which all of the predictor variables are uncorrelated. 
 
 To calculate the VIF for each predictor variable, you can use the `variance_inflation_factor()` function from the statsmodels package. Here is an example of how you might obtain VIFs for your predictor variables.
@@ -1673,8 +1673,90 @@ There are a few specific statistical techniques you can use to select variables 
 
 **Create new variables using existing data**
 
+### Interaction term
+A term that represents how the relationship between two independent variables is associated with changes in the mean of the dependent variable. We can represnet the interaction term as a product of the two independent variables in question. 
 
+Using coffe shop sales as an example, if we suspect the distance from public transportation might be associated with the coffe shop sales associated with the temperature, we can include the interaction term of distance times temperature. 
 
+Let's say this was the original equation: 
+$$sales = \beta_0 + \beta_\text{temperature} * X_\text{temperature} + \beta_\text{transportation} * X_\text{transportation}$$
+
+If we want to include the interaction, we can amend the equation as below: 
+
+$$sales = \beta_0 + \beta_\text{temp} * X_\text{temp} + \beta_\text{trans} * X_\text{trans} + \beta_\text{interaction} * (\text{temp} * \text{trans})$$
+
+### Run a multiple linear regression model in Python with the OLS method
+
+```{python}
+# Import packages
+import pandas as pd
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from statsmodels.formula.api import ols
+
+# Load dataset
+penguins = sns.load_dataset("penguins", cache=False)
+
+# Examine first 5 rows of dataset
+penguins.head()
+
+# Data cleaning
+# Subset data
+penguins = penguins[["body_mass_g", "bill_length_mm", "sex", "species"]]
+
+# Rename columns
+penguins.columns = ["body_mass_g", "bill_length_mm", "gender", "species"]
+
+# Drop rows with missing values
+penguins.dropna(inplace=True)
+
+# Reset index
+penguins.reset_index(inplace=True, drop=True)
+
+# create hold out sample
+# Subset X and y variables
+penguins_X = penguins[["bill_length_mm", "gender", "species"]]
+penguins_y = penguins[["body_mass_g"]]
+
+# Create training data sets and holdout (testing) data sets
+X_train, X_test, y_train, y_test = train_test_split(penguins_X, penguins_y, 
+                                                    test_size = 0.3, random_state = 42)
+
+# Model construction
+# Write out OLS formula as a string
+# C means categorical data, the ols function will use one-hot encode to process them
+ols_formula = "body_mass_g ~ bill_length_mm + C(gender) + C(species)"
+
+# Create OLS dataframe
+ols_data = pd.concat([X_train, y_train], axis = 1)
+
+# Create OLS object and fit the model
+OLS = ols(formula = ols_formula, data = ols_data)
+model = OLS.fit()
+
+# Get model results
+model.summary()
+```
+
+**Interpt the model summary**
+
+![Multiple linear regression model summary](images/multiple_linear_regression_summary.png)
+
+**R-squared: 0.85**
+
+The model explains 85% of the variance in body mass. 
+
+**C(gender) - male**
+
+This is a binary field for the category column, where male =1, female = 0. This means that female penguins are the reference point. If all other variables are constant, then we would expect a male penguin's body mass to be about 528.95 grams more than a female penguin's body mass. 
+
+**C(species) - Chinstrap and Gentoo**
+
+Given the names of these two variables, we know that Adelie penguins are the reference point. So, if we compare an Adelie penguin and a Chinstrap penguin, who have the same characteristics except their species, we would expect the Chinstrap penguin to have a body mass of about 285.39 grams less than the Adelie penguin. If we compare an Adelie penguin and a Gentoo penguin, who have the same characteristics except their species, we would expect the Gentoo penguin to have a body mass of about 1,081.62 grams more than the Adelie penguin. 
+
+**Bill length (mm)**
+
+Lastly, bill length (mm) is a continuous variable, so if we compare two penguins who have the same characteristics, except one penguin's bill is 1 millimeter longer, we would expect the penguin with the longer bill to have 35.55 grams more body mass than the penguin with the shorter bill.
 
 ## Advanced hypothesis testing
 
