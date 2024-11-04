@@ -1758,6 +1758,32 @@ Given the names of these two variables, we know that Adelie penguins are the ref
 
 Lastly, bill length (mm) is a continuous variable, so if we compare two penguins who have the same characteristics, except one penguin's bill is 1 millimeter longer, we would expect the penguin with the longer bill to have 35.55 grams more body mass than the penguin with the shorter bill.
 
+### Underfitting and overfitting
+When you start adding more and more indepentdent variables into a multiple linear regression model, the R square gets more complicated, as the best fit line would be dependent on all the added variables. However not all indepentdent variables equally contributed to the changes in Y. The high R square can be misleading in this case. And it will be highly dependent on the data availables in the model, but no longer applicable to the larger populatoin. This can lead to overfitting. 
+
+**Overfitting**
+
+When a model fits the observed or training data too specifically, and is unabl to generate suitable estimates for the general population. 
+
+We can use the holdout sample to test if the model is overfitting, another way to evaluate if a model is overfitting is to use the adjusted R square. 
+
+**Adjusted R square**
+A variation of the R square regression evaluation metric that penalizes unncessary explanatory variables. Additionally, the adjusted R-squared only captures the proportion of variation explained by the independent variables that show a significant relationship with the outcome variable. These differences prevent the adjusted R-squared value from becoming inflated like the R-squared value. 
+
+Like R square, it varies from 0 to 1. 
+
+It is used to compare models of varying complexity, to determine if you should add another variable or not. 
+
+**Underfitting**
+
+In the case of underfitting, a multiple regression model fails to capture the underlying pattern in the outcome variable. An underfitting model has a low R-squared value. It could be the case that the sample dataset is too small, and this prevents the model from being able to learn the relationship between the predictors and the outcome. Using more sample data to build the model might reduce the problem of underfitting. 
+
+### Selecting variables to avoid overfitting and underfitting
+
+**F-score**
+
+**Lasso, Ridge, and Elastic Net regression**
+
 ## Advanced hypothesis testing
 
 # Logistic regression
