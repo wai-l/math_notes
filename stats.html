@@ -233,8 +233,15 @@ window.Quarto = {
   <li><a href="#handle-data-with-multicollinearity" id="toc-handle-data-with-multicollinearity" class="nav-link" data-scroll-target="#handle-data-with-multicollinearity">Handle data with multicollinearity**</a></li>
   <li><a href="#interaction-term" id="toc-interaction-term" class="nav-link" data-scroll-target="#interaction-term">Interaction term</a></li>
   <li><a href="#run-a-multiple-linear-regression-model-in-python-with-the-ols-method" id="toc-run-a-multiple-linear-regression-model-in-python-with-the-ols-method" class="nav-link" data-scroll-target="#run-a-multiple-linear-regression-model-in-python-with-the-ols-method">Run a multiple linear regression model in Python with the OLS method</a></li>
+  <li><a href="#underfitting-and-overfitting" id="toc-underfitting-and-overfitting" class="nav-link" data-scroll-target="#underfitting-and-overfitting">Underfitting and overfitting</a></li>
+  <li><a href="#selecting-variables-to-avoid-overfitting-and-underfitting" id="toc-selecting-variables-to-avoid-overfitting-and-underfitting" class="nav-link" data-scroll-target="#selecting-variables-to-avoid-overfitting-and-underfitting">Selecting variables to avoid overfitting and underfitting</a></li>
   </ul></li>
-  <li><a href="#advanced-hypothesis-testing" id="toc-advanced-hypothesis-testing" class="nav-link" data-scroll-target="#advanced-hypothesis-testing">Advanced hypothesis testing</a></li>
+  <li><a href="#advanced-hypothesis-testing" id="toc-advanced-hypothesis-testing" class="nav-link" data-scroll-target="#advanced-hypothesis-testing">Advanced hypothesis testing</a>
+  <ul class="collapse">
+  <li><a href="#chi-squared-test" id="toc-chi-squared-test" class="nav-link" data-scroll-target="#chi-squared-test">Chi-squared test</a></li>
+  <li><a href="#chi-squared-goodness-of-fit-test" id="toc-chi-squared-goodness-of-fit-test" class="nav-link" data-scroll-target="#chi-squared-goodness-of-fit-test">Chi-squared goodness of fit test</a></li>
+  <li><a href="#chi-squared-test-for-independence-scenario" id="toc-chi-squared-test-for-independence-scenario" class="nav-link" data-scroll-target="#chi-squared-test-for-independence-scenario">Chi-squared test for independence scenario</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic regression</a>
   <ul class="collapse">
@@ -272,7 +279,7 @@ window.Quarto = {
 </section>
 <section id="packages-used" class="level1">
 <h1>Packages used</h1>
-<div id="8c43d765" class="cell" data-execution_count="1">
+<div id="0b684ff7" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -299,7 +306,7 @@ window.Quarto = {
 <li>Rainy days start of cloudy (P(Cloud|Rain)) = 50%</li>
 </ul>
 <p><span class="math display">\[P(Rain \mid Cloud) = \frac{ 50\% * 10\% }{ 40\% }\]</span></p>
-<div id="ee039660" class="cell" data-execution_count="2">
+<div id="d9e30ca1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p_a_b <span class="op">=</span> <span class="fl">0.5</span><span class="op">*</span><span class="fl">0.1</span><span class="op">/</span><span class="fl">0.4</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p_a_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -363,7 +370,7 @@ window.Quarto = {
 <p>Putting all available variables into the formula will look like this: <span class="math display">\[
 P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 \]</span></p>
-<div id="7be3f5c3" class="cell" data-execution_count="3">
+<div id="ae2f82ce" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>P_A_B <span class="op">=</span> <span class="fl">0.95</span> <span class="op">*</span> <span class="fl">0.01</span> <span class="op">/</span> (<span class="fl">0.95</span><span class="op">*</span><span class="fl">0.01</span> <span class="op">+</span> <span class="fl">0.02</span> <span class="op">*</span> <span class="fl">0.99</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(P_A_B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -406,7 +413,7 @@ P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 </table>
 <p><span class="math display">\[\text{Churn rate of UK customer} = \frac{\text{Number of churned UK customer}} {\text{Number of UK customer}}\]</span></p>
 <p><span class="math display">\[\text{Churn rate of UK customer}  = \frac{30} {50}\]</span></p>
-<div id="693abd15" class="cell" data-execution_count="4">
+<div id="4c572263" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>churn_rate <span class="op">=</span> <span class="dv">30</span><span class="op">/</span><span class="dv">50</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Churn rate of UK customer: </span><span class="sc">{</span>churn_rate<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -419,7 +426,7 @@ P(A \mid B) = \frac{0.95 \times 0.01}{(0.95 \times 0.01) + (0.02 \times 0.99)}
 P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 \]</span></p>
 <p><span class="math display">\[P(A \mid B) = \frac{30}{60} * \frac{60}{100} * \frac{100}{50}\]</span> <span class="math display">\[P(A \mid B) = \frac{30}{50}\]</span></p>
-<div id="a8d251a0" class="cell" data-execution_count="5">
+<div id="f1130fdc" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'P(B|A) = </span><span class="sc">{</span><span class="dv">30</span><span class="op">/</span><span class="dv">50</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>P(B|A) = 0.6</code></pre>
@@ -450,7 +457,7 @@ P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 <p>Say you want to know out of 3 coin toss, the number of outcomes where you can get 2 heads.</p>
 <p>The formula would be:</p>
 <p><span class="math display">\[\text{n-choose-k}=\frac{3!} {2!(3-2)!}\]</span> <span class="math display">\[\text{n-choose-k}=\frac{3*2*1} {2*1*1}\]</span></p>
-<div id="4aad2d00" class="cell" data-execution_count="6">
+<div id="a7cb0471" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>n_choose_k <span class="op">=</span> <span class="dv">3</span><span class="op">*</span><span class="dv">2</span><span class="op">*</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">*</span><span class="dv">1</span><span class="op">*</span><span class="dv">1</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'n-choose-k = </span><span class="sc">{</span>n_choose_k<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -466,7 +473,7 @@ P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 <p>Now we know the chances of getting a head in each toss is 50%</p>
 <p>Put it into work, it would be: <span class="math display">\[0.5^2(1-0.5)^{3-2}\]</span></p>
 <p><span class="math display">\[=0.5*0.5*0.5\]</span></p>
-<div id="e0a185fe" class="cell" data-execution_count="7">
+<div id="cacdfc20" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>prob_of_each_outcome <span class="op">=</span> <span class="fl">0.5</span><span class="op">*</span> <span class="fl">0.5</span> <span class="op">*</span> (<span class="dv">1</span><span class="op">-</span><span class="fl">0.5</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Probability of each outcome = </span><span class="sc">{</span>prob_of_each_outcome<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -478,7 +485,7 @@ P(A \mid B) = \frac{\frac{30}{60} \times \frac{60}{100}}{\frac{50}{100}}
 <p>Say for each coin toss, you can get 2 possible outcomes. For 2 coin toss, you get 2^2, which is 4 outcome.</p>
 <p>Now for 3 coin toss, you will get the total possible outcome of 2^3, which is 8.</p>
 <p>The probability of getting each outcome is 1/8, which is also 0.125.</p>
-<div id="e59d9f6f" class="cell" data-execution_count="8">
+<div id="01d1cac6" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'total number of possible outcome = </span><span class="sc">{</span><span class="dv">2</span><span class="op">**</span><span class="dv">3</span><span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'proabbility of each outcome = </span><span class="sc">{</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">**</span><span class="dv">3</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -491,7 +498,7 @@ proabbility of each outcome = 0.125</code></pre>
 <h3 class="anchored" data-anchor-id="final-outcome">Final outcome</h3>
 <p>Now that we can put the two together.</p>
 <p><span class="math display">\[p(x=k) = n-choose-k * \text{probability of each outcome}\]</span> <span class="math display">\[p(x=k) = 3*0.125\]</span></p>
-<div id="9f343a3a" class="cell" data-execution_count="9">
+<div id="f32a6433" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>binomial_dist <span class="op">=</span> <span class="dv">3</span><span class="op">*</span><span class="fl">0.125</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'p(x=k) = </span><span class="sc">{</span>binomial_dist<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -656,7 +663,7 @@ proabbility of each outcome = 0.125</code></pre>
 <h3 class="anchored" data-anchor-id="formula---mean">Formula - mean</h3>
 <p>This is how we calculate the Z-score: <span class="math display">\[Z = \frac{x-μ}{σ}\]</span> <span class="math display">\[x = \text{a single data value/raw score}\]</span> <span class="math display">\[μ/mu = \text{the population mean}\]</span> <span class="math display">\[σ/sigma = \text{the poplation standard deviation}\]</span></p>
 <p>Now let’s say you have a test score of 133. The test has a mean score of 100 and a standard deviation of 15. The equation would look like this: <span class="math display">\[Z = \frac{133-100}{15}\]</span></p>
-<div id="13c99bdd" class="cell" data-execution_count="10">
+<div id="6ad0287f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>z_score <span class="op">=</span> (<span class="dv">133</span><span class="op">-</span><span class="dv">100</span>)<span class="op">/</span><span class="dv">15</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Z-score: </span><span class="sc">{</span>z_score<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -741,7 +748,7 @@ proabbility of each outcome = 0.125</code></pre>
 <p>The larger the sample size is,the smaller the error would be.</p>
 <p>Now let’s say we have a sample of 100 penguine, which has a mean weight of 3 pounds and a standard deviation of 1 pound.</p>
 <p><span class="math display">\[\text{Stand error of the mean} = \frac{1}{\sqrt{100}}\]</span></p>
-<div id="d224a357" class="cell" data-execution_count="11">
+<div id="f2b1456f" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sample_std <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>n_sqr <span class="op">=</span> math.sqrt(<span class="dv">100</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -768,7 +775,7 @@ proabbility of each outcome = 0.125</code></pre>
 <p><span class="math display">\[n = \text{sample size}\]</span></p>
 <p>Say you are researching a population of 100,000, in a sample with 100 people, 10% of them prefer slipon sneaker.</p>
 <p><span class="math display">\[SE(\hat{p}) = \sqrt{\frac{0.1(1-0.1)}{100}}\]</span></p>
-<div id="5985ce74" class="cell" data-execution_count="12">
+<div id="6f6f2d47" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>phat <span class="op">=</span> <span class="fl">0.1</span></span>
@@ -785,7 +792,7 @@ proabbility of each outcome = 0.125</code></pre>
 <section id="case-study-apply-the-standard-error-of-the-proportion-to-churn-rate" class="level3">
 <h3 class="anchored" data-anchor-id="case-study-apply-the-standard-error-of-the-proportion-to-churn-rate">Case study: apply the standard error of the proportion to churn rate</h3>
 <p>Say you know that you have 100 customers (current and churned) in Scotland, and their churn rate is 60%. You can use the standard error formula to understand how much the sample proportion (in your case, the sample churn rate) is expected to vary from the true population proportion (the true churn rate for all current and future customers).</p>
-<div id="9672d8f4" class="cell" data-execution_count="13">
+<div id="b218aade" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given data</span></span>
@@ -928,7 +935,7 @@ proabbility of each outcome = 0.125</code></pre>
 <p>In the situation of polling, we will use the standard error of poportion for the standard error calculation:</p>
 <p><span class="math display">\[SE(\hat{p}) = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\]</span></p>
 <p><span class="math display">\[\text{Sample proportion}=0.55\]</span> <span class="math display">\[\text{Sample size}=100\]</span></p>
-<div id="951ac2fd" class="cell" data-execution_count="14">
+<div id="a078bbe7" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>p<span class="op">=</span><span class="fl">0.55</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>n<span class="op">=</span><span class="dv">100</span></span>
@@ -1004,7 +1011,7 @@ proabbility of each outcome = 0.125</code></pre>
 </table>
 <p>We want to use the standard error of the mean to calculate the margin of error.</p>
 <p>As we know the standard deviation of the population, we can use that for the formula. <span class="math display">\[\text{Standard error of the mean} = \frac{σ}{\sqrt{n}}\]</span></p>
-<div id="f0a3c3f7" class="cell" data-execution_count="15">
+<div id="7e647b5c" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>sigma<span class="op">=</span><span class="fl">1.5</span></span>
@@ -1021,7 +1028,7 @@ proabbility of each outcome = 0.125</code></pre>
 <section id="calculate-confidence-interval-with-scipy" class="level2">
 <h2 class="anchored" data-anchor-id="calculate-confidence-interval-with-scipy">Calculate confidence interval with SciPy</h2>
 <p>First let’s generate a random sample of a survey result of government support rate by town.</p>
-<div id="d5937515" class="cell" data-execution_count="16">
+<div id="15b832a7" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1054,7 +1061,7 @@ proabbility of each outcome = 0.125</code></pre>
 </div>
 <p>The average support rate by town for the whole data set is 0.4987.</p>
 <p>Now take a random sample size of 50.</p>
-<div id="37cb9e02" class="cell" data-execution_count="17">
+<div id="50eba7fb" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>data_sample <span class="op">=</span> data.sample(n<span class="op">=</span><span class="dv">50</span>, replace<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">30624300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To get the confidence interval of the sample, we will need to know the below:</p>
@@ -1064,7 +1071,7 @@ proabbility of each outcome = 0.125</code></pre>
 <li>Sample standard error</li>
 </ul>
 <p>Assume we want the confidence level of 95 or 99.</p>
-<div id="066b6794" class="cell" data-execution_count="18">
+<div id="5b96491a" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>confi_level <span class="op">=</span> <span class="fl">0.95</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>sample_mean <span class="op">=</span> data_sample[<span class="st">'support_rate'</span>].mean()</span>
@@ -1262,7 +1269,7 @@ Confidence interval of the sample with confidence level of 0.99:
 <p><strong>Left-tail z-test</strong> <span class="math display">\[\text{p-value} = P(Z \leq z)\]</span></p>
 <p><strong>Example</strong> Suppose z = 1.96 in a two-tail test.</p>
 <p><span class="math display">\[P(Z \geq 1.96) = 0.025\]</span> <span class="math display">\[\text{p-value} = 2*0.025 = 0.05\]</span></p>
-<div id="4e613c1e" class="cell" data-execution_count="19">
+<div id="61f8cf5d" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((<span class="dv">1</span><span class="op">-</span>norm.cdf(<span class="bu">abs</span>(<span class="fl">1.96</span>)))<span class="op">*</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1270,7 +1277,7 @@ Confidence interval of the sample with confidence level of 0.99:
 </div>
 </div>
 <p><strong>Calulation in python</strong></p>
-<div id="a7f78818" class="cell" data-execution_count="20">
+<div id="c225a45f" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given z-score</span></span>
@@ -1358,7 +1365,7 @@ Left-tailed p-value: 0.9750021048517795</code></pre>
 <p><strong>Right-tail t-test</strong> <span class="math display">\[\text{p-value} = P(T \geq t;df)\]</span></p>
 <p><strong>Left-tail t-test</strong> <span class="math display">\[\text{p-value} = P(T \leq t;df)\]</span></p>
 <p><strong>Calculation in python</strong></p>
-<div id="e72cf1e1" class="cell" data-execution_count="21">
+<div id="fa58c92f" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> t</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given t-score and degrees of freedom</span></span>
@@ -1436,7 +1443,7 @@ Left-tailed p-value (t-test): 0.9633059826146297</code></pre>
 <li>σ/sqrt(n) = standard error of the population mean</li>
 </ul>
 <p><span class="math display">\[z = \frac{38-40}{\frac{5}{\sqrt{50}}}\]</span></p>
-<div id="45751224" class="cell" data-execution_count="22">
+<div id="4540fc88" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1511,7 +1518,7 @@ P-value: 0.0023388674905236283</code></pre>
 <section id="get-p-value-from-two-sample-t-test" class="level3">
 <h3 class="anchored" data-anchor-id="get-p-value-from-two-sample-t-test">Get p-value from two-sample t-test</h3>
 <p>In a two-sample t-test, you would want the below:</p>
-<div id="0aa7c2dc" class="cell" data-execution_count="23">
+<div id="6e7798eb" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> t</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given t-score and degrees of freedom</span></span>
@@ -1580,7 +1587,7 @@ P-value: 0.0023388674905236283</code></pre>
 <li>s^2/n = variance of the sample mean</li>
 </ul>
 <p><span class="math display">\[t = \frac{(300 - 305)}{\sqrt{({\frac{18.5^2}{40} + \frac{16.7^2}{38}})}}\]</span></p>
-<div id="e54e9223" class="cell" data-execution_count="24">
+<div id="cd8e7220" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> <span class="dv">300</span></span>
@@ -1605,7 +1612,7 @@ P-value: 0.0023388674905236283</code></pre>
 <figcaption>Two-tail test p-value</figcaption>
 </figure>
 </div>
-<div id="afed2476" class="cell" data-execution_count="25">
+<div id="b2f386d9" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> t</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given t-score and degrees of freedom</span></span>
@@ -1643,7 +1650,7 @@ P-value: 0.0023388674905236283</code></pre>
 <li>Significant level: 5%</li>
 </ul>
 <p><strong>Z-score for proportion in hypothesis teseting</strong> <span class="math display">\[Z = \frac{\hat{P}-P}{\sqrt{\frac{{P}(1-{P})}{n}}}\]</span></p>
-<div id="72b29a2f" class="cell" data-execution_count="26">
+<div id="5e4b0b31" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1683,7 +1690,7 @@ Two-tailed p-value: 0.080118313727634</code></pre>
 <p><strong>Z-score for two sample proportion</strong> <span class="math display">\[Z=\frac{\hat{p_1}-\hat{p_2}}{\sqrt{\hat{p_0}(1-\hat{p_0})(\frac{1}{n_1}+\frac{1}{n_2})}}\]</span></p>
 <p><span class="math display">\[\hat{p_1} = \text{Sample proportion of the 1st group}\]</span> <span class="math display">\[\hat{p_2} = \text{Sample proportion of the 2nd group}\]</span></p>
 <p><span class="math display">\[n_1 = \text{Sample size of the 1st group}\]</span> <span class="math display">\[n_2 = \text{Sample size of the 2nd group}\]</span> <span class="math display">\[\hat{p_0} = \text{Pooled proportion (weighted average of the two samples)}\]</span> <span class="math display">\[\text{Pooled proportion} = \frac{x_1+x_2}{n_1+n_2}\]</span> <span class="math display">\[x_1 = \text{Number of success in sample 1}\]</span> <span class="math display">\[x_2 = \text{Number of success in sample 2}\]</span></p>
-<div id="9cc61df6" class="cell" data-execution_count="27">
+<div id="0ecf5b9c" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1891,7 +1898,7 @@ Two-tailed p-value: 0.30295975411763143</code></pre>
 <p><span class="math display">\[ln(y)=ln(e^x)\]</span></p>
 <p>If y = 1000, log(y) = 6.907755278982137</p>
 <p>And after you finished the computation using the log variable, you can use expotential function to transform it back. (It may be slighly difference due to rounding)</p>
-<div id="452cc73c" class="cell" data-execution_count="28">
+<div id="d0ad9eb8" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span><span class="dv">1000</span></span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>log_y <span class="op">=</span> np.log(y)</span>
@@ -1921,7 +1928,7 @@ Two-tailed p-value: 0.30295975411763143</code></pre>
 </section>
 <section id="run-a-simple-linear-regression-model-in-python-with-the-ols-method" class="level3">
 <h3 class="anchored" data-anchor-id="run-a-simple-linear-regression-model-in-python-with-the-ols-method">Run a simple linear regression model in Python with the OLS method</h3>
-<div id="669fcf66" class="cell" data-execution_count="29">
+<div id="061ae330" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import packages</span></span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -2004,8 +2011,8 @@ Two-tailed p-value: 0.30295975411763143</code></pre>
 Dep. Variable:            body_mass_g   R-squared:                       0.769
 Model:                            OLS   Adj. R-squared:                  0.768
 Method:                 Least Squares   F-statistic:                     874.3
-Date:                Tue, 29 Oct 2024   Prob (F-statistic):           1.33e-85
-Time:                        07:01:29   Log-Likelihood:                -1965.8
+Date:                Wed, 06 Nov 2024   Prob (F-statistic):           1.33e-85
+Time:                        07:27:30   Log-Likelihood:                -1965.8
 No. Observations:                 265   AIC:                             3936.
 Df Residuals:                     263   BIC:                             3943.
 Df Model:                           1                                         
@@ -2151,7 +2158,7 @@ Notes:
 </section>
 <section id="run-a-multiple-linear-regression-model-in-python-with-the-ols-method" class="level3">
 <h3 class="anchored" data-anchor-id="run-a-multiple-linear-regression-model-in-python-with-the-ols-method">Run a multiple linear regression model in Python with the OLS method</h3>
-<div id="cf9b5cbe" class="cell" data-execution_count="30">
+<div id="a42cf3ea" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import packages</span></span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -2224,13 +2231,13 @@ Notes:
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">Date:</td>
-<td>Tue, 29 Oct 2024</td>
+<td>Wed, 06 Nov 2024</td>
 <td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
 <td>1.31e-92</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Time:</td>
-<td>07:01:30</td>
+<td>07:27:32</td>
 <td data-quarto-table-cell-role="th">Log-Likelihood:</td>
 <td>-1671.7</td>
 </tr>
@@ -2369,9 +2376,181 @@ Notes:
 <p><strong>Bill length (mm)</strong></p>
 <p>Lastly, bill length (mm) is a continuous variable, so if we compare two penguins who have the same characteristics, except one penguin’s bill is 1 millimeter longer, we would expect the penguin with the longer bill to have 35.55 grams more body mass than the penguin with the shorter bill.</p>
 </section>
+<section id="underfitting-and-overfitting" class="level3">
+<h3 class="anchored" data-anchor-id="underfitting-and-overfitting">Underfitting and overfitting</h3>
+<p>When you start adding more and more indepentdent variables into a multiple linear regression model, the R square gets more complicated, as the best fit line would be dependent on all the added variables. However not all indepentdent variables equally contributed to the changes in Y. The high R square can be misleading in this case. And it will be highly dependent on the data availables in the model, but no longer applicable to the larger populatoin. This can lead to overfitting.</p>
+<p><strong>Overfitting</strong></p>
+<p>When a model fits the observed or training data too specifically, and is unabl to generate suitable estimates for the general population.</p>
+<p>We can use the holdout sample to test if the model is overfitting, another way to evaluate if a model is overfitting is to use the adjusted R square.</p>
+<p><strong>Adjusted R square</strong> A variation of the R square regression evaluation metric that penalizes unncessary explanatory variables. Additionally, the adjusted R-squared only captures the proportion of variation explained by the independent variables that show a significant relationship with the outcome variable. These differences prevent the adjusted R-squared value from becoming inflated like the R-squared value.</p>
+<p>Like R square, it varies from 0 to 1.</p>
+<p>It is used to compare models of varying complexity, to determine if you should add another variable or not.</p>
+<p><strong>Underfitting</strong></p>
+<p>In the case of underfitting, a multiple regression model fails to capture the underlying pattern in the outcome variable. An underfitting model has a low R-squared value. It could be the case that the sample dataset is too small, and this prevents the model from being able to learn the relationship between the predictors and the outcome. Using more sample data to build the model might reduce the problem of underfitting.</p>
+</section>
+<section id="selecting-variables-to-avoid-overfitting-and-underfitting" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-variables-to-avoid-overfitting-and-underfitting">Selecting variables to avoid overfitting and underfitting</h3>
+<p><strong>F-score</strong></p>
+<p><strong>Lasso, Ridge, and Elastic Net regression</strong></p>
+</section>
 </section>
 <section id="advanced-hypothesis-testing" class="level2">
 <h2 class="anchored" data-anchor-id="advanced-hypothesis-testing">Advanced hypothesis testing</h2>
+<section id="chi-squared-test" class="level3">
+<h3 class="anchored" data-anchor-id="chi-squared-test">Chi-squared test</h3>
+<p>Chi-squared tests are used to determine whether one or more observed categorical variables follow expected distribution(s). For example, you may expect that 50% more movie goers attend movies on weekends in comparison to weekdays. After observing movie goers attendance for a month, you then can perform a chi-squared test to see if your initial hypothesis was correct.</p>
+<p>Chi-squared test can be used for two different purpose:</p>
+<ul>
+<li>goodness of fit</li>
+<li>test for independence</li>
+</ul>
+</section>
+<section id="chi-squared-goodness-of-fit-test" class="level3">
+<h3 class="anchored" data-anchor-id="chi-squared-goodness-of-fit-test">Chi-squared goodness of fit test</h3>
+<p><strong>Chi-squared (χ²) goodness of fit test</strong> is a hypothesis test that determines whether an observed categorical variable with more than two possible levels follows an expected distribution. The null hypothesis (H0) of the test is that the categorical variable follows the expected distribution. The alternative hypothesis (Ha) is that the categorical variable does not follow the expected distribution.</p>
+<p><strong>Scenario</strong></p>
+<p>Imagine that you work as a data professional for an online clothing company. Your boss tells you that they expect the number of website visitors to be the same for each day of the week. You decide to test your boss’s hypothesis and pull data every day for the next week and record the number of website visitors in the table below:</p>
+<table class="caption-top table">
+<caption>Obversed number of website visitors</caption>
+<thead>
+<tr class="header">
+<th>Day of the week</th>
+<th>Observed values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sunday</td>
+<td>650</td>
+</tr>
+<tr class="even">
+<td>Monday</td>
+<td>570</td>
+</tr>
+<tr class="odd">
+<td>Tuesday</td>
+<td>420</td>
+</tr>
+<tr class="even">
+<td>Wedesday</td>
+<td>480</td>
+</tr>
+<tr class="odd">
+<td>Thursday</td>
+<td>510</td>
+</tr>
+<tr class="even">
+<td>Friday</td>
+<td>380</td>
+</tr>
+<tr class="odd">
+<td>Saturday</td>
+<td>490</td>
+</tr>
+<tr class="even">
+<td>Total</td>
+<td>3500</td>
+</tr>
+</tbody>
+</table>
+<p>Here are the main steps you will take:</p>
+<ol type="1">
+<li><p>Identify the Null and Alternative Hypotheses</p></li>
+<li><p>Calculate the chi-square test statistic (𝛘2)</p></li>
+<li><p>Calculate the p-value</p></li>
+<li><p>Make a conclusion</p></li>
+</ol>
+<p><strong>The null and alternative hypotheses</strong> H0: The week you observed follows your boss’s expectations that the number of website visitors is equal on any given day</p>
+<p>Ha: The week you observed does not follow your boss’s expectations; therefore, the number of website visitors is not equal across the days of the week</p>
+<p><strong>Caculate the chi-square test statistic</strong></p>
+<p><span class="math display">\[\chi^2 = \sum\frac{\text{(Observed - expected)}^2}{\text{expected}}\]</span></p>
+<p>The H0 stated that the number of website visitors are the same for each weekday. As there are 3500 visitors in total, it means there should be 500 visitors each day.</p>
+<p><span class="math display">\[\chi^2 = \frac{(600-500)^2}{500} + \frac{(570-500)^2}{500} + ... + \frac{(490-500)^2}{500}\]</span> <span class="math display">\[\chi^2 = 45 + 9.8 + 12.8 + 0.8 + 0.2 + 28.8 + 0.2\]</span> <span class="math display">\[\chi^2 = 97.6\]</span></p>
+<p>Note that the 𝛸2 goodness of fit test does not produce reliable results when there are any expected values of less than five.</p>
+<p><strong>Calculate the p-value</strong></p>
+<p>Now that you have calculated the 𝛸2 statistic, consider the following question: What is the probability of obtaining a 𝛸2 statistic of 97.6 or greater when examining 3,500 website visits if they null hypothesis is true? This is the question that the p-value—or “observed significance level”—will answer.</p>
+<p>A long time ago, Pearson realized that p-values for 𝛸2 statistics very closely corresponded with areas under certain curves, known as 𝛸2 curves. 𝛸2 curves represent probability density functions, and their shapes vary based on how many degrees of freedom are present in the experiment. Degrees of freedom are determined by the model, not by the data. This means that, in the website traffic example, the degrees of freedom are determined by how many different days a given visit can occur on—not by how many visits are sampled nor by the daily frequencies of the samples themselves. When the model is fully specified (i.e., you know all the possible categorical levels), then:</p>
+<p><span class="math display">\[\text{degrees of freedom} = \text{number of categorical levels} – 1\]</span></p>
+<p>degrees of freedom = number of categorical levels – 1.</p>
+<p>In this example, there are seven categorical levels (one for each day of the week). Therefore, there are six degrees of freedom. This is because the counts of each level (day) are free to fluctuate, but once you know the counts for six days, the seventh day cannot vary. It must result in a total of 3,500 when summed with the other six days.</p>
+<p><strong>Why only six DF?</strong> With seven categories, knowing the first six values lets us determine the seventh. For example, if you know the counts for Monday through Saturday, you can calculate Sunday’s count by subtracting the sum of those six days from the total (3,500). Therefore, only six values are “free” to vary independently.</p>
+<p>The following figure depicts the 𝛸2 curves for three different degrees of freedom: five, 10, and 20.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/chi_square_curves.png" class="img-fluid figure-img"></p>
+<figcaption>Chi-sqaured curves</figcaption>
+</figure>
+</div>
+<p>The p-value for a given 𝛸2 test statistic is very closely approximated by the area to its right beneath the 𝛸2 curve of the appropriate degrees of freedom. Notice that the more degrees of freedom there are in the experiment, the greater the area under the right tail of the curve for any given 𝛸2 test statistic, and therefore the greater the probability of getting a given 𝛸2 test statistic if the null hypothesis is true.</p>
+<p>The following figure contains the 𝛸2 curve for six degrees of freedom. For a 𝛸2 test statistic of, for instance, 10, the value of P is approximated by the shaded area under the curve where x ≥ 10.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/chi_sqare_curve_2.png" class="img-fluid figure-img"></p>
+<figcaption>Chi-squared curve with 6 degree of freedom</figcaption>
+</figure>
+</div>
+<p>In the case of the website visits, there are six degrees of freedom, but the 𝛸2 test statistic is 97.6—far along the x-axis in the right-skewed tail of the curve. The area under this interval is miniscule: 7.94e-19. In other words, the chances of getting a 𝛸2 test statistic ≥ 97.6 from 3,500 website visits if the null hypothesis were true are 7.94e-17%—practically zero.</p>
+<p><strong>Calculate the p-value with scipy</strong></p>
+<div id="15d80ece" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>observations <span class="op">=</span> [<span class="dv">650</span>, <span class="dv">570</span>, <span class="dv">420</span>, <span class="dv">480</span>, <span class="dv">510</span>, <span class="dv">380</span>, <span class="dv">490</span>]</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>expectations <span class="op">=</span> [<span class="dv">500</span>, <span class="dv">500</span>, <span class="dv">500</span>, <span class="dv">500</span>, <span class="dv">500</span>, <span class="dv">500</span>, <span class="dv">500</span>]</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> stats.chisquare(f_obs<span class="op">=</span>observations, f_exp<span class="op">=</span>expectations)</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="co"># the degree of freedom is default at k - 1, with k = observed frequency</span></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="co"># you can adjust it with the parameter `ddof`, which is default to 0; adding a ddof of 1 would change the dof to: </span></span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a><span class="co"># k-1-ddof = k-1-1</span></span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<pre><code>Power_divergenceResult(statistic=97.6, pvalue=7.943886923343836e-19)</code></pre>
+</div>
+</div>
+<p>The output confirms your calculation of the chi-square test statistic in Step 2 and also gives you the associated p-value. Because the p-value is less than the significance level of 5%, you can reject the null hypothesis.</p>
+</section>
+<section id="chi-squared-test-for-independence-scenario" class="level3">
+<h3 class="anchored" data-anchor-id="chi-squared-test-for-independence-scenario">Chi-squared test for independence scenario</h3>
+<p>Now suppose that you have been asked to expand your analysis to look at the relationship between the device that a website user used and their membership status. To do this, you must use the 𝛸2 test for independence. In this example, the 𝛸2 test of independence determines whether the type of device a visitor uses to visit the website (Mac or PC) is dependent on whether he or she has a membership account or browses as a guest (member or guest).</p>
+<p><strong>Step 1: Identify the null and alternative hypotheses</strong></p>
+<p>H0: The type of device a website visitor uses to visit the website is independent of the visitor’s membership status. Ha: The type of device a website visitor uses to visit the website is not independent of the visitor’s membership status.</p>
+<p><strong>Step 2: Calculate the chi-squared test statistic (𝛘2)</strong></p>
+<p>To calculate the 𝛸2 test statistic, arrange the data as a table that contains m x n values, where m and n are the number of possible levels contained within each respective categorical variable. The following table below breaks down the website visitors based on the device they used and their membership status.</p>
+<table class="caption-top table">
+<caption>Website visitors based on the device they used and their membership status.</caption>
+<thead>
+<tr class="header">
+<th>Observed values</th>
+<th>Member</th>
+<th>Guest</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mac</td>
+<td>850</td>
+<td>450</td>
+<td>1300</td>
+</tr>
+<tr class="even">
+<td>PC</td>
+<td>1300</td>
+<td>900</td>
+<td>2200</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>2150</td>
+<td>1350</td>
+<td>3500</td>
+</tr>
+</tbody>
+</table>
+<p>Notice that the table starts with 2 x 2 known values (two levels for each category), from which totals are derived. These totals can be used to calculate the expected values, which are necessary to get the 𝛸2 test statistic.</p>
+<p>To calculate the expected values, use the following formula:</p>
+<p><span class="math display">\[\text{expected value} = \frac{\text{column total} * \text{row total}}{\text{overall total}}\]</span></p>
+<p>For example, the expected value for a Mac member would be:</p>
+<p><span class="math display">\[\text{expected value} = \frac{2150-1300}{3500}\]</span></p>
+<p>The logic of this calculation is as follows: if device and membership status are truly independent, then the rate of Mac users who are members should be the same as the rate of Mac users who are guests. The percentage of users who use Macs out of all the users is 1,300 / 3,500 = 0.371 * 100 = 37.1%. Accordingly, 37.1% of members and 37.1% of guests would be expected to use Macs. So, 0.371 * 2,150 members ≈ 799.</p>
+</section>
 </section>
 </section>
 <section id="logistic-regression" class="level1">

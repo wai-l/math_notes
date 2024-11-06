@@ -1785,6 +1785,139 @@ In the case of underfitting, a multiple regression model fails to capture the un
 **Lasso, Ridge, and Elastic Net regression**
 
 ## Advanced hypothesis testing
+### Chi-squared test
+Chi-squared tests are used to determine whether one or more observed categorical variables follow expected distribution(s). For example, you may expect that 50% more movie goers attend movies on weekends in comparison to weekdays. After observing movie goers attendance for a month, you then can perform a chi-squared test to see if your initial hypothesis was correct. 
+
+Chi-squared test can be used for two different purpose: 
+
+- goodness of fit
+- test for independence
+
+### Chi-squared goodness of fit test
+**Chi-squared (χ²) goodness of fit test** is a hypothesis test that determines whether an observed categorical variable with more than two possible levels follows an expected distribution. The null hypothesis (H0) of the test is that the categorical variable follows the expected distribution. The alternative hypothesis (Ha) is that the categorical variable does not follow the expected distribution. 
+
+**Scenario**
+
+Imagine that you work as a data professional for an online clothing company. Your boss tells you that they expect the number of website visitors to be the same for each day of the week. You decide to test your boss’s hypothesis and pull data every day for the next week and record the number of website visitors in the table below:
+
+| Day of the week | Observed values |
+|-----------------|-----------------|
+| Sunday          | 650             |
+| Monday          | 570             |
+| Tuesday         | 420             |
+| Wedesday        | 480             |
+| Thursday        | 510             |
+| Friday          | 380             |
+| Saturday        | 490             |
+| Total           | 3500            |
+
+: Obversed number of website visitors
+
+Here are the main steps you will take:
+
+1. Identify the Null and Alternative Hypotheses 
+
+2. Calculate the chi-square test statistic (𝛘2)
+
+3. Calculate the p-value 
+
+4. Make a conclusion 
+
+
+**The null and alternative hypotheses**
+
+H0: The week you observed follows your boss’s expectations that the number of website visitors is equal on any given day
+
+Ha: The week you observed does not follow your boss’s expectations; therefore, the number of website visitors is not equal across the days of the week
+
+**Caculate the chi-square test statistic**
+
+$$\chi^2 = \sum\frac{\text{(Observed - expected)}^2}{\text{expected}}$$
+
+The H0 stated that the number of website visitors are the same for each weekday. As there are 3500 visitors in total, it means there should be 500 visitors each day. 
+
+$$\chi^2 = \frac{(600-500)^2}{500} + \frac{(570-500)^2}{500} + ... + \frac{(490-500)^2}{500}$$
+$$\chi^2 = 45 + 9.8 + 12.8 + 0.8 + 0.2 + 28.8 + 0.2$$
+$$\chi^2 = 97.6$$
+
+Note that the 𝛸2 goodness of fit test does not produce reliable results when there are any expected values of less than five.
+
+**Calculate the p-value**
+
+Now that you have calculated the 𝛸2 statistic, consider the following question: What is the probability of obtaining a 𝛸2 statistic of 97.6 or greater when examining 3,500 website visits if they null hypothesis is true? This is the question that the p-value—or “observed significance level"—will answer. 
+
+A long time ago, Pearson realized that p-values for 𝛸2 statistics very closely corresponded with areas under certain curves, known as 𝛸2 curves. 𝛸2 curves represent probability density functions, and their shapes vary based on how many degrees of freedom are present in the experiment. Degrees of freedom are determined by the model, not by the data. This means that, in the website traffic example, the degrees of freedom are determined by how many different days a given visit can occur on—not by how many visits are sampled nor by the daily frequencies of the samples themselves. When the model is fully specified (i.e., you know all the possible categorical levels), then: 
+
+$$\text{degrees of freedom} = \text{number of categorical levels} – 1$$
+
+degrees of freedom = number of categorical levels – 1.
+
+In this example, there are seven categorical levels (one for each day of the week). Therefore, there are six degrees of freedom. This is because the counts of each level (day) are free to fluctuate, but once you know the counts for six days, the seventh day cannot vary. It must result in a total of 3,500 when summed with the other six days. 
+
+**Why only six DF?** 
+
+With seven categories, knowing the first six values lets us determine the seventh. For example, if you know the counts for Monday through Saturday, you can calculate Sunday’s count by subtracting the sum of those six days from the total (3,500). Therefore, only six values are "free" to vary independently.
+
+The following figure depicts the 𝛸2 curves for three different degrees of freedom: five, 10, and 20.
+
+![Chi-sqaured curves](images/chi_square_curves.png)
+
+The p-value for a given 𝛸2 test statistic is very closely approximated by the area to its right beneath the 𝛸2 curve of the appropriate degrees of freedom. Notice that the more degrees of freedom there are in the experiment, the greater the area under the right tail of the curve for any given 𝛸2 test statistic, and therefore the greater the probability of getting a given 𝛸2 test statistic if the null hypothesis is true. 
+
+The following figure contains the 𝛸2 curve for six degrees of freedom. For a 𝛸2 test statistic of, for instance, 10, the value of P is approximated by the shaded area under the curve where x ≥ 10. 
+
+![Chi-squared curve with 6 degree of freedom](images/chi_sqare_curve_2.png)
+
+In the case of the website visits, there are six degrees of freedom, but the 𝛸2 test statistic is 97.6—far along the x-axis in the right-skewed tail of the curve. The area under this interval is miniscule: 7.94e-19. In other words, the chances of getting a 𝛸2 test statistic ≥ 97.6 from 3,500 website visits if the null hypothesis were true are 7.94e-17%—practically zero. 
+
+**Calculate the p-value with scipy**
+
+```{python}
+import scipy.stats as stats
+observations = [650, 570, 420, 480, 510, 380, 490]
+expectations = [500, 500, 500, 500, 500, 500, 500]
+result = stats.chisquare(f_obs=observations, f_exp=expectations)
+# the degree of freedom is default at k - 1, with k = observed frequency
+# you can adjust it with the parameter `ddof`, which is default to 0; adding a ddof of 1 would change the dof to: 
+# k-1-ddof = k-1-1
+result
+```
+
+The output confirms your calculation of the chi-square test statistic in Step 2 and also gives you the associated p-value. Because the p-value is less than the significance level of 5%, you can reject the null hypothesis.
+
+### Chi-squared test for independence scenario
+
+Now suppose that you have been asked to expand your analysis to look at the relationship between the device that a website user used and their membership status. To do this, you must use the 𝛸2 test for independence. In this example, the 𝛸2 test of independence determines whether the type of device a visitor uses to visit the website (Mac or PC) is dependent on whether he or she has a membership account or browses as a guest (member or guest). 
+
+**Step 1: Identify the null and alternative hypotheses**
+
+H0: The type of device a website visitor uses to visit the website is independent of the visitor’s membership status.
+Ha: The type of device a website visitor uses to visit the website is not independent of the visitor’s membership status.
+
+**Step 2: Calculate the chi-squared test statistic (𝛘2)**
+
+To calculate the 𝛸2 test statistic, arrange the data as a table that contains m x n values, where m and n are the number of possible levels contained within each respective categorical variable. The following table below breaks down the website visitors based on the device they used and their membership status.
+
+| Observed values | Member | Guest | Total |
+|-----------------|--------|-------|-------|
+| Mac             | 850    | 450   | 1300  |
+| PC              | 1300   | 900   | 2200  |
+| Total           | 2150   | 1350  | 3500  |
+
+: Website visitors based on the device they used and their membership status. 
+
+Notice that the table starts with 2 x 2 known values (two levels for each category), from which totals are derived. These totals can be used to calculate the expected values, which are necessary to get the 𝛸2 test statistic. 
+
+To calculate the expected values, use the following formula: 
+
+$$\text{expected value} = \frac{\text{column total} * \text{row total}}{\text{overall total}}$$
+
+For example, the expected value for a Mac member would be: 
+
+$$\text{expected value} = \frac{2150-1300}{3500}$$
+
+The logic of this calculation is as follows: if device and membership status are truly independent, then the rate of Mac users who are members should be the same as the rate of Mac users who are guests. The percentage of users who use Macs out of all the users is 1,300 / 3,500 = 0.371 * 100 = 37.1%. Accordingly, 37.1% of members and 37.1% of guests would be expected to use Macs. So, 0.371 * 2,150 members ≈ 799. 
+
 
 # Logistic regression
 A technique that models a categorical dependent variable based on one or more independent variables. For example, if leads become subscriber or not, customer renew or not renew. The dependent variable can have two or more possible discrete values. 
