@@ -1918,6 +1918,107 @@ $$\text{expected value} = \frac{2150-1300}{3500}$$
 
 The logic of this calculation is as follows: if device and membership status are truly independent, then the rate of Mac users who are members should be the same as the rate of Mac users who are guests. The percentage of users who use Macs out of all the users is 1,300 / 3,500 = 0.371 * 100 = 37.1%. Accordingly, 37.1% of members and 37.1% of guests would be expected to use Macs. So, 0.371 * 2,150 members ≈ 799. 
 
+**Step 3: Find the p-value**
+
+Finding the p-value associated with a particular 𝛸2 test statistic is similar to the process outlined already for the goodness of fit test. The only minor difference is how to determine the number of degrees of freedom. For an independence test with two categorical variables with m x n possible levels, there are (m – 1) (n – 1) degrees of freedom, assuming there are no other constraints on the probabilities. So, in the working example, this means there is (2 – 1)(2 – 1) = 1 degree of freedom. The p-value in this example is 0.00022. It was determined using Python.
+
+**Step 4: Make a conclusion**
+
+Because the p-value is 0.00022, you can reject the null hypothesis in favor of the alternative. You conclude that the type of device a website user uses is not independent of his or her membership status. You may recommend to your boss to dive into the reasons behind why visitors sign up for paid memberships more on a particular device. Perhaps the sign-up button appears differently on a particular device. Or maybe there are device-specific bugs that need to be fixed. These are just a couple examples of things you might consider for further exploration.
+
+**Calculate the p-value with scipy**
+
+```{python}
+import numpy as np
+import scipy.stats as stats
+observations = np.array([[850, 450],[1300, 900]])
+result = stats.contingency.chi2_contingency(observations, correction=False)
+result
+```
+
+The output above is in the following order: the 𝛸2 statistic, p-value, degrees of freedom, and expected values in array format. One thing to note is that when degrees of freedom = 1 (i.e., you have a 2 x 2 table), the default behavior of the stats.chi2_contingency() function is to apply Yates’ correction for continuity. This is to make it less likely that small discrepancies will result in significant 𝛸2 values. It is designed to be used when it’s possible for an expected frequency in the table to be small (generally < 5). In the given example, it is known that the expected values are all well over five. Therefore, the correction parameter was set to False.
+
+### Analysis of Variance (ANOVA)
+ANOVA—is a group of statistical techniques that test the difference of means between groups. ANOVA testing is useful when you want to test a hypothesis about group differences based on categorical independent variables.  For example, if you wanted to determine whether changes in people’s weight when following different diets are statistically significant or due to chance, you could use ANOVA to analyze the results. 
+
+The intuition behind ANOVA is to compare the variability between different groups with the variability within the groups. If they are comparable, then the differences between groups are more likely to be due to sampling variability. On the other hand, if the variability between groups is much larger than the variability expected from the samples within their respective groups, then those groups are probably drawn from significantly different subpopulations.
+
+The variation between groups and within groups is calculated as sums of squares, which are then expressed as a ratio. This ratio is known as the F-statistic. The formula for each component of these calculations is presented in the worked example that follows. 
+
+There are two different types of ANOVA: 
+
+- **One-way ANOVA**: Compares the means of one continuous dependent variable based on three or more groups of one categorical variable
+
+- **Two-way ANOVA**: Compares the means of one continuous dependent variable based on three or more groups of two categorical variables
+
+### One-way ANOVA: example
+Let's use the example of students studying for an exam. Suppose you wanted to compare three different studying programs, A, B, and C to determine whether they have an effect on exam score. Here is the data: 
+
+```{python}
+import pandas as pd
+
+df = pd.DataFrame(
+    {
+        'Student': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        'Study Program': ['A', 'A', 'A', 'A', 'B', 'B', 'B', 'B', 'C', 'C', 'C', 'C'],
+        'Exam Score': [88, 79, 86, 90, 94, 84, 87, 89, 85, 76, 81, 78]
+        }
+        )
+
+df
+
+df['Exam Score'].mean()
+
+# df.groupby('Study Program')['Exam Score'].mean()
+```
+
+**Step 1: determine the hypothesis & confidence level**
+
+H0: 𝜇A =  𝜇B = 𝜇C 
+
+The mean score of group A = the mean score of group B = the mean score of group C.
+
+H1: NOT (𝜇A =  𝜇B = 𝜇C)
+
+The means of each group are not all equal. Remember, even if only one mean differs, that is sufficient evidence to reject the null hypothesis. 
+
+Set the confidence level to 95%
+
+**Step 2: Calculate group means and grand mean** 
+
+The grand mean is the overall mean of all samples in all groups.
+
+Group means: 
+Study Program
+A    85.75
+B    88.50
+C    80.00
+
+Grand mean (MG): 
+84.75 
+
+**Step 3: Calculate the sum of squares between groups (SSB)**
+
+$$\text{SSB} = \sum_{g=1} n_g (M_g - M_G)^2$$
+
+where
+​	
+$n_g$ = the number of samples in the gth group
+$M_g$ = mean of the gth group	
+$M_G$  = grand mean
+
+$$SSB = 4(85.75-84.75)^2 + 4(88.5-84.75)^2 + 4(80-84.75)^2$$
+
+$$SSB = 150.5$$
+
+**Step 4: Calculate the sum of squares within groups (SSW)**
+
+$$\text{SSW} = \sum_{g=1} \sum_{i=1} (x_{gi} - M_g)^2$$
+
+where:
+$x_{gi}$= sample i of the gth group
+$M_g$= mean of the gth group
+
 
 # Logistic regression
 A technique that models a categorical dependent variable based on one or more independent variables. For example, if leads become subscriber or not, customer renew or not renew. The dependent variable can have two or more possible discrete values. 
