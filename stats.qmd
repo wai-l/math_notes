@@ -2019,6 +2019,101 @@ where:
 $x_{gi}$= sample i of the gth group
 $M_g$= mean of the gth group
 
+The double summation acts like a nested loop. The outer loop is for each group and the inner loop is for all the samples in that group. So, for each sample in group 1, subtract from it the group's mean and square the result. Then, do the same thing with the samples in group 2, using the group 2 mean. Continue this way for all the groups and sum all the results. 
+
+The following script uses the student exam score as an example to demonstrate the steps of calculation for SSW: 
+
+```{python}
+import pandas as pd
+
+df = pd.DataFrame(
+    {
+        'Student': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        'Study Program': ['A', 'A', 'A', 'A', 'B', 'B', 'B', 'B', 'C', 'C', 'C', 'C'],
+        'Exam Score': [88, 79, 86, 90, 94, 84, 87, 89, 85, 76, 81, 78]
+        }
+        )
+
+group_mean = df.groupby('Study Program')['Exam Score'].mean().reset_index()
+
+group_mean = group_mean.rename(columns={'Exam Score': 'Group Mean Score'})
+
+df = df.merge(group_mean, 'left', on='Study Program')
+
+df['sq_in_gp'] = (df['Exam Score'] - df['Group Mean Score'])**2
+
+# SSW = sum(df.groupby('Study Program')['sq_in_gp'].sum())
+
+SSW = sum(df['sq_in_gp'])
+
+SSW
+
+```
+
+$$SSW = 167.75$$
+
+**Step 5: Calculate the mean square between and within group**
+
+A. Mean squares between groups (MSSB): 
+
+$$\text{MSSB}=\frac{\text{SSB}}{k - 1}$$
+
+where
+
+$k$ = the number of groups
+
+Note: $k$-1 represents the degrees of freedom between groups
+
+```{python}
+mssb = 150.5/(3-1)
+mssb
+```
+
+mssb = 75.25
+
+B. Mean squares within groups (MSSW): 
+
+$$\text{MSSW}=\frac{\text{SSW}}{n - k}$$
+
+where
+
+$n$ = the total number of samples in all groups
+$k$ = the number of groups
+
+Note: $n−k$ represents the degrees of freedom within groups
+
+why $n-k$: 
+$$(n_1 - 1) + (n_2 - 1) + (n_3 - 1) = (n_1 + n_2 + n_3) - 3 = n - k$$
+
+
+```{python}
+mssw = 167.75/(12-3)
+mssw
+```
+
+mssw = 18.64
+
+**Step 6: Compute the F-statistic**
+
+The F-statistic is the ratio of the mean sum of squares between groups (MSSB) to the mean sum of squares within groups (MSSW): 
+
+$$\text{F-statistic} = \frac{\text{MSSB}}{\text{MSSW}}$$
+
+```{python}
+f_stat = 75.25/18.64
+
+f_stat
+```
+
+f_stat = 4.04
+
+A higher F-statistic indicates a greater variability between group means relative to the variability within groups, suggesting that at least one group mean is significantly different from the others. 
+
+**Step 7: Get p-value**
+
+ Now you can use F-distribution and the F-statistic to get a p-value, which you use to decide whether to reject the null hypothesis. 
+
+ 
 
 # Logistic regression
 A technique that models a categorical dependent variable based on one or more independent variables. For example, if leads become subscriber or not, customer renew or not renew. The dependent variable can have two or more possible discrete values. 
