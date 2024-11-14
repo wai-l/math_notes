@@ -1951,6 +1951,24 @@ There are two different types of ANOVA:
 
 - **Two-way ANOVA**: Compares the means of one continuous dependent variable based on three or more groups of two categorical variables
 
+**Assumptions of ANOVA**
+
+ANOVA will only work if the following assumptions are true:
+
+1. The dependent values for each group come from normal distributions
+
+- Note that this assumption does NOT mean that all of the dependent values, taken together, must be normally distributed. Instead, it means that within each group, the dependent values should be normally distributed. 
+
+- ANOVA is generally robust to violations of normality, especially when sample sizes are large or similar across groups, due to the central limit theorem. However, significant violations can lead to incorrect conclusions.
+
+2. The variances across groups are equal
+
+- ANOVA compares means across groups and assumes that the variance around these means is the same for all groups. If the variances are unequal (i.e., heteroscedastic), it could lead to incorrect conclusions
+
+3. Observations are independent of each other
+
+- ANOVA assumes that one observation does not influence or predict any other observation. If there is autocorrelation among the observations, the results of the ANOVA test could be biased.
+
 ### One-way ANOVA: example
 Let's use the example of students studying for an exam. Suppose you wanted to compare three different studying programs, A, B, and C to determine whether they have an effect on exam score. Here is the data: 
 
@@ -2113,7 +2131,19 @@ A higher F-statistic indicates a greater variability between group means relativ
 
  Now you can use F-distribution and the F-statistic to get a p-value, which you use to decide whether to reject the null hypothesis. 
 
- 
+ Similar to t-tests and 𝛸2 tests, ANOVA testing finds the area under a particular probability distribution curve—the F-distribution—of the null hypothesis to determine a p-value. The larger the F-statistic, the lesser the area beneath the curve and the more evidence against the null hypothesis, thus resulting in a lower p-value. 
+
+The shape of the F-distribution curve is determined by the degrees of freedom between and within groups. Here is a graph depicting F-distributions for three, five, and 10 groups—each group containing 50 samples. Note that “dfn” represents the degrees of freedom in the numerator (between groups) and “dfd” represents the degrees of freedom in the denominator (within groups). Notice how the degrees of freedom affect the shape of the curve. 
+
+![F-distribution for multiple degree of freedom](images/f_distribution.png)
+
+Similar to 𝛸2 curves, F-distributions help determine the probability of falsely rejecting the null hypothesis. In the case of ANOVA, this probability is represented by the area of the F-distribution beneath the curve where x ≥ your F-statistic. For example, the following graph depicts the F-distribution for the exam scores example. It has two degrees of freedom in the numerator ($k-1$) and nine degrees of freedom ($n-k$)in the denominator. The area beneath the curve where x ≥ 4.04 (the computed F-statistic) is shaded.
+
+![F-distribution for the exam score example](images/f_distribution_2.png)
+
+In this case, the area beneath the F-distribution to the right of 4.04 is 0.05604. This is the probability of observing an F-statistic greater than 4.04 if the null hypothesis were true. Whether this is sufficient to reject the null hypothesis is a decision you make at the beginning of your hypothesis test. For example, if you decided that you wanted a confidence level of 95% or greater, you cannot reject the null hypothesis that the means of the distributions for each program of study are all the same, because the p-value is 0.056.
+
+
 
 # Logistic regression
 A technique that models a categorical dependent variable based on one or more independent variables. For example, if leads become subscriber or not, customer renew or not renew. The dependent variable can have two or more possible discrete values. 
