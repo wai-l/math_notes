@@ -2143,6 +2143,30 @@ Similar to 𝛸2 curves, F-distributions help determine the probability of false
 
 In this case, the area beneath the F-distribution to the right of 4.04 is 0.05604. This is the probability of observing an F-statistic greater than 4.04 if the null hypothesis were true. Whether this is sufficient to reject the null hypothesis is a decision you make at the beginning of your hypothesis test. For example, if you decided that you wanted a confidence level of 95% or greater, you cannot reject the null hypothesis that the means of the distributions for each program of study are all the same, because the p-value is 0.056.
 
+### Type I, II & III ANOVA
+Not to be confused with one-way or two-way ANOVA, the type of ANOVA is a distinct concept. It refers to how the sums of squares (these quantities are the building blocks for ANOVA) are calculated, while "K-way" means that there are K categorical factors in the analysis. 
+
+For one-way ANOVA, all types give identical results, so the choice doesn’t matter. 
+
+For two-way/multi-factor ANOVA, consider: 
+
+- Use Type I if there’s a logical order or hierarchy in factor entry.
+- Use Type II for balanced data and when there’s no interaction.
+- Use Type III for unbalanced data or if interactions exist.
+
+### ANOVA in Python
+In `python`, you can use the `statsmodel` package to build a linear regression model, then use the `anova_lm` function to calculate the f-statistics. 
+
+```{{python}}
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+
+model = ols(formula = "log_price ~ C(color)", data = diamonds).fit()
+model.summary()
+
+# Run one-way ANOVA
+sm.stats.anova_lm(model, typ = 2) # typ argument refers to the three types of ANOVA tests
+```
 
 
 # Logistic regression
