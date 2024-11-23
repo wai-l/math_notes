@@ -2168,6 +2168,25 @@ model.summary()
 sm.stats.anova_lm(model, typ = 2) # typ argument refers to the three types of ANOVA tests
 ```
 
+### Post-hoc tests after ANOVA
+ANOVA tells us whether there is a statistically significant difference between group means, but it doesn’t specify which groups are significantly different from one another. This is the role of post-hoc tests — they perform pairwise comparisons between the groups to identify precisely where the differences exist. When you have more than two groups, these tests are essential, and the ANOVA result is significant.
+
+In python, you can use the `pairwise_tukeyhsd` function from `statsmodels` to perform the test. 
+
+```{{python}}
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
+
+tukey_oneway = pairwise_tukeyhsd(endog=data['Sales'], # the Y variable
+                                 groups=data['TV'], # the categorical X
+                                 alpha=0.05) # this set the confidence level of all tests to 95%
+
+tukey_oneway.summary()
+```
+
+The above codes will return a summary table for the post-hoc test. The reject column indicate whether if we reject the null hypothesis for each pair comparison. In this case, null hypothesis for all comparisions are rejected. 
+
+
+![Post-hoc test summary in python. ](images/posthoc_test_summary.png)
 
 # Logistic regression
 A technique that models a categorical dependent variable based on one or more independent variables. For example, if leads become subscriber or not, customer renew or not renew. The dependent variable can have two or more possible discrete values. 
