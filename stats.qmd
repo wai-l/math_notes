@@ -2209,6 +2209,13 @@ A nonlinear function that connects or links the dependent variable to the indepe
 
 $$g(p)=\beta_0 + \beta_1 * X$$
 
+## Maximum likelihood estimation (MLE)
+A technique for estimating the beta parameters that maximize the likelihood of the model prodcuing the observed data. 
+
+- **Likelihood**: 
+
+The probability of observing the actual data, given some set of beta parameters. 
+
 ## Linear regression VS Logistic regression
 
 
@@ -2218,3 +2225,38 @@ $$g(p)=\beta_0 + \beta_1 * X$$
 |Estimate the mean of y              |Estimate the probability of an outcome  |
 
 : Linear regression VS Logistic regression
+
+## Binomial logistic regression
+A technique that models the probability of an observation falling into one of two categories, based on one or more independent variables. 
+
+### Odds and Logit
+- **Odd**: 
+
+$$\text{odd} = \frac{P}{1-P}$$
+
+- **Logit** (log-odds): 
+
+The logarithm of the odds of a given probability. So the logit of the probability p is equal to the logarithm of p divided by 1 minus p. 
+
+$$\text{logic}(p) = \text{log}(\frac{p}{1-p})$$
+
+- **Logit in terms of X variables**: 
+
+$$\text{logic}(p) = \text{log}(\frac{p}{1-p}) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_n X_n$$
+
+### Assumptions
+- **Linearity**: 
+
+There should be a linear relationship between each X variable and the logit of the probability that Y equals 1. 
+
+- **Independent observation**: 
+
+While observation are independent: 
+
+$$P(A and B) = P(A)*P(B)$$
+
+- **No multicollinearity**: 
+
+The multiple X variables should not be highly correlated to one another. 
+
+- **No extreme outliner**
