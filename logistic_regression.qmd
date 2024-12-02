@@ -1,0 +1,118 @@
+# About
+This notebook aims to demonstrate the maths behind the Logistic Regression model with a synthetic dataset. 
+
+# Setup
+## Packages
+```{python}
+# Import libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
+
+
+
+```
+
+## Dataset (created by ChatGPT)
+```{python}
+np.random.seed(42)
+time_on_website = np.random.randint(1, 30, 50) 
+
+purchase_prob = 1 / (1 + np.exp(-0.6 * (time_on_website - 15)))
+purchased = np.random.binomial(1, purchase_prob)
+
+data = {
+    "Time_on_Website": time_on_website,
+    "Purchased": purchased
+}
+df = pd.DataFrame(data)
+
+df
+```
+
+# Difference between linear and logistic regression
+To understand the logistic regression, let's first take a step back and see how a binary y variable fit into a linear regression model. 
+
+```{python}
+sns.regplot(x='Time_on_Website', y='Purchased', data=df); 
+plt.grid()
+```
+
+The graph indicate that if a visitor spent 15 minutes on the website, the probability of them making a purchase it around 0.5. However, the problem of usinga linear regression in such scenario is that the result is not bound by the binary category of 1 and 0, so the output cannot be interpt as probability. For instance, the vistors that spent more than 25 minutes will have a y variable of more than 1, which is not valid. 
+
+In order to understand the relationship between a continious x variable and a binary y variable, we would want a Sigmoid curve (the s line) like below: 
+
+```{python}
+sns.regplot(
+    x='Time_on_Website', y='Purchased', 
+    data=df, logistic=True); 
+plt.grid()
+```
+
+# The logit function
+To understand the Sigmoid curve, first we need to look at the logit function. The logit function ensures that the output of the model is bounded between 0 and 1. It is defined as follow: 
+
+$$logit(p) = ln(\frac{p}{1-p})$$
+
+# Extra
+
+```{python}
+# Independent (X) and dependent (y) variables
+X = df[['Time_on_Website']]  # Features
+y = df['Purchased']    # Target
+
+# Step 2: Split the data into training and testing sets (80% train, 20% test)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Step 3: Train Logistic Regression Model
+# Initialize and train the logistic regression model
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Step 4: Make Predictions
+# Predict on the test set
+y_pred = model.predict(X_test)
+y_pred_prob = model.predict_proba(X_test)[:, 1]  # Probability of "1"
+
+# Step 5: Evaluate the Model
+# Evaluate accuracy
+accuracy = accuracy_score(y_test, y_pred)
+classification_report_text = classification_report(y_test, y_pred)
+
+# Step 6: Visualize the Sigmoid Curve
+# Generate sigmoid curve data
+x_values = np.linspace(0, 10, 100).reshape(-1, 1)  # Generate values from 0 to 10
+y_values = model.predict_proba(x_values)[:, 1]    # Predict probabilities for these values
+
+# Plot sigmoid curve and data points
+plt.figure(figsize=(8, 6))
+plt.scatter(X, y, color='blue', label='Actual Data')
+plt.plot(x_values, y_values, color='red', label='Sigmoid Curve')
+plt.xlabel('Time on Website (minutes)')
+plt.ylabel('Probability of Buying Lemonade')
+plt.title('Logistic Regression Sigmoid Curve')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+
+# Display evaluation metrics and predictions
+accuracy, y_pred, y_pred_prob, classification_report_text
+
+```
+```{python}
+import sklearn.metrics as metrics
+
+cm = metrics.confusion_matrix(y_test, y_pred, labels = model.classes_)
+
+disp = metrics.ConfusionMatrixDisplay(confusion_matrix = cm,display_labels = model.classes_)
+
+disp.plot()
+
+```

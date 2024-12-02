@@ -2195,7 +2195,7 @@ In the case of logistic regression, the relationship between x and y doesn't for
 
 ![Logistic regression doesn't form a line. ](images/logistic_regression.png)
 
-Therefore we need a different way to model the logistic regression. The key is to get the probability of y equals to 1 given x. 
+Therefore we need a different way to model the logistic regression. The key is to get the probability of y equals to 1 given x: 
 
 $$\mu_{y|x} = \text{Prob}(Y=1|X)$$
 
@@ -2208,6 +2208,19 @@ However, you would want to link this equation to a regression equation with a fo
 A nonlinear function that connects or links the dependent variable to the independent variables mathematically. 
 
 $$g(p)=\beta_0 + \beta_1 * X$$
+
+**The logistic function**
+
+The logistic function is used in logistic regression to model the probability p(x). Specifically:
+
+- $\beta_0$ is the intercept of the model.
+- $\beta_1$ is the coefficient associated with the feature x. 
+
+The logistic function maps any input x to a value between 0 and 1, ensuring the output is a valid probability. 
+
+The equation: 
+
+$$p(x) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x)}}$$
 
 ## Maximum likelihood estimation (MLE)
 A technique for estimating the beta parameters that maximize the likelihood of the model prodcuing the observed data. 
@@ -2260,3 +2273,4 @@ $$P(A and B) = P(A)*P(B)$$
 The multiple X variables should not be highly correlated to one another. 
 
 - **No extreme outliner**
+
