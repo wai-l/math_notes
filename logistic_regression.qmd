@@ -58,6 +58,28 @@ To understand the Sigmoid curve, first we need to look at the logit function. Th
 
 $$logit(p) = ln(\frac{p}{1-p})$$
 
+If we have a set of probability, and transform them with the logit function, you can see logit is only defined between the domain 0 and 1, and the range is from $-\infty$ to $\infty$.
+
+```{python}
+import pandas as pd
+import numpy as np
+import seaborn as sns
+
+np.random.seed(42)
+prob_list = np.random.random_sample(50)
+
+prob_logit = pd.DataFrame({'probability': prob_list})
+
+prob_logit['logit'] = np.log(prob_logit['probability']/(1-prob_logit['probability']))
+
+prob_logit
+
+fig=sns.lineplot(x='probability', y='logit', data=prob_logit)
+fig.axhline(y=0, linestyle='--', color='gray')
+fig.set_title('p-value VS logit(p)')
+plt.show()
+```
+
 # Extra
 
 ```{python}
