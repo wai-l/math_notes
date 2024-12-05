@@ -133,7 +133,7 @@ window.Quarto = {
 <h1>Setup</h1>
 <section id="packages" class="level2">
 <h2 class="anchored" data-anchor-id="packages">Packages</h2>
-<div id="0d1d9342" class="cell" data-execution_count="1">
+<div id="48cc28ac" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -146,7 +146,7 @@ window.Quarto = {
 </section>
 <section id="dataset-created-by-chatgpt" class="level2">
 <h2 class="anchored" data-anchor-id="dataset-created-by-chatgpt">Dataset (created by ChatGPT)</h2>
-<div id="59151f30" class="cell" data-execution_count="2">
+<div id="9490f902" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>time_on_website <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">30</span>, <span class="dv">50</span>) </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -160,7 +160,7 @@ window.Quarto = {
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
 
@@ -434,7 +434,7 @@ window.Quarto = {
 <section id="difference-between-linear-and-logistic-regression" class="level1">
 <h1>Difference between linear and logistic regression</h1>
 <p>To understand the logistic regression, let’s first take a step back and see how a binary y variable fit into a linear regression model.</p>
-<div id="ab9a81a1" class="cell" data-execution_count="3">
+<div id="eab15c40" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sns.regplot(x<span class="op">=</span><span class="st">'Time_on_Website'</span>, y<span class="op">=</span><span class="st">'Purchased'</span>, data<span class="op">=</span>df)<span class="op">;</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>plt.grid()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -447,7 +447,7 @@ window.Quarto = {
 </div>
 <p>The graph indicate that if a visitor spent 15 minutes on the website, the probability of them making a purchase it around 0.5. However, the problem of usinga linear regression in such scenario is that the result is not bound by the binary category of 1 and 0, so the output cannot be interpt as probability. For instance, the vistors that spent more than 25 minutes will have a y variable of more than 1, which is not valid.</p>
 <p>In order to understand the relationship between a continious x variable and a binary y variable, we would want a Sigmoid curve (the s line) like below:</p>
-<div id="c22dc91f" class="cell" data-execution_count="4">
+<div id="6845c1c6" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sns.regplot(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Time_on_Website'</span>, y<span class="op">=</span><span class="st">'Purchased'</span>, </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df, logistic<span class="op">=</span><span class="va">True</span>)<span class="op">;</span> </span>
@@ -466,7 +466,7 @@ window.Quarto = {
 <p>To understand the Sigmoid curve, first we need to look at the logit function. The logit function ensures that the output of the model is bounded between 0 and 1. It is defined as follow:</p>
 <p><span class="math display">\[logit(p) = ln(\frac{p}{1-p})\]</span></p>
 <p>If we have a set of probability, and transform them with the logit function, you can see logit is only defined between the domain 0 and 1, and the range is from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>.</p>
-<div id="0b0d34dd" class="cell" data-execution_count="5">
+<div id="87ae52db" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -492,10 +492,12 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<p>Now let’s transform the logit function into an equation with based on the p-value.</p>
+<p><span class="math display">\[logit(p) = ln(\frac{p}{1-p}) = \beta_0 + \beta_1 * x_1\]</span> <span class="math display">\[ln(\frac{p}{1-p}) = \beta_0 + \beta_1 * x_1\]</span> <span class="math display">\[(\frac{p}{1-p}) = e^{\beta_0 + \beta_1 * x_1}\]</span> <span class="math display">\[p = e^{\beta_0 + \beta_1 * x_1} - e^{\beta_0 + \beta_1 * x_1}*p\]</span> <span class="math display">\[p + e^{\beta_0 + \beta_1 * x_1}*p = e^{\beta_0 + \beta_1 * x_1}\]</span> <span class="math display">\[p(1 + e^{\beta_0 + \beta_1 * x_1}) = e^{\beta_0 + \beta_1 * x_1}\]</span> <span class="math display">\[p = \frac{e^{\beta_0 + \beta_1 * x_1}}{1 + e^{\beta_0 + \beta_1 * x_1}}\]</span></p>
 </section>
 <section id="extra" class="level1">
 <h1>Extra</h1>
-<div id="f53f7058" class="cell" data-execution_count="6">
+<div id="810e0c44" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Independent (X) and dependent (y) variables</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[[<span class="st">'Time_on_Website'</span>]]  <span class="co"># Features</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'Purchased'</span>]    <span class="co"># Target</span></span>
@@ -550,7 +552,7 @@ window.Quarto = {
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>(0.8666666666666667,
  array([0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1]),
  array([1.66574165e-01, 9.43853779e-02, 2.77082371e-01, 9.73374120e-01,
@@ -560,7 +562,7 @@ window.Quarto = {
  '              precision    recall  f1-score   support\n\n           0       0.90      0.90      0.90        10\n           1       0.80      0.80      0.80         5\n\n    accuracy                           0.87        15\n   macro avg       0.85      0.85      0.85        15\nweighted avg       0.87      0.87      0.87        15\n')</code></pre>
 </div>
 </div>
-<div id="c862b2ab" class="cell" data-execution_count="7">
+<div id="fc46bea7" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.metrics <span class="im">as</span> metrics</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> metrics.confusion_matrix(y_test, y_pred, labels <span class="op">=</span> model.classes_)</span>

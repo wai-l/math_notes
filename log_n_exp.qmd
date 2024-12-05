@@ -1,0 +1,110 @@
+
+```{python}
+import pandas as pd
+import seaborn as sns
+import numpy as np
+import math
+```
+
+
+```{python}
+df = pd.DataFrame({
+    'number': range(1, 11), 
+    'index': range(1, 11)
+    })
+df
+```
+
+
+```{python}
+df['exp'] = np.exp(df['number'])
+df['log'] = np.log(df['number'])
+
+# df['math_exp'] = df['number'].apply(math.exp)
+# df['math_log'] = df['number'].apply(math.log)
+
+df['exp_log'] = np.log(df['exp'])
+
+df['log_exp'] = np.exp(df['log'])
+
+df
+```
+```{python}
+df_melted = df.melt(
+    id_vars=['index'], 
+    value_vars=['number', 'exp', 'log'], 
+    var_name = 'category', 
+    value_name='value')
+
+df_melted
+```
+```{python}
+sns.lineplot(
+    x='index', 
+    y='value', 
+    hue='category', 
+    data=df_melted
+);
+```
+
+
+```{python}
+fig_1 = sns.lineplot(
+    x='index', y='number', data=df
+);
+
+fig_2 = sns.lineplot(
+    x='index', y='log', data=df
+);
+
+fig_3 = sns.lineplot(
+    x='index', y='exp', data=df
+);
+```
+
+
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Create subplots
+fig, axes = plt.subplots(3, 1, figsize=(8, 12))  # 3 rows, 1 column of plots
+
+# Plot 'number'
+sns.lineplot(ax=axes[0], x='index', y='number', data=df)
+axes[0].set_title("Number Plot")
+
+# Plot 'log'
+sns.lineplot(ax=axes[1], x='index', y='log', data=df)
+axes[1].set_title("Log Plot")
+
+# Plot 'exp'
+sns.lineplot(ax=axes[2], x='index', y='exp', data=df)
+axes[2].set_title("Exp Plot")
+
+# Adjust layout
+plt.tight_layout()
+plt.show()
+
+```
+
+
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Create subplots
+fig, axes = plt.subplots(2, 1, figsize=(8, 12))  # 3 rows, 1 column of plots
+
+# Plot 'log'
+sns.lineplot(ax=axes[0], x='number', y='log', data=df)
+axes[0].set_title("Log Plot")
+
+# Plot 'exp'
+sns.lineplot(ax=axes[1], x='number', y='exp', data=df)
+axes[1].set_title("Exp Plot")
+
+# Adjust layout
+plt.tight_layout()
+plt.show()
+```

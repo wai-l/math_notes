@@ -80,6 +80,50 @@ fig.set_title('p-value VS logit(p)')
 plt.show()
 ```
 
+Now let's transform the logit function into an equation with based on the p-value. 
+
+$$logit(p) = ln(\frac{p}{1-p}) = \beta_0 + \beta_1 * x_1$$
+$$ln(\frac{p}{1-p}) = \beta_0 + \beta_1 * x_1$$
+$$(\frac{p}{1-p}) = e^{\beta_0 + \beta_1 * x_1}$$
+$$p = e^{\beta_0 + \beta_1 * x_1} - e^{\beta_0 + \beta_1 * x_1}*p$$
+$$p + e^{\beta_0 + \beta_1 * x_1}*p = e^{\beta_0 + \beta_1 * x_1}$$
+$$p(1 + e^{\beta_0 + \beta_1 * x_1}) = e^{\beta_0 + \beta_1 * x_1}$$
+$$p = \frac{e^{\beta_0 + \beta_1 * x_1}}{1 + e^{\beta_0 + \beta_1 * x_1}}$$
+
+# The Sigmoid function
+It is a mathematical function that maps any real-valued input z to a value between 0 and 1. It is defined as: 
+
+$$\sigma(z) = \frac{1}{1+e^{-z}}$$
+
+Where: 
+$$\sigma = Sigma$$
+
+This is commonly used to represent the Sigmoid function. 
+
+$$z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n$$
+
+The Sigmoid function can also be written as: 
+
+$$\sigma(z) = \frac{e^z}{1+e^z}$$
+
+Because: 
+
+$$e^{-z} = \frac{1}{e^z}$$
+
+And
+
+$$e^z * e^{-z} = e^0 = 1$$
+
+In logistic regression, Instead of predicting directly from z, logistic regression maps z to a probability p using the sigmoid function, this ensures that p is always between 0 and 1, making it a valid probability: 
+
+$$p = \sigma(z) = \frac{1}{1+e^{-z}}$$
+
+Now if you put the Logit function and the Sigmoid function together, below is also a valid equation: 
+$$ln(\frac{p}{1-p}) = \beta_0 + \beta_1 * x_1 = z$$
+
+And since $z = \beta_0 + \beta_1 x_1$
+$$p = \beta(z) = \frac{1}{1+e^{-z}} = \frac{e^z}{1+e^z} = \frac{e^{\beta_0 + \beta_1 * x_1}}{1 + e^{\beta_0 + \beta_1 * x_1}}$$
+
 # Extra
 
 ```{python}
