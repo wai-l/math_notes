@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>logistic_regression</title>
+<title>Logistic regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,15 +103,42 @@ window.Quarto = {
 
 </head>
 
-<body class="fullcontent">
+<body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about">About</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a>
+  <ul class="collapse">
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
+  <li><a href="#dataset-created-with-chatgpt" id="toc-dataset-created-with-chatgpt" class="nav-link" data-scroll-target="#dataset-created-with-chatgpt">Dataset (created with ChatGPT)</a></li>
+  </ul></li>
+  <li><a href="#linear-vs-logistic-regression" id="toc-linear-vs-logistic-regression" class="nav-link" data-scroll-target="#linear-vs-logistic-regression">Linear VS Logistic regression</a></li>
+  <li><a href="#the-logit-function" id="toc-the-logit-function" class="nav-link" data-scroll-target="#the-logit-function">The Logit function</a></li>
+  <li><a href="#the-sigmoid-function" id="toc-the-sigmoid-function" class="nav-link" data-scroll-target="#the-sigmoid-function">The Sigmoid function</a></li>
+  <li><a href="#maximum-likelihood-estimation-mle" id="toc-maximum-likelihood-estimation-mle" class="nav-link" data-scroll-target="#maximum-likelihood-estimation-mle">Maximum likelihood estimation (MLE)</a></li>
+  <li><a href="#binomial-logistic-regression" id="toc-binomial-logistic-regression" class="nav-link" data-scroll-target="#binomial-logistic-regression">Binomial logistic regression</a>
+  <ul class="collapse">
+  <li><a href="#odds-and-logit" id="toc-odds-and-logit" class="nav-link" data-scroll-target="#odds-and-logit">Odds and Logit</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#training-a-binomial-logistic-regression-model-with-python" id="toc-training-a-binomial-logistic-regression-model-with-python" class="nav-link" data-scroll-target="#training-a-binomial-logistic-regression-model-with-python">Training a Binomial logistic regression model with Python</a></li>
+  <li><a href="#evaluate-the-trained-model" id="toc-evaluate-the-trained-model" class="nav-link" data-scroll-target="#evaluate-the-trained-model">Evaluate the trained model</a></li>
+  </ul></li>
+  <li><a href="#extra" id="toc-extra" class="nav-link" data-scroll-target="#extra">Extra</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">Logistic regression</h1>
 </div>
 
 
@@ -128,25 +155,29 @@ window.Quarto = {
 </header>
 
 
+<section id="about" class="level1">
+<h1>About</h1>
 <p>This notebook aims to demonstrate the maths behind the Logistic Regression model with a synthetic dataset.</p>
+</section>
 <section id="setup" class="level1">
 <h1>Setup</h1>
 <section id="packages" class="level2">
 <h2 class="anchored" data-anchor-id="packages">Packages</h2>
-<div id="48cc28ac" class="cell" data-execution_count="1">
+<div id="3d3b6fd0" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, classification_report</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, classification_report</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="dataset-created-by-chatgpt" class="level2">
-<h2 class="anchored" data-anchor-id="dataset-created-by-chatgpt">Dataset (created by ChatGPT)</h2>
-<div id="9490f902" class="cell" data-execution_count="2">
+<section id="dataset-created-with-chatgpt" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-created-with-chatgpt">Dataset (created with ChatGPT)</h2>
+<div id="aea5ea86" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>time_on_website <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">30</span>, <span class="dv">50</span>) </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -160,7 +191,7 @@ window.Quarto = {
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="18">
 <div>
 
 
@@ -431,10 +462,10 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="difference-between-linear-and-logistic-regression" class="level1">
-<h1>Difference between linear and logistic regression</h1>
+<section id="linear-vs-logistic-regression" class="level1">
+<h1>Linear VS Logistic regression</h1>
 <p>To understand the logistic regression, let’s first take a step back and see how a binary y variable fit into a linear regression model.</p>
-<div id="eab15c40" class="cell" data-execution_count="3">
+<div id="7f47c2b8" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sns.regplot(x<span class="op">=</span><span class="st">'Time_on_Website'</span>, y<span class="op">=</span><span class="st">'Purchased'</span>, data<span class="op">=</span>df)<span class="op">;</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>plt.grid()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -447,7 +478,7 @@ window.Quarto = {
 </div>
 <p>The graph indicate that if a visitor spent 15 minutes on the website, the probability of them making a purchase it around 0.5. However, the problem of usinga linear regression in such scenario is that the result is not bound by the binary category of 1 and 0, so the output cannot be interpt as probability. For instance, the vistors that spent more than 25 minutes will have a y variable of more than 1, which is not valid.</p>
 <p>In order to understand the relationship between a continious x variable and a binary y variable, we would want a Sigmoid curve (the s line) like below:</p>
-<div id="6845c1c6" class="cell" data-execution_count="4">
+<div id="27d9901a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sns.regplot(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Time_on_Website'</span>, y<span class="op">=</span><span class="st">'Purchased'</span>, </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df, logistic<span class="op">=</span><span class="va">True</span>)<span class="op">;</span> </span>
@@ -462,11 +493,11 @@ window.Quarto = {
 </div>
 </section>
 <section id="the-logit-function" class="level1">
-<h1>The logit function</h1>
+<h1>The Logit function</h1>
 <p>To understand the Sigmoid curve, first we need to look at the logit function. The logit function ensures that the output of the model is bounded between 0 and 1. It is defined as follow:</p>
 <p><span class="math display">\[logit(p) = ln(\frac{p}{1-p})\]</span></p>
 <p>If we have a set of probability, and transform them with the logit function, you can see logit is only defined between the domain 0 and 1, and the range is from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>.</p>
-<div id="87ae52db" class="cell" data-execution_count="5">
+<div id="3ee6db1c" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -495,52 +526,150 @@ window.Quarto = {
 <p>Now let’s transform the logit function into an equation with based on the p-value.</p>
 <p><span class="math display">\[logit(p) = ln(\frac{p}{1-p}) = \beta_0 + \beta_1 * x_1\]</span> <span class="math display">\[ln(\frac{p}{1-p}) = \beta_0 + \beta_1 * x_1\]</span> <span class="math display">\[(\frac{p}{1-p}) = e^{\beta_0 + \beta_1 * x_1}\]</span> <span class="math display">\[p = e^{\beta_0 + \beta_1 * x_1} - e^{\beta_0 + \beta_1 * x_1}*p\]</span> <span class="math display">\[p + e^{\beta_0 + \beta_1 * x_1}*p = e^{\beta_0 + \beta_1 * x_1}\]</span> <span class="math display">\[p(1 + e^{\beta_0 + \beta_1 * x_1}) = e^{\beta_0 + \beta_1 * x_1}\]</span> <span class="math display">\[p = \frac{e^{\beta_0 + \beta_1 * x_1}}{1 + e^{\beta_0 + \beta_1 * x_1}}\]</span></p>
 </section>
+<section id="the-sigmoid-function" class="level1">
+<h1>The Sigmoid function</h1>
+<p>It is a mathematical function that maps any real-valued input z to a value between 0 and 1. It is defined as:</p>
+<p><span class="math display">\[\sigma(z) = \frac{1}{1+e^{-z}}\]</span></p>
+<p>Where: <span class="math display">\[\sigma = Sigma\]</span></p>
+<p>This is commonly used to represent the Sigmoid function.</p>
+<p><span class="math display">\[z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n\]</span></p>
+<p>The Sigmoid function can also be written as:</p>
+<p><span class="math display">\[\sigma(z) = \frac{e^z}{1+e^z}\]</span></p>
+<p>Because:</p>
+<p><span class="math display">\[e^{-z} = \frac{1}{e^z}\]</span></p>
+<p>And</p>
+<p><span class="math display">\[e^z * e^{-z} = e^0 = 1\]</span></p>
+<p>In logistic regression, Instead of predicting directly from z, logistic regression maps z to a probability p using the sigmoid function, this ensures that p is always between 0 and 1, making it a valid probability:</p>
+<p><span class="math display">\[p = \sigma(z) = \frac{1}{1+e^{-z}}\]</span></p>
+<p>Now if you put the Logit function and the Sigmoid function together, below is also a valid equation: <span class="math display">\[ln(\frac{p}{1-p}) = \beta_0 + \beta_1 * x_1 = z\]</span></p>
+<p>And since <span class="math inline">\(z = \beta_0 + \beta_1 x_1\)</span> <span class="math display">\[p = \beta(z) = \frac{1}{1+e^{-z}} = \frac{e^z}{1+e^z} = \frac{e^{\beta_0 + \beta_1 * x_1}}{1 + e^{\beta_0 + \beta_1 * x_1}}\]</span></p>
+<p>Now let’s look at how the Sigmoid function transform the z value to valid probability:</p>
+<div id="570fe506" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>z_list <span class="op">=</span> np.random.randint(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">40</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sigmoid_function(x): </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>math.exp(<span class="op">-</span>x))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>sigmoid_sample <span class="op">=</span> pd.DataFrame({<span class="st">'z'</span>: z_list})</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>sigmoid_sample[<span class="st">'p'</span>] <span class="op">=</span> sigmoid_sample[<span class="st">'z'</span>].<span class="bu">apply</span>(sigmoid_function)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>sigmoid_sample</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>sigmoid_sample <span class="op">=</span> sigmoid_sample.sort_values(by<span class="op">=</span><span class="st">'z'</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x<span class="op">=</span><span class="st">'z'</span>, y<span class="op">=</span><span class="st">'p'</span>, data<span class="op">=</span>sigmoid_sample)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="logistic_regression_files/figure-html/cell-7-output-1.png" width="589" height="429" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The sigmoid function, as the name suggests, takes on an S-looking shape. The domain z stretches from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>, while the range is bounded between 0 and 1. The output of the sigmoid function therefore can be interpreted as a probability.</p>
+</section>
+<section id="maximum-likelihood-estimation-mle" class="level1">
+<h1>Maximum likelihood estimation (MLE)</h1>
+<p>A technique for estimating the beta parameters that maximize the likelihood of the model prodcuing the observed data.</p>
+<ul>
+<li><strong>Likelihood</strong>:</li>
+</ul>
+<p>The probability of observing the actual data, given some set of beta parameters.</p>
+</section>
+<section id="binomial-logistic-regression" class="level1">
+<h1>Binomial logistic regression</h1>
+<p>A technique that models the probability of an observation falling into one of two categories, based on one or more independent variables.</p>
+<section id="odds-and-logit" class="level2">
+<h2 class="anchored" data-anchor-id="odds-and-logit">Odds and Logit</h2>
+<ul>
+<li><strong>Odd</strong>:</li>
+</ul>
+<p><span class="math display">\[\text{odd} = \frac{P}{1-P}\]</span></p>
+<ul>
+<li><strong>Logit</strong> (log-odds):</li>
+</ul>
+<p>The logarithm of the odds of a given probability. So the logit of the probability p is equal to the logarithm of p divided by 1 minus p.&nbsp;</p>
+<p><span class="math display">\[\text{logic}(p) = \text{log}(\frac{p}{1-p})\]</span></p>
+<ul>
+<li><strong>Logit in terms of X variables</strong>:</li>
+</ul>
+<p><span class="math display">\[\text{logic}(p) = \text{log}(\frac{p}{1-p}) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_n X_n\]</span></p>
+</section>
+<section id="assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
+<ul>
+<li><strong>Linearity</strong>:</li>
+</ul>
+<p>There should be a linear relationship between each X variable and the logit of the probability that Y equals 1.</p>
+<ul>
+<li><strong>Independent observation</strong>:</li>
+</ul>
+<p>While observation are independent:</p>
+<p><span class="math display">\[P(A and B) = P(A)*P(B)\]</span></p>
+<ul>
+<li><strong>No multicollinearity</strong>:</li>
+</ul>
+<p>The multiple X variables should not be highly correlated to one another.</p>
+<ul>
+<li><strong>No extreme outliner</strong></li>
+</ul>
+</section>
+<section id="training-a-binomial-logistic-regression-model-with-python" class="level2">
+<h2 class="anchored" data-anchor-id="training-a-binomial-logistic-regression-model-with-python">Training a Binomial logistic regression model with Python</h2>
+</section>
+<section id="evaluate-the-trained-model" class="level2">
+<h2 class="anchored" data-anchor-id="evaluate-the-trained-model">Evaluate the trained model</h2>
+</section>
+</section>
 <section id="extra" class="level1">
 <h1>Extra</h1>
-<div id="810e0c44" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Independent (X) and dependent (y) variables</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[[<span class="st">'Time_on_Website'</span>]]  <span class="co"># Features</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'Purchased'</span>]    <span class="co"># Target</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Split the data into training and testing sets (80% train, 20% test)</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Train Logistic Regression Model</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize and train the logistic regression model</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LogisticRegression()</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Make Predictions</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on the test set</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model.predict(X_test)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>y_pred_prob <span class="op">=</span> model.predict_proba(X_test)[:, <span class="dv">1</span>]  <span class="co"># Probability of "1"</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 5: Evaluate the Model</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate accuracy</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>classification_report_text <span class="op">=</span> classification_report(y_test, y_pred)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 6: Visualize the Sigmoid Curve</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate sigmoid curve data</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>x_values <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)  <span class="co"># Generate values from 0 to 10</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>y_values <span class="op">=</span> model.predict_proba(x_values)[:, <span class="dv">1</span>]    <span class="co"># Predict probabilities for these values</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot sigmoid curve and data points</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>plt.scatter(X, y, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Actual Data'</span>)</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>plt.plot(x_values, y_values, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Sigmoid Curve'</span>)</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time on Website (minutes)'</span>)</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Probability of Buying Lemonade'</span>)</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Logistic Regression Sigmoid Curve'</span>)</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Display evaluation metrics and predictions</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>accuracy, y_pred, y_pred_prob, classification_report_text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="eec99422" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Independent (X) and dependent (y) variables</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[[<span class="st">'Time_on_Website'</span>]]  <span class="co"># Features</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'Purchased'</span>]    <span class="co"># Target</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Split the data into training and testing sets (80% train, 20% test)</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Train Logistic Regression Model</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize and train the logistic regression model</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LogisticRegression()</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Make Predictions</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on the test set</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>y_pred_prob <span class="op">=</span> model.predict_proba(X_test)[:, <span class="dv">1</span>]  <span class="co"># Probability of "1"</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 5: Evaluate the Model</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate accuracy</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>classification_report_text <span class="op">=</span> classification_report(y_test, y_pred)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 6: Visualize the Sigmoid Curve</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate sigmoid curve data</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>x_values <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)  <span class="co"># Generate values from 0 to 10</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>y_values <span class="op">=</span> model.predict_proba(x_values)[:, <span class="dv">1</span>]    <span class="co"># Predict probabilities for these values</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot sigmoid curve and data points</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>plt.scatter(X, y, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Actual Data'</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>plt.plot(x_values, y_values, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Sigmoid Curve'</span>)</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time on Website (minutes)'</span>)</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Probability of Buying Lemonade'</span>)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Logistic Regression Sigmoid Curve'</span>)</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Display evaluation metrics and predictions</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>accuracy, y_pred, y_pred_prob, classification_report_text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but LogisticRegression was fitted with feature names
   warnings.warn(</code></pre>
@@ -548,11 +677,11 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="logistic_regression_files/figure-html/cell-7-output-2.png" width="758" height="566" class="figure-img"></p>
+<p><img src="logistic_regression_files/figure-html/cell-8-output-2.png" width="758" height="566" class="figure-img"></p>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>(0.8666666666666667,
  array([0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1]),
  array([1.66574165e-01, 9.43853779e-02, 2.77082371e-01, 9.73374120e-01,
@@ -562,18 +691,18 @@ window.Quarto = {
  '              precision    recall  f1-score   support\n\n           0       0.90      0.90      0.90        10\n           1       0.80      0.80      0.80         5\n\n    accuracy                           0.87        15\n   macro avg       0.85      0.85      0.85        15\nweighted avg       0.87      0.87      0.87        15\n')</code></pre>
 </div>
 </div>
-<div id="fc46bea7" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.metrics <span class="im">as</span> metrics</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> metrics.confusion_matrix(y_test, y_pred, labels <span class="op">=</span> model.classes_)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>disp <span class="op">=</span> metrics.ConfusionMatrixDisplay(confusion_matrix <span class="op">=</span> cm,display_labels <span class="op">=</span> model.classes_)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>disp.plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="26448790" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.metrics <span class="im">as</span> metrics</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> metrics.confusion_matrix(y_test, y_pred, labels <span class="op">=</span> model.classes_)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>disp <span class="op">=</span> metrics.ConfusionMatrixDisplay(confusion_matrix <span class="op">=</span> cm,display_labels <span class="op">=</span> model.classes_)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>disp.plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="logistic_regression_files/figure-html/cell-8-output-1.png" width="487" height="434" class="figure-img"></p>
+<p><img src="logistic_regression_files/figure-html/cell-9-output-1.png" width="487" height="434" class="figure-img"></p>
 </figure>
 </div>
 </div>

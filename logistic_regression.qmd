@@ -1,3 +1,13 @@
+---
+title: Logistic regression
+jupyter: python3
+format: 
+    html: 
+        code-fold: False
+        toc: True
+        toc-location: left
+---
+
 # About
 This notebook aims to demonstrate the maths behind the Logistic Regression model with a synthetic dataset. 
 
@@ -7,6 +17,7 @@ This notebook aims to demonstrate the maths behind the Logistic Regression model
 # Import libraries
 import numpy as np
 import pandas as pd
+import math
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.linear_model import LogisticRegression
@@ -17,7 +28,7 @@ from sklearn.metrics import accuracy_score, classification_report
 
 ```
 
-## Dataset (created by ChatGPT)
+## Dataset (created with ChatGPT)
 ```{python}
 np.random.seed(42)
 time_on_website = np.random.randint(1, 30, 50) 
@@ -34,7 +45,7 @@ df = pd.DataFrame(data)
 df
 ```
 
-# Difference between linear and logistic regression
+# Linear VS Logistic regression
 To understand the logistic regression, let's first take a step back and see how a binary y variable fit into a linear regression model. 
 
 ```{python}
@@ -53,7 +64,7 @@ sns.regplot(
 plt.grid()
 ```
 
-# The logit function
+# The Logit function
 To understand the Sigmoid curve, first we need to look at the logit function. The logit function ensures that the output of the model is bounded between 0 and 1. It is defined as follow: 
 
 $$logit(p) = ln(\frac{p}{1-p})$$
@@ -123,6 +134,75 @@ $$ln(\frac{p}{1-p}) = \beta_0 + \beta_1 * x_1 = z$$
 
 And since $z = \beta_0 + \beta_1 x_1$
 $$p = \beta(z) = \frac{1}{1+e^{-z}} = \frac{e^z}{1+e^z} = \frac{e^{\beta_0 + \beta_1 * x_1}}{1 + e^{\beta_0 + \beta_1 * x_1}}$$
+
+Now let's look at how the Sigmoid function transform the z value to valid probability: 
+
+```{python}
+np.random.seed(42)
+z_list = np.random.randint(-20, 20, 40)
+
+def sigmoid_function(x): 
+    p = 1/(1+math.exp(-x))
+    return p
+
+sigmoid_sample = pd.DataFrame({'z': z_list})
+
+sigmoid_sample['p'] = sigmoid_sample['z'].apply(sigmoid_function)
+
+sigmoid_sample
+
+sigmoid_sample = sigmoid_sample.sort_values(by='z')
+
+sns.lineplot(x='z', y='p', data=sigmoid_sample);
+```
+
+The sigmoid function, as the name suggests, takes on an S-looking shape. The domain z stretches from $-\infty$ to $\infty$, while the range is bounded between 0 and 1. The output of the sigmoid function therefore can be interpreted as a probability. 
+
+# Maximum likelihood estimation (MLE)
+A technique for estimating the beta parameters that maximize the likelihood of the model prodcuing the observed data. 
+
+- **Likelihood**: 
+
+The probability of observing the actual data, given some set of beta parameters. 
+
+# Binomial logistic regression
+A technique that models the probability of an observation falling into one of two categories, based on one or more independent variables. 
+
+## Odds and Logit
+- **Odd**: 
+
+$$\text{odd} = \frac{P}{1-P}$$
+
+- **Logit** (log-odds): 
+
+The logarithm of the odds of a given probability. So the logit of the probability p is equal to the logarithm of p divided by 1 minus p. 
+
+$$\text{logic}(p) = \text{log}(\frac{p}{1-p})$$
+
+- **Logit in terms of X variables**: 
+
+$$\text{logic}(p) = \text{log}(\frac{p}{1-p}) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_n X_n$$
+
+## Assumptions
+- **Linearity**: 
+
+There should be a linear relationship between each X variable and the logit of the probability that Y equals 1. 
+
+- **Independent observation**: 
+
+While observation are independent: 
+
+$$P(A and B) = P(A)*P(B)$$
+
+- **No multicollinearity**: 
+
+The multiple X variables should not be highly correlated to one another. 
+
+- **No extreme outliner**
+
+## Training a Binomial logistic regression model with Python
+
+## Evaluate the trained model
 
 # Extra
 
