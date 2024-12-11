@@ -23,6 +23,9 @@ import seaborn as sns
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
+import sklearn.metrics as metrics
+from sklearn.metrics import RocCurveDisplay
+
 
 
 
@@ -200,65 +203,214 @@ The multiple X variables should not be highly correlated to one another.
 
 - **No extreme outliner**
 
-## Training a Binomial logistic regression model with Python
-
-## Evaluate the trained model
-
-# Extra
+## Training, evaluate and interpret a Binomial logistic regression model
+### Training
 
 ```{python}
 # Independent (X) and dependent (y) variables
 X = df[['Time_on_Website']]  # Features
 y = df['Purchased']    # Target
 
-# Step 2: Split the data into training and testing sets (80% train, 20% test)
+# Step 2: Split the data into training and testing sets (30% are testing)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
 # Step 3: Train Logistic Regression Model
 # Initialize and train the logistic regression model
-model = LogisticRegression()
-model.fit(X_train, y_train)
-
-# Step 4: Make Predictions
-# Predict on the test set
-y_pred = model.predict(X_test)
-y_pred_prob = model.predict_proba(X_test)[:, 1]  # Probability of "1"
-
-# Step 5: Evaluate the Model
-# Evaluate accuracy
-accuracy = accuracy_score(y_test, y_pred)
-classification_report_text = classification_report(y_test, y_pred)
-
-# Step 6: Visualize the Sigmoid Curve
-# Generate sigmoid curve data
-x_values = np.linspace(0, 10, 100).reshape(-1, 1)  # Generate values from 0 to 10
-y_values = model.predict_proba(x_values)[:, 1]    # Predict probabilities for these values
-
-# Plot sigmoid curve and data points
-plt.figure(figsize=(8, 6))
-plt.scatter(X, y, color='blue', label='Actual Data')
-plt.plot(x_values, y_values, color='red', label='Sigmoid Curve')
-plt.xlabel('Time on Website (minutes)')
-plt.ylabel('Probability of Buying Lemonade')
-plt.title('Logistic Regression Sigmoid Curve')
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
-
-# Show the plot
-plt.show()
-
-# Display evaluation metrics and predictions
-accuracy, y_pred, y_pred_prob, classification_report_text
+# clf: classifier
+clf = LogisticRegression().fit(X_train, y_train)
 
 ```
+
 ```{python}
-import sklearn.metrics as metrics
+# print the coefficient
+clf.coef_
+```
 
-cm = metrics.confusion_matrix(y_test, y_pred, labels = model.classes_)
+```{python}
+# print the inter cept
+clf.intercept_
+```
 
-disp = metrics.ConfusionMatrixDisplay(confusion_matrix = cm,display_labels = model.classes_)
+```{python}
+# Plot the logistic regression and its confidence band
+sns.regplot(x='Time_on_Website', y='Purchased', data=df, logistic=True);
+```
 
+### Evaluate the trained model
+
+First, we can use the `predict` function to get the predicted dependent variable using the hold out sample (X) with the trained model: 
+
+```{python}
+# predict the y using test x
+y_pred = clf.predict(X_test)
+y_pred
+```
+
+Now, we can also run the `predict_proba` function to return the predicted probabilities of the target variable belonging to each class for the given input data. 
+
+```{python}
+clf.predict_proba(X_test)
+```
+
+**Key Use Cases**
+- Thresholding: You can set custom thresholds for class predictions based on probabilities instead of using the default 0.5 threshold. 
+- Uncertainty: Helps assess the confidence of the predictions.
+- Visualization: Visualizing probabilities can provide insights into the decision boundaries and model behavior.
+
+**Confusion Matrix**
+
+Now we can also run a Confussion Matris to visualise how well our model categorised each data point. The Confusion Matrix is a graphical representation of how accurate a classifier is at predicting the labels for a categorical variable. 
+
+```{python}
+cm = metrics.confusion_matrix(y_test, y_pred, labels = clf.classes_)
+disp = metrics.ConfusionMatrixDisplay(confusion_matrix = cm,display_labels = clf.classes_)
 disp.plot()
+```
 
+Now we can use some metrics to evaluate the values associated with the matrix: 
+- True Positives
+- False Positives
+- True Negatives
+- False Negatives
+
+Below are some common metrics we can use: 
+
+**Precision**
+
+The proportion of positive predictions that were true positives. 
+
+$$\text{Presion} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}$$
+
+```{python}
+metrics.precision_score(y_test, y_pred)
+```
+
+**Recall**
+
+The proportion of positives the model was able to identify correctly. 
+
+$$\text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}$$
+
+```{python}
+metrics.recall_score(y_test, y_pred)
+```
+
+**Accuracy**
+
+The proportion of data points that were correctly categorised. 
+
+$$\text{Accuracy} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Predictions}}$$
+
+```{python}
+metrics.accuracy_score(y_test, y_pred)
+```
+
+**Chosee the correct metric**
+
+
+
+Two other common evaluations techniques that maybe helpful to work with classifier are **ROC curves** and **AUC**.  
+
+**ROC curves** (Receiver Operating Characteristic Curve)
+
+An ROC curve helps in visualizing the performance of a logistic regression classifier. To visualize the performance of a classifier at different classification thresholds, you can graph an ROC curve. In the context of binary classification, a classification threshold is a cutoff for differentiating the positive class from the negative class.
+
+For example, the default cutoff for a binary variable is 0.5, anything above 0.5 is classfied as `True`. You can adjust the cutoff to a differnt level, like 0.4, this will change the number of False Positives and False Negatives. 
+
+An ROC curve plots two key concepts: 
+
+- **True Positive Rate (Recall)**: 
+$$\text{True Positive Rate} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}$$
+
+- **False Positive Rate**: The ratio between the False Positives and the total count of observations that should be predicted as False. The formula for False Positive Rate is as follows: 
+
+$$\text{False Positive Rate} = \frac{\text{False Positives}}{\text{False Positives} + \text{True Negatives}}$$
+
+```{python}
+FP = 1
+TN = 9
+
+FPR = 1/(1+9)
+
+FPR
+
+```
+
+The ROC Curve display how change in the threshold (from 0 to 1) interact with the True Postiive Rate and False Positive Rate. As a generalisation, we would want to use the threshold where the line is the closet to the top left corner. The ROC curve help us understand if a model is good at performing the classification. 
+
+```{python}
+RocCurveDisplay.from_predictions(y_test, y_pred)
+
+plt.show()
+```
+
+**AUC (area under the ROC curve)**
+
+As the name suggest, the AUC refers to the area under the curve in the ROC curve ranging from 0 to 1. 
+
+A score of 0 means that under all threshold, all positive are false positive. 
+
+A score of 1 means that all positive are true positive, which also means the model's prediction is 100% correct. 
+
+An AUC smaller than 0.5 indicates that the model performs worse than a random classifier (i.e. a classifier that randomly assigns each example to True or False), and an AUC larger than 0.5 indicates that the model performs better than a random classifier.
+
+Now let's run the AUC score with the model we built: 
+```{python}
+metrics.roc_auc_score(y_test,y_pred)
+```
+
+### Interpret the trained model
+Let's say we evaluated the metrics and decided that the model we trained is good. How do we interpret it? 
+
+Let's go back to the **Logit function** and the **coefficients**. 
+
+**Logit function**
+
+Where $p = p(Y=1)$
+$$logit(p) = ln(\frac{p}{1-p}) = \beta_0 + \beta_1 x_1$$
+
+**Interpret coefficients**
+
+Use the model we trained, we already know the coefficient is 0.65. 
+
+```{python}
+clf.coef_
+```
+
+That means a one-unit increase in time on website is associated with a 0.65 increase in the log odds of p. To interpret change in odds of Y as a percentage, you can exponentiate $\beta_1$: 
+​	
+$$e^{\beta_1} = e^0.65 \approx 1.92$$
+
+```{python}
+b1 = clf.coef_
+np.exp(b1)
+```
+
+So, for every one-unit increase in time on website, you can expect that the odds of purchase to increase by 1.92, or 92%. 
+
+Now, put the 92% figure into the logit function. 
+
+For 1 minute on the website: approximately 0.03% (0.000297)
+```{python}
+def p(x):     
+    b_0 = clf.intercept_
+    b_1 = clf.coef_
+    logit_p = b_0 + b_1*x
+    p = np.exp(logit_p)
+    return p
+
+p_x_1 = p(x=1)
+
+p_x_1
+```
+
+For 2 minutes on the website: approximately 0.06% (0.000569)
+```{python}
+p_x_2 = p(x=2)
+p_x_2
+```
+
+Increase in time on website from 1 minute to 2 mintues, increase the probability to purchase for approximately 92%. 
+```{python}
+(p_x_2-p_x_1)/p_x_1
 ```
