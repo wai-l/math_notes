@@ -166,7 +166,7 @@ window.Quarto = {
 <h1>Setup</h1>
 <section id="packages" class="level2">
 <h2 class="anchored" data-anchor-id="packages">Packages</h2>
-<div id="5bb8a778" class="cell" data-execution_count="1">
+<div id="b0baf09a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -182,7 +182,7 @@ window.Quarto = {
 </section>
 <section id="dataset-created-with-chatgpt" class="level2">
 <h2 class="anchored" data-anchor-id="dataset-created-with-chatgpt">Dataset (created with ChatGPT)</h2>
-<div id="153ff8ed" class="cell" data-execution_count="2">
+<div id="33bb1984" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>time_on_website <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">30</span>, <span class="dv">50</span>) </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -470,7 +470,7 @@ window.Quarto = {
 <section id="linear-vs-logistic-regression" class="level1">
 <h1>Linear VS Logistic regression</h1>
 <p>To understand the logistic regression, let’s first take a step back and see how a binary y variable fit into a linear regression model.</p>
-<div id="b22cba50" class="cell" data-execution_count="3">
+<div id="21359f7d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sns.regplot(x<span class="op">=</span><span class="st">'Time_on_Website'</span>, y<span class="op">=</span><span class="st">'Purchased'</span>, data<span class="op">=</span>df)<span class="op">;</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>plt.grid()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -483,7 +483,7 @@ window.Quarto = {
 </div>
 <p>The graph indicate that if a visitor spent 15 minutes on the website, the probability of them making a purchase it around 0.5. However, the problem of usinga linear regression in such scenario is that the result is not bound by the binary category of 1 and 0, so the output cannot be interpt as probability. For instance, the vistors that spent more than 25 minutes will have a y variable of more than 1, which is not valid.</p>
 <p>In order to understand the relationship between a continious x variable and a binary y variable, we would want a Sigmoid curve (the s line) like below:</p>
-<div id="1164e368" class="cell" data-execution_count="4">
+<div id="cc8da92d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sns.regplot(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Time_on_Website'</span>, y<span class="op">=</span><span class="st">'Purchased'</span>, </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df, logistic<span class="op">=</span><span class="va">True</span>)<span class="op">;</span> </span>
@@ -502,7 +502,7 @@ window.Quarto = {
 <p>To understand the Sigmoid curve, first we need to look at the logit function. The logit function ensures that the output of the model is bounded between 0 and 1. It is defined as follow:</p>
 <p><span class="math display">\[logit(p) = ln(\frac{p}{1-p})\]</span></p>
 <p>If we have a set of probability, and transform them with the logit function, you can see logit is only defined between the domain 0 and 1, and the range is from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>.</p>
-<div id="3a99d65c" class="cell" data-execution_count="5">
+<div id="b7fd6212" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -549,7 +549,7 @@ window.Quarto = {
 <p>Now if you put the Logit function and the Sigmoid function together, below is also a valid equation: <span class="math display">\[ln(\frac{p}{1-p}) = \beta_0 + \beta_1 * x_1 = z\]</span></p>
 <p>And since <span class="math inline">\(z = \beta_0 + \beta_1 x_1\)</span> <span class="math display">\[p = \beta(z) = \frac{1}{1+e^{-z}} = \frac{e^z}{1+e^z} = \frac{e^{\beta_0 + \beta_1 * x_1}}{1 + e^{\beta_0 + \beta_1 * x_1}}\]</span></p>
 <p>Now let’s look at how the Sigmoid function transform the z value to valid probability:</p>
-<div id="45f01e4c" class="cell" data-execution_count="6">
+<div id="553c99de" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>z_list <span class="op">=</span> np.random.randint(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">40</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -626,7 +626,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="training-evaluate-and-interpret-a-binomial-logistic-regression-model">Training, evaluate and interpret a Binomial logistic regression model</h2>
 <section id="training" class="level3">
 <h3 class="anchored" data-anchor-id="training">Training</h3>
-<div id="c6092492" class="cell" data-execution_count="7">
+<div id="0648ab92" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Independent (X) and dependent (y) variables</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[[<span class="st">'Time_on_Website'</span>]]  <span class="co"># Features</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'Purchased'</span>]    <span class="co"># Target</span></span>
@@ -639,21 +639,21 @@ window.Quarto = {
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># clf: classifier</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> LogisticRegression().fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="3410f018" class="cell" data-execution_count="8">
+<div id="28e1649a" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the coefficient</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>clf.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>array([[0.65112362]])</code></pre>
 </div>
 </div>
-<div id="ddaf4f17" class="cell" data-execution_count="9">
+<div id="fcc6443a" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the inter cept</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>clf.intercept_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>array([-8.77246384])</code></pre>
 </div>
 </div>
-<div id="fa18bbcc" class="cell" data-execution_count="10">
+<div id="812c2628" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the logistic regression and its confidence band</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sns.regplot(x<span class="op">=</span><span class="st">'Time_on_Website'</span>, y<span class="op">=</span><span class="st">'Purchased'</span>, data<span class="op">=</span>df, logistic<span class="op">=</span><span class="va">True</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -668,7 +668,7 @@ window.Quarto = {
 <section id="evaluate-the-trained-model" class="level3">
 <h3 class="anchored" data-anchor-id="evaluate-the-trained-model">Evaluate the trained model</h3>
 <p>First, we can use the <code>predict</code> function to get the predicted dependent variable using the hold out sample (X) with the trained model:</p>
-<div id="f0112be2" class="cell" data-execution_count="11">
+<div id="6bc615e1" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># predict the y using test x</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> clf.predict(X_test)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>y_pred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -677,7 +677,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Now, we can also run the <code>predict_proba</code> function to return the predicted probabilities of the target variable belonging to each class for the given input data.</p>
-<div id="e1530336" class="cell" data-execution_count="12">
+<div id="46f94184" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>clf.predict_proba(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>array([[8.33425835e-01, 1.66574165e-01],
@@ -698,8 +698,9 @@ window.Quarto = {
 </div>
 </div>
 <p><strong>Key Use Cases</strong> - Thresholding: You can set custom thresholds for class predictions based on probabilities instead of using the default 0.5 threshold. - Uncertainty: Helps assess the confidence of the predictions. - Visualization: Visualizing probabilities can provide insights into the decision boundaries and model behavior.</p>
-<p><strong>Confusion Matrix</strong> Now we can also run a Confussion Matris to visualise how well our model categorised each data point. The Confusion Matrix is a graphical representation of how accurate a classifier is at predicting the labels for a categorical variable.</p>
-<div id="55c1ad7f" class="cell" data-execution_count="13">
+<p><strong>Confusion Matrix</strong></p>
+<p>Now we can also run a Confussion Matris to visualise how well our model categorised each data point. The Confusion Matrix is a graphical representation of how accurate a classifier is at predicting the labels for a categorical variable.</p>
+<div id="93f58b8b" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> metrics.confusion_matrix(y_test, y_pred, labels <span class="op">=</span> clf.classes_)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>disp <span class="op">=</span> metrics.ConfusionMatrixDisplay(confusion_matrix <span class="op">=</span> cm,display_labels <span class="op">=</span> clf.classes_)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>disp.plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -712,36 +713,40 @@ window.Quarto = {
 </div>
 </div>
 <p>Now we can use some metrics to evaluate the values associated with the matrix: - True Positives - False Positives - True Negatives - False Negatives</p>
-<p>Below are some common metrics we can use: <strong>Precision</strong></p>
+<p>Below are some common metrics we can use:</p>
+<p><strong>Precision</strong></p>
 <p>The proportion of positive predictions that were true positives.</p>
 <p><span class="math display">\[\text{Presion} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}\]</span></p>
-<div id="cd699bbc" class="cell" data-execution_count="14">
+<div id="e817db03" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>metrics.precision_score(y_test, y_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>0.8</code></pre>
 </div>
 </div>
+<p>When to use: Using precision as an evaluation metric is especially helpful in contexts where the cost of a false positive is quite high and much higher than the cost of a false negative. For example, in the context of email spam detection, a false positive (predicting a non-spam email as spam) would be more costly than a false negative (predicting a spam email as non-spam). A non-spam email that is misclassified could contain important information, such as project status updates from a vendor to a client or assignment deadline announcements from an instructor to a class of students.</p>
 <p><strong>Recall</strong></p>
 <p>The proportion of positives the model was able to identify correctly.</p>
 <p><span class="math display">\[\text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}\]</span></p>
-<div id="5ba09eb5" class="cell" data-execution_count="15">
+<div id="ef368d86" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>metrics.recall_score(y_test, y_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>0.8</code></pre>
 </div>
 </div>
+<p>When to use: Using recall as an evaluation metric is especially helpful in contexts where the cost of a false negative is quite high and much higher than the cost of a false positive. For example, in the context of fraud detection among credit card transactions, a false negative (predicting a fraudulent credit card charge as non-fraudulent) would be more costly than a false positive (predicting a non-fraudulent credit card charge as fraudulent). A fraudulent credit card charge that is misclassified could lead to the customer losing money, undetected.</p>
 <p><strong>Accuracy</strong></p>
 <p>The proportion of data points that were correctly categorised.</p>
 <p><span class="math display">\[\text{Accuracy} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Predictions}}\]</span></p>
-<div id="a5a6b288" class="cell" data-execution_count="16">
+<div id="215964b1" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>metrics.accuracy_score(y_test, y_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>0.8666666666666667</code></pre>
 </div>
 </div>
-<p><strong>Chosee the correct metric</strong></p>
+<p>When to use: It is helpful to use accuracy as an evaluation metric when you specifically want to know how much of the data at hand has been correctly categorized by the classifier. Another scenario to consider: accuracy is an appropriate metric to use when the data is balanced, in other words, when the data has a roughly equal number of positive examples and negative examples. Otherwise, accuracy can be biased. For example, imagine that 95% of a dataset contains positive examples, and the remaining 5% contains negative examples. Then you train a logistic regression classifier on this data and use this classifier predict on this data. If you get an accuracy of 95%, that does not necessarily indicate that this classifier is effective. Since there is a much larger proportion of positive examples than negative examples, the classifier may be biased towards the majority class (positive) and thus the accuracy metric in this context may not be meaningful. When the data you are working with is imbalanced, consider either transforming it to be balanced or using a different evaluation metric other than accuracy.</p>
 <p>Two other common evaluations techniques that maybe helpful to work with classifier are <strong>ROC curves</strong> and <strong>AUC</strong>.</p>
-<p><strong>ROC curves</strong> (Receiver Operating Characteristic Curve) An ROC curve helps in visualizing the performance of a logistic regression classifier. To visualize the performance of a classifier at different classification thresholds, you can graph an ROC curve. In the context of binary classification, a classification threshold is a cutoff for differentiating the positive class from the negative class.</p>
+<p><strong>ROC curves</strong> (Receiver Operating Characteristic Curve)</p>
+<p>An ROC curve helps in visualizing the performance of a logistic regression classifier. To visualize the performance of a classifier at different classification thresholds, you can graph an ROC curve. In the context of binary classification, a classification threshold is a cutoff for differentiating the positive class from the negative class.</p>
 <p>For example, the default cutoff for a binary variable is 0.5, anything above 0.5 is classfied as <code>True</code>. You can adjust the cutoff to a differnt level, like 0.4, this will change the number of False Positives and False Negatives.</p>
 <p>An ROC curve plots two key concepts:</p>
 <ul>
@@ -749,7 +754,7 @@ window.Quarto = {
 <li><p><strong>False Positive Rate</strong>: The ratio between the False Positives and the total count of observations that should be predicted as False. The formula for False Positive Rate is as follows:</p></li>
 </ul>
 <p><span class="math display">\[\text{False Positive Rate} = \frac{\text{False Positives}}{\text{False Positives} + \text{True Negatives}}\]</span></p>
-<div id="398f272f" class="cell" data-execution_count="17">
+<div id="4c4cf938" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>FP <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>TN <span class="op">=</span> <span class="dv">9</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -761,7 +766,7 @@ window.Quarto = {
 </div>
 </div>
 <p>The ROC Curve display how change in the threshold (from 0 to 1) interact with the True Postiive Rate and False Positive Rate. As a generalisation, we would want to use the threshold where the line is the closet to the top left corner. The ROC curve help us understand if a model is good at performing the classification.</p>
-<div id="6ab4e6ca" class="cell" data-execution_count="18">
+<div id="5895d5a7" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>RocCurveDisplay.from_predictions(y_test, y_pred)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -779,7 +784,7 @@ window.Quarto = {
 <p>A score of 1 means that all positive are true positive, which also means the model’s prediction is 100% correct.</p>
 <p>An AUC smaller than 0.5 indicates that the model performs worse than a random classifier (i.e.&nbsp;a classifier that randomly assigns each example to True or False), and an AUC larger than 0.5 indicates that the model performs better than a random classifier.</p>
 <p>Now let’s run the AUC score with the model we built:</p>
-<div id="aa56a822" class="cell" data-execution_count="19">
+<div id="3d226cea" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>metrics.roc_auc_score(y_test,y_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>0.8500000000000001</code></pre>
@@ -790,10 +795,11 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="interpret-the-trained-model">Interpret the trained model</h3>
 <p>Let’s say we evaluated the metrics and decided that the model we trained is good. How do we interpret it?</p>
 <p>Let’s go back to the <strong>Logit function</strong> and the <strong>coefficients</strong>.</p>
-<p><strong>Logit function</strong> Where <span class="math inline">\(p = p(Y=1)\)</span> <span class="math display">\[logit(p) = ln(\frac{p}{1-p}) = \beta_0 + \beta_1 x_1\]</span></p>
+<p><strong>Logit function</strong></p>
+<p>Where <span class="math inline">\(p = p(Y=1)\)</span> <span class="math display">\[logit(p) = ln(\frac{p}{1-p}) = \beta_0 + \beta_1 x_1\]</span></p>
 <p><strong>Interpret coefficients</strong></p>
 <p>Use the model we trained, we already know the coefficient is 0.65.</p>
-<div id="c18906b9" class="cell" data-execution_count="20">
+<div id="167ecf14" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>clf.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>array([[0.65112362]])</code></pre>
@@ -801,7 +807,7 @@ window.Quarto = {
 </div>
 <p>That means a one-unit increase in time on website is associated with a 0.65 increase in the log odds of p.&nbsp;To interpret change in odds of Y as a percentage, you can exponentiate <span class="math inline">\(\beta_1\)</span>: ​<br>
 <span class="math display">\[e^{\beta_1} = e^0.65 \approx 1.92\]</span></p>
-<div id="f9109b14" class="cell" data-execution_count="21">
+<div id="9424d0ab" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>b1 <span class="op">=</span> clf.coef_</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>np.exp(b1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
@@ -811,7 +817,7 @@ window.Quarto = {
 <p>So, for every one-unit increase in time on website, you can expect that the odds of purchase to increase by 1.92, or 92%.</p>
 <p>Now, put the 92% figure into the logit function.</p>
 <p>For 1 minute on the website: approximately 0.03% (0.000297)</p>
-<div id="1ba3f3f1" class="cell" data-execution_count="22">
+<div id="738e1dd6" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> p(x):     </span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    b_0 <span class="op">=</span> clf.intercept_</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    b_1 <span class="op">=</span> clf.coef_</span>
@@ -827,7 +833,7 @@ window.Quarto = {
 </div>
 </div>
 <p>For 2 minutes on the website: approximately 0.06% (0.000569)</p>
-<div id="387df716" class="cell" data-execution_count="23">
+<div id="96f1f452" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>p_x_2 <span class="op">=</span> p(x<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>p_x_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
@@ -835,7 +841,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Increase in time on website from 1 minute to 2 mintues, increase the probability to purchase for approximately 92%.</p>
-<div id="7a31f513" class="cell" data-execution_count="24">
+<div id="ebe72e07" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>(p_x_2<span class="op">-</span>p_x_1)<span class="op">/</span>p_x_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>array([[0.91769437]])</code></pre>

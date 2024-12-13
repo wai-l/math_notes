@@ -285,6 +285,9 @@ $$\text{Presion} = \frac{\text{True Positives}}{\text{True Positives} + \text{Fa
 metrics.precision_score(y_test, y_pred)
 ```
 
+When to use: 
+Using precision as an evaluation metric is especially helpful in contexts where the cost of a false positive is quite high and much higher than the cost of a false negative. For example, in the context of email spam detection, a false positive (predicting a non-spam email as spam) would be more costly than a false negative (predicting a spam email as non-spam). A non-spam email that is misclassified could contain important information, such as project status updates from a vendor to a client or assignment deadline announcements from an instructor to a class of students. 
+
 **Recall**
 
 The proportion of positives the model was able to identify correctly. 
@@ -294,6 +297,9 @@ $$\text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{Fal
 ```{python}
 metrics.recall_score(y_test, y_pred)
 ```
+
+When to use: 
+Using recall as an evaluation metric is especially helpful in contexts where the cost of a false negative is quite high and much higher than the cost of a false positive. For example, in the context of fraud detection among credit card transactions, a false negative (predicting a fraudulent credit card charge as non-fraudulent) would be more costly than a false positive (predicting a non-fraudulent credit card charge as fraudulent). A fraudulent credit card charge that is misclassified could lead to the customer losing money, undetected.
 
 **Accuracy**
 
@@ -305,9 +311,8 @@ $$\text{Accuracy} = \frac{\text{True Positives} + \text{True Negatives}}{\text{T
 metrics.accuracy_score(y_test, y_pred)
 ```
 
-**Chosee the correct metric**
-
-
+When to use: 
+It is helpful to use accuracy as an evaluation metric when you specifically want to know how much of the data at hand has been correctly categorized by the classifier. Another scenario to consider: accuracy is an appropriate metric to use when the data is balanced, in other words, when the data has a roughly equal number of positive examples and negative examples. Otherwise, accuracy can be biased. For example, imagine that 95% of a dataset contains positive examples, and the remaining 5% contains negative examples. Then you train a logistic regression classifier on this data and use this classifier predict on this data. If you get an accuracy of 95%, that does not necessarily indicate that this classifier is effective. Since there is a much larger proportion of positive examples than negative examples, the classifier may be biased towards the majority class (positive) and thus the accuracy metric in this context may not be meaningful. When the data you are working with is imbalanced, consider either transforming it to be balanced or using a different evaluation metric other than accuracy. 
 
 Two other common evaluations techniques that maybe helpful to work with classifier are **ROC curves** and **AUC**.  
 
