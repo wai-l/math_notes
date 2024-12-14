@@ -267,6 +267,10 @@ disp = metrics.ConfusionMatrixDisplay(confusion_matrix = cm,display_labels = clf
 disp.plot()
 ```
 
+If you don't need to customise the labels, this should do: 
+```{python}
+metrics.ConfusionMatrixDisplay.from_predictions(y_test, y_pred)
+```
 Now we can use some metrics to evaluate the values associated with the matrix: 
 - True Positives
 - False Positives
@@ -286,6 +290,7 @@ metrics.precision_score(y_test, y_pred)
 ```
 
 When to use: 
+
 Using precision as an evaluation metric is especially helpful in contexts where the cost of a false positive is quite high and much higher than the cost of a false negative. For example, in the context of email spam detection, a false positive (predicting a non-spam email as spam) would be more costly than a false negative (predicting a spam email as non-spam). A non-spam email that is misclassified could contain important information, such as project status updates from a vendor to a client or assignment deadline announcements from an instructor to a class of students. 
 
 **Recall**
@@ -299,6 +304,7 @@ metrics.recall_score(y_test, y_pred)
 ```
 
 When to use: 
+
 Using recall as an evaluation metric is especially helpful in contexts where the cost of a false negative is quite high and much higher than the cost of a false positive. For example, in the context of fraud detection among credit card transactions, a false negative (predicting a fraudulent credit card charge as non-fraudulent) would be more costly than a false positive (predicting a non-fraudulent credit card charge as fraudulent). A fraudulent credit card charge that is misclassified could lead to the customer losing money, undetected.
 
 **Accuracy**
@@ -312,7 +318,22 @@ metrics.accuracy_score(y_test, y_pred)
 ```
 
 When to use: 
+
 It is helpful to use accuracy as an evaluation metric when you specifically want to know how much of the data at hand has been correctly categorized by the classifier. Another scenario to consider: accuracy is an appropriate metric to use when the data is balanced, in other words, when the data has a roughly equal number of positive examples and negative examples. Otherwise, accuracy can be biased. For example, imagine that 95% of a dataset contains positive examples, and the remaining 5% contains negative examples. Then you train a logistic regression classifier on this data and use this classifier predict on this data. If you get an accuracy of 95%, that does not necessarily indicate that this classifier is effective. Since there is a much larger proportion of positive examples than negative examples, the classifier may be biased towards the majority class (positive) and thus the accuracy metric in this context may not be meaningful. When the data you are working with is imbalanced, consider either transforming it to be balanced or using a different evaluation metric other than accuracy. 
+
+**F1 score**
+
+The F1 score is a performance metric that evaluates the model's balance between precision and recall. It's especially useful for classification problems with imbalanced datasets, where one class might significantly outnumber the other.
+
+$$\text{F1 score} = 2*\frac{\text{precession} * \text{recall}}{\text{precession} + \text{recall}}$$
+
+When to use: 
+
+What F1 Score Does in Logistic Regression: 
+
+- Measures Classification Quality: Logistic regression predicts probabilities, which are converted into class labels using a threshold (e.g., 0.5 by default). The F1 score then measures how well the model performs in classifying instances.
+- Handles Imbalance: In cases where one class (e.g., "0") dominates the dataset, accuracy can be misleading. The F1 score highlights performance on the minority class, making it more robust to imbalanced data.
+- Threshold Sensitivity: The F1 score is sensitive to the decision threshold. If you adjust the threshold (e.g., predicting "1" for probabilities > 0.7 instead of 0.5), the F1 score will change.
 
 Two other common evaluations techniques that maybe helpful to work with classifier are **ROC curves** and **AUC**.  
 
